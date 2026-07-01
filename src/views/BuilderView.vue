@@ -254,7 +254,6 @@ function printPage() {
   font-weight: 500;
   padding: 0 0 12px;
   text-align: left;
-  border-bottom: 1px solid var(--gray-border);
 }
 
 .th-concept {
@@ -278,7 +277,6 @@ function printPage() {
 
 .item-row td {
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
   vertical-align: middle;
 }
 
@@ -422,8 +420,6 @@ function printPage() {
   justify-content: space-between;
   align-items: center;
   padding: 24px 40px;
-  border-top: 2px solid var(--black);
-  border-bottom: 2px solid var(--black);
 }
 
 .total-label {
