@@ -74,19 +74,17 @@ async function handleLogout() {
 .topbar-icon-btn {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.7);
-  padding: 6px;
-  border-radius: 6px;
+  color: var(--white);
+  padding: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: opacity 0.2s;
 }
 
 .topbar-icon-btn:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.1);
+  opacity: 0.7;
 }
 
 .topbar-logout {

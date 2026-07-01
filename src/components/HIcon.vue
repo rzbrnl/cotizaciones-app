@@ -60,7 +60,7 @@
 <script setup>
 import { computed } from 'vue'
 import {
-  Share02Icon,
+  Share01Icon,
   SaveIcon,
   PrinterIcon,
   EyeIcon,
@@ -87,7 +87,7 @@ const props = defineProps({
 })
 
 const iconMap = {
-  share: Share02Icon,
+  share: Share01Icon,
   save: SaveIcon,
   printer: PrinterIcon,
   eye: EyeIcon,
