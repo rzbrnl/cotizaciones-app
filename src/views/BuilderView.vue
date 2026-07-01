@@ -6,13 +6,13 @@
         @click="shareOpen = true"
         title="Compartir"
       >
-        <HIcon name="share" :size="22" :stroke-width="2" />
+        <HIcon name="share" :size="22" :stroke-width="1.5" />
       </button>
       <button class="topbar-icon-btn" @click="handleSave" title="Guardar">
-        <HIcon name="save" :size="22" :stroke-width="2" />
+        <HIcon name="save" :size="22" :stroke-width="1.5" />
       </button>
       <button class="topbar-icon-btn" @click="printPage" title="Imprimir">
-        <HIcon name="printer" :size="22" :stroke-width="2" />
+        <HIcon name="printer" :size="22" :stroke-width="1.5" />
       </button>
     </template>
 
@@ -471,6 +471,12 @@ function printPage() {
 
 .notes-textarea::placeholder {
   color: #ccc;
+}
+
+.topbar-icon-btn {
+  background-color: transparent;
+  color: white;
+  border: none;
 }
 
 @media print {
