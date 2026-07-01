@@ -1,16 +1,13 @@
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <div class="auth-header">
-        <div class="auth-logo">CC</div>
-        <h1>Cotizaciones</h1>
-        <p>Cristian Castelo — Diseño Floral</p>
-      </div>
+      <h1 class="auth-title">CotizaYa by Vēlum</h1>
+      <p class="auth-subtitle">Inicia sesión para crear, administrar y compartir cotizaciones profesionales desde un solo lugar.</p>
 
       <form @submit.prevent="handleLogin" class="auth-form">
         <div class="auth-field">
-          <label>Email</label>
-          <input v-model="email" type="email" placeholder="tu@email.com" autofocus />
+          <label>Correo electrónico</label>
+          <input v-model="email" type="email" placeholder="hola@mundo.com" autofocus />
         </div>
         <div class="auth-field">
           <label>Contraseña</label>
@@ -18,13 +15,11 @@
         </div>
         <div v-if="error" class="auth-error">{{ error }}</div>
         <button type="submit" class="auth-submit" :disabled="loading">
-          {{ loading ? 'Ingresando...' : 'Iniciar Sesión' }}
+          {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
         </button>
       </form>
 
-      <div class="auth-footer">
-        <p>¿No tienes cuenta? <a href="#" @click.prevent="$router.push('/registro')">Crear cuenta</a></p>
-      </div>
+      <p class="auth-footer">¿No tienes cuenta? <router-link to="/registro">Crear cuenta</router-link></p>
     </div>
   </div>
 </template>
@@ -65,110 +60,100 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #353535;
   padding: 20px;
 }
 
 .auth-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 400px;
-  padding: 40px 36px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  max-width: 420px;
+  padding: 48px 40px 40px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.auth-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+.auth-title {
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--black);
-  letter-spacing: 4px;
+  text-align: center;
   margin-bottom: 8px;
 }
 
-.auth-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 4px;
-}
-
-.auth-header p {
-  font-size: 0.8rem;
+.auth-subtitle {
+  font-size: 0.85rem;
   color: var(--gray-text);
-  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 32px;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .auth-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .auth-field label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gray-text);
+  font-size: 0.85rem;
   font-weight: 500;
+  color: var(--black);
 }
 
 .auth-field input {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border: 1px solid var(--gray-border);
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 0.9rem;
   outline: none;
   transition: border-color 0.2s;
+  background: #fafafa;
 }
 
 .auth-field input:focus {
   border-color: var(--gold);
+  background: var(--white);
+}
+
+.auth-field input::placeholder {
+  color: #bbb;
 }
 
 .auth-error {
-  background: #fee;
+  background: #fef2f2;
   color: var(--danger);
   padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
   text-align: center;
 }
 
 .auth-submit {
-  background: var(--gold);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
   border: none;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
   margin-top: 4px;
 }
 
 .auth-submit:hover:not(:disabled) {
-  background: var(--gold-hover);
+  opacity: 0.9;
 }
 
 .auth-submit:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 

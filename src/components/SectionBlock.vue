@@ -77,7 +77,7 @@ const total = computed(() => {
 }
 
 .section-title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -160,7 +160,7 @@ const total = computed(() => {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .btn-add-dark:hover {

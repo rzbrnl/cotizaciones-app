@@ -14,7 +14,7 @@
 }
 
 .toolbar h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
   letter-spacing: 2px;
@@ -93,7 +93,7 @@
 }
 
 .header-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 2.4rem;
   color: var(--white);
   font-weight: 400;
@@ -105,7 +105,7 @@
 }
 
 .logo-monogram {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: var(--white);
@@ -114,7 +114,7 @@
 }
 
 .logo-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.6rem;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -123,7 +123,7 @@
 }
 
 .logo-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.45rem;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -185,7 +185,7 @@
 }
 
 .section-header .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -194,7 +194,7 @@
 }
 
 .section-header .editable {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -316,7 +316,7 @@
   letter-spacing: 1px;
   border-radius: 4px;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .add-btn:hover {
@@ -362,7 +362,7 @@
 }
 
 .grand-total .total-label {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -370,7 +370,7 @@
 }
 
 .grand-total .total-amount {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -611,7 +611,7 @@
 }
 
 .share-modal-header h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -715,7 +715,7 @@
 }
 
 .dashboard-header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -763,7 +763,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--gold);
@@ -805,7 +805,7 @@
 }
 
 .empty-state h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--black);

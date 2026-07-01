@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   background: #e8e8e8;
   color: var(--black);
   min-height: 100vh;
@@ -19,12 +19,12 @@ a {
 }
 
 button {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   cursor: pointer;
 }
 
-input, textarea {
-  font-family: 'Inter', sans-serif;
+input, textarea, select {
+  font-family: 'Google Sans', sans-serif;
 }
 
 .field-label {
@@ -44,7 +44,7 @@ input, textarea {
   min-width: 60px;
   display: inline-block;
   background: transparent;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .editable:hover {
@@ -57,7 +57,6 @@ input, textarea {
   background: var(--gold-light);
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }

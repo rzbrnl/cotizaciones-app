@@ -25,14 +25,14 @@ defineProps({
 }
 
 .total-label {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
 
 .total-amount {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.5px;

@@ -147,7 +147,7 @@ const window = globalThis.window
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .btn-add-dark:hover {

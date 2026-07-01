@@ -48,7 +48,7 @@ const logo = computed(() => auth.userLogo)
 }
 
 .header-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 2.4rem;
   color: var(--white);
   font-weight: 400;
@@ -57,7 +57,7 @@ const logo = computed(() => auth.userLogo)
 }
 
 .header-date {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 0.75rem;
   color: rgba(255,255,255,0.5);
   letter-spacing: 0.5px;

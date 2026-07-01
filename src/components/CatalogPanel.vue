@@ -282,7 +282,7 @@ function addCustom() {
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.85rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -314,7 +314,7 @@ function addCustom() {
   white-space: nowrap;
   border-bottom: 2px solid transparent;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .catalog-tab:hover { color: var(--black); }
@@ -438,7 +438,7 @@ function addCustom() {
   border: 1px solid var(--gray-border);
   border-radius: 6px;
   font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   outline: none;
   margin-bottom: 8px;
   transition: border-color 0.2s;
@@ -483,7 +483,7 @@ function addCustom() {
   cursor: pointer;
   border: none;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .edit-btn.save {
@@ -533,7 +533,7 @@ function addCustom() {
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -554,7 +554,7 @@ function addCustom() {
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -569,7 +569,7 @@ function addCustom() {
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   outline: none;
   cursor: pointer;
   appearance: none;

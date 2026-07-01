@@ -124,7 +124,7 @@ function changeQty(delta) {
   outline: none;
   padding: 8px 10px;
   font-size: 0.82rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   color: var(--black);
   background: transparent;
   width: 100%;
@@ -184,7 +184,7 @@ function changeQty(delta) {
   outline: none;
   padding: 6px 0;
   font-size: 0.82rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   color: var(--black);
   background: transparent;
   font-variant-numeric: tabular-nums;

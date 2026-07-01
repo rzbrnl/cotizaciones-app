@@ -45,7 +45,7 @@ const emit = defineEmits(['update'])
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.85rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   color: var(--black);
   background: var(--white);
   outline: none;

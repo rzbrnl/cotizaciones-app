@@ -1,24 +1,21 @@
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <div class="auth-header">
-        <div class="auth-logo">CC</div>
-        <h1>Crear Cuenta</h1>
-        <p>Regístrate para comenzar a cotizar</p>
-      </div>
+      <h1 class="auth-title">CotizaYa by Vēlum</h1>
+      <p class="auth-subtitle">Comienza a crear cotizaciones profesionales, organiza a tus clientes y comparte propuestas en minutos.</p>
 
       <form @submit.prevent="handleRegister" class="auth-form">
         <div class="auth-field">
           <label>Nombre completo</label>
-          <input v-model="fullName" type="text" placeholder="Tu nombre" autofocus />
+          <input v-model="fullName" type="text" placeholder="Tu nombre completo" autofocus />
         </div>
         <div class="auth-field">
-          <label>Email</label>
-          <input v-model="email" type="email" placeholder="tu@email.com" />
+          <label>Correo electrónico</label>
+          <input v-model="email" type="email" placeholder="hola@mundo.com" />
         </div>
         <div class="auth-field">
           <label>Contraseña</label>
-          <input v-model="password" type="password" placeholder="Mínimo 6 caracteres" />
+          <input v-model="password" type="password" placeholder="Tu contraseña" />
         </div>
         <div class="auth-field">
           <label>Confirmar contraseña</label>
@@ -27,13 +24,11 @@
         <div v-if="error" class="auth-error">{{ error }}</div>
         <div v-if="success" class="auth-success">{{ success }}</div>
         <button type="submit" class="auth-submit" :disabled="loading">
-          {{ loading ? 'Creando...' : 'Crear Cuenta' }}
+          {{ loading ? 'Creando...' : 'Registrarme' }}
         </button>
       </form>
 
-      <div class="auth-footer">
-        <p>¿Ya tienes cuenta? <a href="#" @click.prevent="$router.push('/login')">Iniciar sesión</a></p>
-      </div>
+      <p class="auth-footer">¿Ya tienes cuenta? <router-link to="/login">Inicia sesión</router-link></p>
     </div>
   </div>
 </template>
@@ -92,119 +87,109 @@ async function handleRegister() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #353535;
   padding: 20px;
 }
 
 .auth-card {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 400px;
-  padding: 40px 36px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  max-width: 420px;
+  padding: 48px 40px 40px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.auth-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+.auth-title {
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--black);
-  letter-spacing: 4px;
+  text-align: center;
   margin-bottom: 8px;
 }
 
-.auth-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 4px;
-}
-
-.auth-header p {
-  font-size: 0.8rem;
+.auth-subtitle {
+  font-size: 0.85rem;
   color: var(--gray-text);
-  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 32px;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .auth-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .auth-field label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gray-text);
+  font-size: 0.85rem;
   font-weight: 500;
+  color: var(--black);
 }
 
 .auth-field input {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border: 1px solid var(--gray-border);
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 0.9rem;
   outline: none;
   transition: border-color 0.2s;
+  background: #fafafa;
 }
 
 .auth-field input:focus {
   border-color: var(--gold);
+  background: var(--white);
+}
+
+.auth-field input::placeholder {
+  color: #bbb;
 }
 
 .auth-error {
-  background: #fee;
+  background: #fef2f2;
   color: var(--danger);
   padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
   text-align: center;
 }
 
 .auth-success {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: #f0fdf4;
+  color: #16a34a;
   padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
   text-align: center;
 }
 
 .auth-submit {
-  background: var(--gold);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
   border: none;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
   margin-top: 4px;
 }
 
 .auth-submit:hover:not(:disabled) {
-  background: var(--gold-hover);
+  opacity: 0.9;
 }
 
 .auth-submit:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 

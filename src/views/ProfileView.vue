@@ -120,7 +120,7 @@ async function handleLogout() {
 }
 
 .profile-card h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Google Sans', sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 28px;
