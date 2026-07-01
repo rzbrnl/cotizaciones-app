@@ -1,25 +1,34 @@
 <template>
   <AppLayout>
     <div class="dashboard">
-      <div class="dashboard-hero">
-        <div class="dashboard-icon">
-          <HIcon name="document" :size="48" />
+      <template v-if="store.savedList.length === 0">
+        <div class="empty-hero">
+          <div class="empty-icon">
+            <HIcon name="document" :size="48" />
+          </div>
+          <h1>No hay cotizaciones</h1>
+          <p>Crea tu primera cotización para comenzar</p>
+          <router-link to="/nueva" class="empty-btn">Crear mi primer cotización</router-link>
         </div>
-        <h1>{{ store.savedList.length === 0 ? 'No hay cotizaciones' : 'Mis cotizaciones' }}</h1>
-        <p v-if="store.savedList.length === 0">Crea tu primera cotización para comenzar</p>
-      </div>
+      </template>
 
-      <EmptyState v-if="store.savedList.length === 0" />
-
-      <div v-else class="dashboard-grid">
-        <QuotationCard
-          v-for="q in store.savedList"
-          :key="q.id"
-          :quotation="q"
-          @edit="editQuotation"
-          @delete="deleteQuotation"
-        />
-      </div>
+      <template v-else>
+        <div class="dashboard-header">
+          <div class="header-icon">
+            <HIcon name="document" :size="36" />
+          </div>
+          <h1>Mis cotizaciones</h1>
+        </div>
+        <div class="dashboard-grid">
+          <QuotationCard
+            v-for="q in store.savedList"
+            :key="q.id"
+            :quotation="q"
+            @edit="editQuotation"
+            @delete="deleteQuotation"
+          />
+        </div>
+      </template>
     </div>
   </AppLayout>
 </template>
@@ -30,7 +39,6 @@ import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
-import EmptyState from '../components/EmptyState.vue'
 import HIcon from '../components/HIcon.vue'
 
 const store = useQuotationStore()
@@ -58,26 +66,61 @@ async function deleteQuotation(id) {
   padding: 40px 24px;
 }
 
-.dashboard-hero {
+/* Empty state */
+.empty-hero {
   text-align: center;
-  margin-bottom: 36px;
+  padding: 80px 20px;
 }
 
-.dashboard-icon {
+.empty-icon {
   color: #999;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.dashboard-hero h1 {
-  font-size: 1.6rem;
+.empty-hero h1 {
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--black);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-.dashboard-hero p {
+.empty-hero p {
   font-size: 0.9rem;
   color: var(--gray-text);
+  margin-bottom: 28px;
+}
+
+.empty-btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.empty-btn:hover {
+  opacity: 0.9;
+}
+
+/* With data */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header-icon {
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.dashboard-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--black);
 }
 
 .dashboard-grid {
