@@ -1,0 +1,117 @@
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .toolbar, .catalog-overlay, .catalog-panel, .share-modal, .modal-overlay,
+  .share-badge, .section-add-wrapper, .row-actions, .remove-btn,
+  .remove-btn-sm, .section-remove, .btn-add-dark, .section-add,
+  .qty-stepper, .item-input-wrap, .no-print {
+    display: none !important;
+  }
+
+  .page-wrapper {
+    padding: 0;
+  }
+
+  .page {
+    box-shadow: none;
+    max-width: 100%;
+    min-height: auto;
+    border-radius: 0;
+  }
+
+  .header-banner {
+    background: #1a1a1a !important;
+    padding: 32px 40px !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .header-title {
+    color: white !important;
+  }
+
+  .header-date {
+    color: rgba(255,255,255,0.5) !important;
+  }
+
+  .logo-img {
+    max-width: 70px;
+    max-height: 70px;
+  }
+
+  .logo-placeholder {
+    display: none;
+  }
+
+  .client-form {
+    padding: 24px 40px 20px;
+  }
+
+  .section-block {
+    padding: 0 40px;
+  }
+
+  .grand-total {
+    padding: 24px 40px;
+  }
+
+  .notes-area {
+    padding: 20px 40px 32px;
+  }
+
+  .notes-textarea {
+    border: 1px solid #e0e0e0 !important;
+    min-height: 80px;
+  }
+
+  .editable, .form-input, .item-input {
+    border: none !important;
+    background: none !important;
+    padding: 2px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .editable:hover, .editable:focus,
+  .form-input:hover, .form-input:focus {
+    border: none !important;
+    background: none !important;
+  }
+
+  .input-icon {
+    display: none;
+  }
+
+  .form-display {
+    border: none !important;
+    padding: 2px 0;
+  }
+
+  .item-row:hover {
+    background: none;
+  }
+
+  .item-table thead th {
+    border-bottom: 1px solid #ccc !important;
+  }
+
+  .item-table tbody td {
+    border-bottom: 1px solid #eee !important;
+  }
+
+  .section-total {
+    border-top: 1px solid #ccc !important;
+  }
+
+  .grand-total {
+    border-top: 2px solid #1a1a1a !important;
+    border-bottom: 2px solid #1a1a1a !important;
+  }
+}

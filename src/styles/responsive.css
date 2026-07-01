@@ -1,0 +1,12 @@
+@media (max-width: 600px) {
+  .header-banner { padding: 24px; }
+  .header-title { font-size: 2.2rem; }
+  .logo-monogram { font-size: 2rem; }
+  .client-info { padding: 20px 24px 12px; gap: 16px; }
+  .section { padding: 0 24px; }
+  .grand-total { padding: 16px 24px 24px; }
+  .notes-area { padding: 12px 24px 24px; }
+  .toolbar-btn { padding: 6px 10px; font-size: 0.7rem; }
+  .catalog-panel { width: 100%; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
