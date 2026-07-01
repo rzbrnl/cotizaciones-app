@@ -10,20 +10,20 @@
       <path
         v-if="element[0] === 'path'"
         :d="element[1].d"
-        :stroke="element[1].stroke || color"
-        :stroke-width="element[1].strokeWidth || strokeWidth"
-        :stroke-linecap="element[1].strokeLinecap || 'round'"
-        :stroke-linejoin="element[1].strokeLinejoin || 'round'"
-        :fill="element[1].fill || 'none'"
+        :stroke="color"
+        :stroke-width="strokeWidth"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
       />
       <circle
         v-else-if="element[0] === 'circle'"
         :cx="element[1].cx"
         :cy="element[1].cy"
         :r="element[1].r"
-        :stroke="element[1].stroke || color"
-        :stroke-width="element[1].strokeWidth || strokeWidth"
-        :fill="element[1].fill || 'none'"
+        :stroke="color"
+        :stroke-width="strokeWidth"
+        fill="none"
       />
       <rect
         v-else-if="element[0] === 'rect'"
@@ -33,9 +33,9 @@
         :height="element[1].height"
         :rx="element[1].rx"
         :ry="element[1].ry"
-        :stroke="element[1].stroke || color"
-        :stroke-width="element[1].strokeWidth || strokeWidth"
-        :fill="element[1].fill || 'none'"
+        :stroke="color"
+        :stroke-width="strokeWidth"
+        fill="none"
       />
       <line
         v-else-if="element[0] === 'line'"
@@ -43,14 +43,14 @@
         :y1="element[1].y1"
         :x2="element[1].x2"
         :y2="element[1].y2"
-        :stroke="element[1].stroke || color"
-        :stroke-width="element[1].strokeWidth || strokeWidth"
+        :stroke="color"
+        :stroke-width="strokeWidth"
       />
       <polyline
         v-else-if="element[0] === 'polyline'"
         :points="element[1].points"
-        :stroke="element[1].stroke || color"
-        :stroke-width="element[1].strokeWidth || strokeWidth"
+        :stroke="color"
+        :stroke-width="strokeWidth"
         fill="none"
       />
     </template>

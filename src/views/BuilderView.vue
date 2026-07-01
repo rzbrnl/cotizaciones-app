@@ -1,14 +1,18 @@
 <template>
   <AppLayout>
     <template #actions>
-      <button class="topbar-icon-btn" @click="shareOpen = true" title="Compartir">
-        <HIcon name="share" :size="20" />
+      <button
+        class="topbar-icon-btn"
+        @click="shareOpen = true"
+        title="Compartir"
+      >
+        <HIcon name="share" :size="22" :stroke-width="2" />
       </button>
       <button class="topbar-icon-btn" @click="handleSave" title="Guardar">
-        <HIcon name="save" :size="20" />
+        <HIcon name="save" :size="22" :stroke-width="2" />
       </button>
       <button class="topbar-icon-btn" @click="printPage" title="Imprimir">
-        <HIcon name="printer" :size="20" />
+        <HIcon name="printer" :size="22" :stroke-width="2" />
       </button>
     </template>
 
@@ -18,11 +22,11 @@
 
         <ClientInfoForm
           :data="store.active"
-          @update:clientName="v => store.active.clientName = v"
-          @update:clientPhone="v => store.active.clientPhone = v"
-          @update:eventType="v => store.active.eventType = v"
-          @update:eventDate="v => store.active.eventDate = v"
-          @update:venue="v => store.active.venue = v"
+          @update:clientName="(v) => (store.active.clientName = v)"
+          @update:clientPhone="(v) => (store.active.clientPhone = v)"
+          @update:eventType="(v) => (store.active.eventType = v)"
+          @update:eventDate="(v) => (store.active.eventDate = v)"
+          @update:venue="(v) => (store.active.venue = v)"
         />
 
         <!-- Items -->
@@ -50,7 +54,9 @@
                 </td>
                 <td class="cell-center">
                   <div class="qty-stepper">
-                    <button class="qty-btn" @click="changeQty(item.id, -1)">−</button>
+                    <button class="qty-btn" @click="changeQty(item.id, -1)">
+                      −
+                    </button>
                     <input
                       type="number"
                       class="qty-input"
@@ -58,7 +64,9 @@
                       min="1"
                       @input="updateItem(item.id, 'qty', $event.target.value)"
                     />
-                    <button class="qty-btn" @click="changeQty(item.id, 1)">+</button>
+                    <button class="qty-btn" @click="changeQty(item.id, 1)">
+                      +
+                    </button>
                   </div>
                 </td>
                 <td class="cell-right">
@@ -67,14 +75,20 @@
                     type="text"
                     class="cell-input cell-input--right"
                     :value="formatNumber(item.unitPrice)"
-                    @blur="updateItem(item.id, 'unitPrice', $event.target.value)"
+                    @blur="
+                      updateItem(item.id, 'unitPrice', $event.target.value)
+                    "
                   />
                 </td>
                 <td class="cell-right cell-subtotal">
                   {{ formatCurrency(item.qty * item.unitPrice) }}
                 </td>
                 <td class="cell-center">
-                  <button v-if="allItems.length > 1" class="item-remove" @click="removeItem(item.id)">
+                  <button
+                    v-if="allItems.length > 1"
+                    class="item-remove"
+                    @click="removeItem(item.id)"
+                  >
                     <HIcon name="close" :size="16" />
                   </button>
                 </td>
@@ -82,13 +96,17 @@
             </tbody>
           </table>
 
-          <button class="btn-add-concept" @click="addItem">Agregar concepto</button>
+          <button class="btn-add-concept" @click="addItem">
+            Agregar concepto
+          </button>
         </div>
 
         <!-- Total -->
         <div class="total-bar">
           <span class="total-label">Total</span>
-          <span class="total-value">{{ formatCurrency(store.grandTotal) }} MXN</span>
+          <span class="total-value"
+            >{{ formatCurrency(store.grandTotal) }} MXN</span
+          >
         </div>
 
         <!-- Notes -->
@@ -114,88 +132,91 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useQuotationStore } from '../stores/quotation'
-import { formatCurrency } from '../utils/format'
-import AppLayout from '../components/AppLayout.vue'
-import QuoteHeader from '../components/QuoteHeader.vue'
-import ClientInfoForm from '../components/ClientInfoForm.vue'
-import ShareModal from '../components/ShareModal.vue'
-import HIcon from '../components/HIcon.vue'
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useQuotationStore } from "../stores/quotation";
+import { formatCurrency } from "../utils/format";
+import AppLayout from "../components/AppLayout.vue";
+import QuoteHeader from "../components/QuoteHeader.vue";
+import ClientInfoForm from "../components/ClientInfoForm.vue";
+import ShareModal from "../components/ShareModal.vue";
+import HIcon from "../components/HIcon.vue";
 
-const store = useQuotationStore()
-const route = useRoute()
-const router = useRouter()
+const store = useQuotationStore();
+const route = useRoute();
+const router = useRouter();
 
-const shareOpen = ref(false)
+const shareOpen = ref(false);
 
 const allItems = computed(() => {
-  const items = []
+  const items = [];
   for (const section of store.active.sections) {
     for (const item of section.items) {
-      items.push(item)
+      items.push(item);
     }
   }
-  return items
-})
+  return items;
+});
 
 onMounted(async () => {
   if (route.params.id) {
-    await store.loadAll()
-    const found = await store.loadById(route.params.id)
-    if (!found) router.push('/')
+    await store.loadAll();
+    const found = await store.loadById(route.params.id);
+    if (!found) router.push("/");
   } else {
-    store.createNew()
+    store.createNew();
   }
-})
+});
 
 function addItem() {
-  const sections = store.active.sections
+  const sections = store.active.sections;
   if (sections.length > 0) {
-    store.addItem(sections[sections.length - 1].id)
+    store.addItem(sections[sections.length - 1].id);
   }
 }
 
 function removeItem(itemId) {
-  const sections = store.active.sections
+  const sections = store.active.sections;
   if (sections.length > 0) {
-    store.removeItem(sections[0].id, itemId)
+    store.removeItem(sections[0].id, itemId);
   }
 }
 
 function changeQty(itemId, delta) {
-  const item = allItems.value.find(i => i.id === itemId)
-  if (!item) return
-  const newQty = Math.max(1, item.qty + delta)
-  updateItem(itemId, 'qty', String(newQty))
+  const item = allItems.value.find((i) => i.id === itemId);
+  if (!item) return;
+  const newQty = Math.max(1, item.qty + delta);
+  updateItem(itemId, "qty", String(newQty));
 }
 
 function updateItem(itemId, field, value) {
   for (const section of store.active.sections) {
-    const item = section.items.find(i => i.id === itemId)
-    if (!item) continue
-    if (field === 'name') {
-      item.name = value.trim()
-    } else if (field === 'qty') {
-      item.qty = Math.max(1, parseInt(value.replace(/[^0-9]/g, '')) || 1)
-    } else if (field === 'unitPrice') {
-      item.unitPrice = Math.max(0, parseFloat(value.replace(/[^0-9.\-]/g, '')) || 0)
+    const item = section.items.find((i) => i.id === itemId);
+    if (!item) continue;
+    if (field === "name") {
+      item.name = value.trim();
+    } else if (field === "qty") {
+      item.qty = Math.max(1, parseInt(value.replace(/[^0-9]/g, "")) || 1);
+    } else if (field === "unitPrice") {
+      item.unitPrice = Math.max(
+        0,
+        parseFloat(value.replace(/[^0-9.\-]/g, "")) || 0,
+      );
     }
   }
 }
 
 function formatNumber(num) {
-  return Number(num || 0).toLocaleString('en-US')
+  return Number(num || 0).toLocaleString("en-US");
 }
 
 async function handleSave() {
-  await store.save()
-  alert('Cotización guardada')
+  await store.save();
+  alert("Cotización guardada");
 }
 
 function printPage() {
-  window.print()
+  window.print();
 }
 </script>
 
@@ -211,7 +232,7 @@ function printPage() {
   width: 100%;
   max-width: 760px;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -236,11 +257,24 @@ function printPage() {
   border-bottom: 1px solid var(--gray-border);
 }
 
-.th-concept { width: 40%; }
-.th-qty { width: 16%; text-align: center; }
-.th-price { width: 18%; text-align: right; }
-.th-subtotal { width: 18%; text-align: right; }
-.th-actions { width: 8%; }
+.th-concept {
+  width: 40%;
+}
+.th-qty {
+  width: 16%;
+  text-align: center;
+}
+.th-price {
+  width: 18%;
+  text-align: right;
+}
+.th-subtotal {
+  width: 18%;
+  text-align: right;
+}
+.th-actions {
+  width: 8%;
+}
 
 .item-row td {
   padding: 10px 0;
@@ -254,7 +288,7 @@ function printPage() {
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 0.82rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   outline: none;
   transition: border-color 0.2s;
@@ -273,8 +307,12 @@ function printPage() {
   width: 90px;
 }
 
-.cell-center { text-align: center; }
-.cell-right { text-align: right; }
+.cell-center {
+  text-align: center;
+}
+.cell-right {
+  text-align: right;
+}
 
 .cell-currency {
   color: var(--gray-text);
@@ -325,7 +363,7 @@ function printPage() {
   outline: none;
   padding: 4px 0;
   font-size: 0.82rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   background: transparent;
   -moz-appearance: textfield;
@@ -371,7 +409,7 @@ function printPage() {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   margin: 16px 0 24px;
 }
 
@@ -420,7 +458,7 @@ function printPage() {
   border: 1px solid var(--gray-border);
   border-radius: 10px;
   font-size: 0.85rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   outline: none;
   resize: vertical;
@@ -436,10 +474,24 @@ function printPage() {
 }
 
 @media print {
-  .topbar, .btn-add-concept, .item-remove, .qty-stepper,
-  .th-actions, .no-print { display: none !important; }
-  .builder-wrapper { padding: 0; }
-  .builder-page { box-shadow: none; border-radius: 0; }
-  .cell-input { border: none !important; padding: 2px 0; }
+  .topbar,
+  .btn-add-concept,
+  .item-remove,
+  .qty-stepper,
+  .th-actions,
+  .no-print {
+    display: none !important;
+  }
+  .builder-wrapper {
+    padding: 0;
+  }
+  .builder-page {
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .cell-input {
+    border: none !important;
+    padding: 2px 0;
+  }
 }
 </style>
