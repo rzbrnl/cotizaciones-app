@@ -1,5 +1,5 @@
 @page {
-  margin: 10mm;
+  margin: 0;
 }
 
 @media print {
@@ -20,13 +20,34 @@
   .share-modal,
   .modal-overlay,
   .no-print,
-  .qty-stepper,
   .item-remove,
   .th-actions,
   .btn-add-concept,
-  .topbar-icon-btn,
-  .item-input-wrap {
+  .topbar-icon-btn {
     display: none !important;
+  }
+
+  /* Show qty value without stepper controls */
+  .qty-stepper {
+    border: none !important;
+    background: transparent !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .qty-btn {
+    display: none !important;
+  }
+
+  .qty-input {
+    border: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+    font-size: 0.82rem !important;
+    background: transparent !important;
   }
 
   /* Layout */
@@ -55,7 +76,7 @@
   .header-banner {
     background: #353535 !important;
     padding: 24px 32px !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
   }
 
   .header-title {
