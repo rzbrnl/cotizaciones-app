@@ -3,8 +3,9 @@
     <header class="topbar">
       <div class="topbar-brand">CotizaYa by Vēlum</div>
       <nav class="topbar-nav">
+        <slot name="actions" />
         <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
-        <router-link to="/nueva" class="topbar-link">Crear cotización</router-link>
+        <router-link to="/" class="topbar-link">Dashboard</router-link>
         <button class="topbar-logout" @click="handleLogout">Cerrar sesión</button>
       </nav>
     </header>
@@ -30,7 +31,7 @@ async function handleLogout() {
 <style scoped>
 .app-layout {
   min-height: 100vh;
-  background: var(--white);
+  background: #f0f0f0;
 }
 
 .topbar {
@@ -55,7 +56,7 @@ async function handleLogout() {
 .topbar-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .topbar-link {
@@ -68,6 +69,24 @@ async function handleLogout() {
 
 .topbar-link:hover {
   color: var(--white);
+}
+
+.topbar-icon-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.topbar-icon-btn:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
 }
 
 .topbar-logout {
