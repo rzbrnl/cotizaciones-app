@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="toolbar">
-      <h1>COTIZACIONES</h1>
+      <h1>CotizaYa by Vēlum</h1>
       <div class="toolbar-actions">
         <span class="toolbar-user">{{ auth.currentUser?.email }}</span>
         <router-link to="/" class="toolbar-btn">Dashboard</router-link>
@@ -25,7 +25,7 @@
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id">
-              <td>{{ user.full_name || '—' }}</td>
+              <td>{{ user.full_name || "—" }}</td>
               <td>{{ user.id }}</td>
               <td>{{ formatDate(user.created_at) }}</td>
             </tr>
@@ -40,30 +40,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
-const auth = useAuthStore()
-const router = useRouter()
-const users = ref([])
+const auth = useAuthStore();
+const router = useRouter();
+const users = ref([]);
 
 onMounted(async () => {
-  if (auth.currentUser?.role !== 'admin') {
-    router.push('/')
-    return
+  if (auth.currentUser?.role !== "admin") {
+    router.push("/");
+    return;
   }
-  users.value = await auth.getAllUsers()
-})
+  users.value = await auth.getAllUsers();
+});
 
 function formatDate(iso) {
-  if (!iso) return ''
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 async function handleLogout() {
-  await auth.logout()
-  router.push('/login')
+  await auth.logout();
+  router.push("/login");
 }
 </script>
 
@@ -78,7 +82,7 @@ async function handleLogout() {
 .users-table-wrap {
   background: var(--white);
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 

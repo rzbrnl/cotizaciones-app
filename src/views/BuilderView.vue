@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="toolbar">
-      <h1>COTIZACIONES</h1>
+      <h1>CotizaYa by Vēlum</h1>
       <div class="toolbar-actions">
-        <button class="toolbar-btn" @click="catalogOpen = true">Catálogo</button>
+        <button class="toolbar-btn" @click="catalogOpen = true">
+          Catálogo
+        </button>
         <button class="toolbar-btn" @click="shareOpen = true">Compartir</button>
         <button class="toolbar-btn primary" @click="handleSave">Guardar</button>
         <button class="toolbar-btn" @click="window.print()">Imprimir</button>
@@ -19,33 +21,38 @@
 
         <ClientInfoForm
           :data="store.active"
-          @update:clientName="v => store.active.clientName = v"
-          @update:clientPhone="v => store.active.clientPhone = v"
-          @update:eventType="v => store.active.eventType = v"
-          @update:eventDate="v => store.active.eventDate = v"
-          @update:venue="v => store.active.venue = v"
+          @update:clientName="(v) => (store.active.clientName = v)"
+          @update:clientPhone="(v) => (store.active.clientPhone = v)"
+          @update:eventType="(v) => (store.active.eventType = v)"
+          @update:eventDate="(v) => (store.active.eventDate = v)"
+          @update:venue="(v) => (store.active.venue = v)"
         />
 
         <SectionBlock
           v-for="section in store.active.sections"
           :key="section.id"
           :section="section"
-          @updateName="v => section.name = v || 'Sección'"
+          @updateName="(v) => (section.name = v || 'Sección')"
           @addItem="store.addItem(section.id)"
-          @updateItem="(itemId, field, value) => updateItem(section.id, itemId, field, value)"
-          @removeItem="itemId => store.removeItem(section.id, itemId)"
+          @updateItem="
+            (itemId, field, value) =>
+              updateItem(section.id, itemId, field, value)
+          "
+          @removeItem="(itemId) => store.removeItem(section.id, itemId)"
           @remove="store.removeSection(section.id)"
         />
 
         <div class="section-add-wrapper no-print">
-          <button class="btn-add-dark" @click="store.addSection()">Agregar sección</button>
+          <button class="btn-add-dark" @click="store.addSection()">
+            Agregar sección
+          </button>
         </div>
 
         <GrandTotal :total="store.grandTotal" />
 
         <NotesArea
           :notes="store.active.notes"
-          @update="v => store.active.notes = v"
+          @update="(v) => (store.active.notes = v)"
         />
       </div>
     </div>
@@ -65,69 +72,72 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useQuotationStore } from '../stores/quotation'
-import { useAuthStore } from '../stores/auth'
-import QuoteHeader from '../components/QuoteHeader.vue'
-import ClientInfoForm from '../components/ClientInfoForm.vue'
-import SectionBlock from '../components/SectionBlock.vue'
-import GrandTotal from '../components/GrandTotal.vue'
-import NotesArea from '../components/NotesArea.vue'
-import CatalogPanel from '../components/CatalogPanel.vue'
-import ShareModal from '../components/ShareModal.vue'
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useQuotationStore } from "../stores/quotation";
+import { useAuthStore } from "../stores/auth";
+import QuoteHeader from "../components/QuoteHeader.vue";
+import ClientInfoForm from "../components/ClientInfoForm.vue";
+import SectionBlock from "../components/SectionBlock.vue";
+import GrandTotal from "../components/GrandTotal.vue";
+import NotesArea from "../components/NotesArea.vue";
+import CatalogPanel from "../components/CatalogPanel.vue";
+import ShareModal from "../components/ShareModal.vue";
 
-const store = useQuotationStore()
-const auth = useAuthStore()
-const route = useRoute()
-const router = useRouter()
+const store = useQuotationStore();
+const auth = useAuthStore();
+const route = useRoute();
+const router = useRouter();
 
-const catalogOpen = ref(false)
-const shareOpen = ref(false)
+const catalogOpen = ref(false);
+const shareOpen = ref(false);
 
 onMounted(async () => {
   if (route.params.id) {
-    await store.loadAll()
-    const found = await store.loadById(route.params.id)
+    await store.loadAll();
+    const found = await store.loadById(route.params.id);
     if (!found) {
-      router.push('/')
+      router.push("/");
     }
   } else {
-    store.createNew()
+    store.createNew();
   }
-})
+});
 
 function updateItem(sectionId, itemId, field, value) {
-  const section = store.active.sections.find(s => s.id === sectionId)
-  if (!section) return
-  const item = section.items.find(i => i.id === itemId)
-  if (!item) return
+  const section = store.active.sections.find((s) => s.id === sectionId);
+  if (!section) return;
+  const item = section.items.find((i) => i.id === itemId);
+  if (!item) return;
 
-  if (field === 'name') {
-    item.name = value.trim()
-  } else if (field === 'qty') {
-    item.qty = Math.max(1, parseInt(value.replace(/[^0-9]/g, '')) || 1)
-  } else if (field === 'unitPrice') {
-    item.unitPrice = Math.max(0, parseFloat(value.replace(/[^0-9.\-]/g, '')) || 0)
+  if (field === "name") {
+    item.name = value.trim();
+  } else if (field === "qty") {
+    item.qty = Math.max(1, parseInt(value.replace(/[^0-9]/g, "")) || 1);
+  } else if (field === "unitPrice") {
+    item.unitPrice = Math.max(
+      0,
+      parseFloat(value.replace(/[^0-9.\-]/g, "")) || 0,
+    );
   }
 }
 
 function handleAddProduct(product) {
-  store.addProductFromCatalog(product)
-  catalogOpen.value = false
+  store.addProductFromCatalog(product);
+  catalogOpen.value = false;
 }
 
 async function handleSave() {
-  await store.save()
-  alert('Cotización guardada')
+  await store.save();
+  alert("Cotización guardada");
 }
 
 function handleLogout() {
-  auth.logout()
-  router.push('/login')
+  auth.logout();
+  router.push("/login");
 }
 
-const window = globalThis.window
+const window = globalThis.window;
 </script>
 
 <style scoped>
@@ -147,7 +157,7 @@ const window = globalThis.window
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
 }
 
 .btn-add-dark:hover {

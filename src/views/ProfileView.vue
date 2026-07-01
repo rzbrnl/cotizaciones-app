@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="toolbar">
-      <h1>COTIZACIONES</h1>
+      <h1>CotizaYa by Vēlum</h1>
       <div class="toolbar-actions">
         <router-link to="/" class="toolbar-btn">Dashboard</router-link>
         <button class="toolbar-btn danger" @click="handleLogout">Salir</button>
@@ -14,15 +14,29 @@
 
         <div class="profile-section">
           <label class="profile-label">Logo de la empresa</label>
-          <p class="profile-hint">Este logo aparecerá en todas tus cotizaciones</p>
+          <p class="profile-hint">
+            Este logo aparecerá en todas tus cotizaciones
+          </p>
 
           <div class="logo-upload-area" @click="triggerUpload">
-            <img v-if="auth.userLogo" :src="auth.userLogo" alt="Logo actual" class="logo-preview" />
+            <img
+              v-if="auth.userLogo"
+              :src="auth.userLogo"
+              alt="Logo actual"
+              class="logo-preview"
+            />
             <div v-else class="logo-empty">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
               </svg>
               <span>Click para subir tu logo</span>
               <span class="logo-upload-hint">PNG, JPG o SVG</span>
@@ -36,7 +50,11 @@
             />
           </div>
 
-          <button v-if="auth.userLogo" class="btn-remove-logo" @click="removeLogo">
+          <button
+            v-if="auth.userLogo"
+            class="btn-remove-logo"
+            @click="removeLogo"
+          >
             Quitar logo
           </button>
         </div>
@@ -46,15 +64,21 @@
           <div class="profile-info">
             <div class="profile-info-row">
               <span class="profile-info-label">Nombre:</span>
-              <span class="profile-info-value">{{ auth.currentUser?.fullName }}</span>
+              <span class="profile-info-value">{{
+                auth.currentUser?.fullName
+              }}</span>
             </div>
             <div class="profile-info-row">
               <span class="profile-info-label">Usuario:</span>
-              <span class="profile-info-value">{{ auth.currentUser?.username }}</span>
+              <span class="profile-info-value">{{
+                auth.currentUser?.username
+              }}</span>
             </div>
             <div class="profile-info-row">
               <span class="profile-info-label">Rol:</span>
-              <span class="profile-info-value">{{ auth.currentUser?.role }}</span>
+              <span class="profile-info-value">{{
+                auth.currentUser?.role
+              }}</span>
             </div>
           </div>
         </div>
@@ -64,44 +88,44 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
-const auth = useAuthStore()
-const router = useRouter()
-const fileInput = ref(null)
+const auth = useAuthStore();
+const router = useRouter();
+const fileInput = ref(null);
 
 function triggerUpload() {
-  fileInput.value.click()
+  fileInput.value.click();
 }
 
 async function handleLogoUpload(e) {
-  const file = e.target.files[0]
-  if (!file) return
+  const file = e.target.files[0];
+  if (!file) return;
 
   if (file.size > 2 * 1024 * 1024) {
-    alert('El logo debe ser menor a 2MB')
-    return
+    alert("El logo debe ser menor a 2MB");
+    return;
   }
 
-  const reader = new FileReader()
+  const reader = new FileReader();
   reader.onload = async (ev) => {
-    await auth.updateLogo(ev.target.result)
-  }
-  reader.readAsDataURL(file)
-  e.target.value = ''
+    await auth.updateLogo(ev.target.result);
+  };
+  reader.readAsDataURL(file);
+  e.target.value = "";
 }
 
 async function removeLogo() {
-  if (confirm('¿Quitar el logo de tu perfil?')) {
-    await auth.updateLogo('')
+  if (confirm("¿Quitar el logo de tu perfil?")) {
+    await auth.updateLogo("");
   }
 }
 
 async function handleLogout() {
-  await auth.logout()
-  router.push('/login')
+  await auth.logout();
+  router.push("/login");
 }
 </script>
 
@@ -116,11 +140,11 @@ async function handleLogout() {
   background: var(--white);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .profile-card h2 {
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 28px;
