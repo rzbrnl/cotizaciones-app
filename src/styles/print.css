@@ -31,10 +31,11 @@
   .qty-stepper {
     border: none !important;
     background: transparent !important;
-    display: block !important;
+    display: inline !important;
     width: auto !important;
     height: auto !important;
     overflow: visible !important;
+    padding: 0 !important;
   }
 
   .qty-btn {
@@ -43,11 +44,20 @@
 
   .qty-input {
     border: none !important;
-    width: auto !important;
+    width: 30px !important;
     padding: 0 !important;
     text-align: center !important;
     font-size: 0.82rem !important;
     background: transparent !important;
+    display: inline !important;
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+  }
+
+  .qty-input::-webkit-outer-spin-button,
+  .qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
   }
 
   /* Layout */
