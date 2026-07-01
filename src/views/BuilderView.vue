@@ -68,6 +68,7 @@
                       +
                     </button>
                   </div>
+                  <span class="qty-print">{{ item.qty }}</span>
                 </td>
                 <td class="cell-right">
                   <span class="cell-currency">$</span>
@@ -469,6 +470,11 @@ function printPage() {
   color: #ccc;
 }
 
+/* Print-only qty */
+.qty-print {
+  display: none;
+}
+
 .topbar-icon-btn {
   background-color: transparent;
   color: white;
@@ -483,6 +489,10 @@ function printPage() {
   .th-actions,
   .no-print {
     display: none !important;
+  }
+  .qty-print {
+    display: inline !important;
+    font-size: 0.82rem;
   }
   .builder-wrapper {
     padding: 0;
