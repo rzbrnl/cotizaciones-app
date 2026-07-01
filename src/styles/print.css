@@ -1,3 +1,8 @@
+@page {
+  margin: 0;
+  size: A4;
+}
+
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
@@ -5,37 +10,59 @@
     color-adjust: exact !important;
   }
 
-  body {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
     background: white;
   }
 
-  .toolbar, .catalog-overlay, .catalog-panel, .share-modal, .modal-overlay,
-  .share-badge, .section-add-wrapper, .row-actions, .remove-btn,
-  .remove-btn-sm, .section-remove, .btn-add-dark, .section-add,
-  .qty-stepper, .item-input-wrap, .no-print {
+  /* Hide everything except the builder page */
+  .topbar,
+  .app-layout > *:not(.builder-wrapper),
+  .catalog-overlay,
+  .catalog-panel,
+  .share-modal,
+  .modal-overlay,
+  .share-badge,
+  .no-print,
+  .builder-wrapper .topbar-icon-btn,
+  .qty-stepper,
+  .item-remove,
+  .th-actions,
+  .btn-add-concept {
     display: none !important;
   }
 
-  .page-wrapper {
-    padding: 0;
-  }
-
-  .page {
-    box-shadow: none;
-    max-width: 100%;
+  /* Reset layout */
+  .app-layout {
+    background: white;
     min-height: auto;
-    border-radius: 0;
   }
 
+  .builder-wrapper {
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .builder-page {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Header */
   .header-banner {
-    background: #1a1a1a !important;
-    padding: 32px 40px !important;
+    background: #353535 !important;
+    padding: 28px 36px !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
+    border-radius: 0 !important;
   }
 
   .header-title {
     color: white !important;
+    font-size: 1.8rem !important;
   }
 
   .header-date {
@@ -43,75 +70,79 @@
   }
 
   .logo-img {
-    max-width: 70px;
-    max-height: 70px;
+    max-width: 60px;
+    max-height: 60px;
   }
 
   .logo-placeholder {
     display: none;
   }
 
+  /* Client form */
   .client-form {
-    padding: 24px 40px 20px;
+    padding: 20px 36px 16px;
+    border-bottom: 1px solid #eee;
   }
 
-  .section-block {
-    padding: 0 40px;
-  }
-
-  .grand-total {
-    padding: 24px 40px;
-  }
-
-  .notes-area {
-    padding: 20px 40px 32px;
-  }
-
-  .notes-textarea {
-    border: 1px solid #e0e0e0 !important;
-    min-height: 80px;
-  }
-
-  .editable, .form-input, .item-input {
+  .form-input {
     border: none !important;
-    background: none !important;
-    padding: 2px 0 !important;
+    padding: 4px 0 !important;
+    background: transparent !important;
     box-shadow: none !important;
-  }
-
-  .editable:hover, .editable:focus,
-  .form-input:hover, .form-input:focus {
-    border: none !important;
-    background: none !important;
-  }
-
-  .input-icon {
-    display: none;
   }
 
   .form-display {
     border: none !important;
-    padding: 2px 0;
+    padding: 4px 0;
   }
 
-  .item-row:hover {
-    background: none;
+  .input-icon {
+    display: none !important;
   }
 
-  .item-table thead th {
-    border-bottom: 1px solid #ccc !important;
+  /* Items table */
+  .items-section {
+    padding: 0 36px;
   }
 
-  .item-table tbody td {
-    border-bottom: 1px solid #eee !important;
+  .cell-input {
+    border: none !important;
+    padding: 4px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
-  .section-total {
-    border-top: 1px solid #ccc !important;
+  .cell-subtotal {
+    font-weight: 600;
   }
 
-  .grand-total {
-    border-top: 2px solid #1a1a1a !important;
-    border-bottom: 2px solid #1a1a1a !important;
+  .item-row td {
+    border-bottom: 1px solid #f0f0f0 !important;
+  }
+
+  /* Total */
+  .total-bar {
+    padding: 20px 36px;
+    border-top: 2px solid #353535 !important;
+    border-bottom: 2px solid #353535 !important;
+  }
+
+  .total-label {
+    font-size: 1.2rem;
+  }
+
+  .total-value {
+    font-size: 1.2rem;
+  }
+
+  /* Notes */
+  .notes-section {
+    padding: 20px 36px 32px;
+  }
+
+  .notes-textarea {
+    border: 1px solid #e0e0e0 !important;
+    min-height: 60px;
+    background: transparent !important;
   }
 }
