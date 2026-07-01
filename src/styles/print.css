@@ -116,22 +116,37 @@
     background: transparent !important;
     box-shadow: none !important;
     font-size: 0.82rem !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  .cell-currency {
+    margin-right: 2px !important;
+  }
+
+  .cell-right {
+    white-space: nowrap !important;
   }
 
   .cell-subtotal {
     font-weight: 600 !important;
+    white-space: nowrap !important;
   }
 
   .item-row td {
     border-bottom: 1px solid #f0f0f0 !important;
     padding: 6px 0 !important;
+    word-wrap: break-word !important;
   }
 
   /* Total */
   .total-bar {
     padding: 16px 32px !important;
-    border-top: 2px solid #353535 !important;
-    border-bottom: 2px solid #353535 !important;
+    border-top: 1px solid #e0e0e0 !important;
+    border-bottom: none !important;
   }
 
   /* Notes */
