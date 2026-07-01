@@ -1,6 +1,5 @@
 @page {
-  margin: 0;
-  size: A4;
+  margin: 10mm;
 }
 
 @media print {
@@ -13,35 +12,35 @@
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    background: white;
+    background: white !important;
   }
 
-  /* Hide everything except the builder page */
+  /* Hide UI elements */
   .topbar,
-  .app-layout > *:not(.builder-wrapper),
-  .catalog-overlay,
-  .catalog-panel,
   .share-modal,
   .modal-overlay,
-  .share-badge,
   .no-print,
-  .builder-wrapper .topbar-icon-btn,
   .qty-stepper,
   .item-remove,
   .th-actions,
-  .btn-add-concept {
+  .btn-add-concept,
+  .topbar-icon-btn,
+  .item-input-wrap {
     display: none !important;
   }
 
-  /* Reset layout */
+  /* Layout */
   .app-layout {
-    background: white;
-    min-height: auto;
+    background: white !important;
+    min-height: auto !important;
+  }
+
+  .topbar-main {
+    min-height: auto !important;
   }
 
   .builder-wrapper {
     padding: 0 !important;
-    display: block !important;
   }
 
   .builder-page {
@@ -49,100 +48,96 @@
     border-radius: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
+    background: white !important;
   }
 
   /* Header */
   .header-banner {
     background: #353535 !important;
-    padding: 28px 36px !important;
-    print-color-adjust: exact !important;
-    -webkit-print-color-adjust: exact !important;
-    border-radius: 0 !important;
+    padding: 24px 32px !important;
+    border-radius: 8px !important;
   }
 
   .header-title {
     color: white !important;
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
   }
 
   .header-date {
     color: rgba(255,255,255,0.5) !important;
+    font-size: 0.7rem !important;
   }
 
   .logo-img {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 56px;
+    max-height: 56px;
   }
 
   .logo-placeholder {
-    display: none;
+    display: none !important;
   }
 
   /* Client form */
   .client-form {
-    padding: 20px 36px 16px;
-    border-bottom: 1px solid #eee;
+    padding: 16px 32px !important;
+    border-bottom: 1px solid #eee !important;
   }
 
   .form-input {
     border: none !important;
-    padding: 4px 0 !important;
+    padding: 2px 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+    font-size: 0.82rem !important;
   }
 
   .form-display {
     border: none !important;
-    padding: 4px 0;
+    padding: 2px 0 !important;
   }
 
   .input-icon {
     display: none !important;
   }
 
-  /* Items table */
+  /* Items */
   .items-section {
-    padding: 0 36px;
+    padding: 0 32px !important;
   }
 
   .cell-input {
     border: none !important;
-    padding: 4px 0 !important;
+    padding: 2px 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+    font-size: 0.82rem !important;
   }
 
   .cell-subtotal {
-    font-weight: 600;
+    font-weight: 600 !important;
   }
 
   .item-row td {
     border-bottom: 1px solid #f0f0f0 !important;
+    padding: 6px 0 !important;
   }
 
   /* Total */
   .total-bar {
-    padding: 20px 36px;
+    padding: 16px 32px !important;
     border-top: 2px solid #353535 !important;
     border-bottom: 2px solid #353535 !important;
   }
 
-  .total-label {
-    font-size: 1.2rem;
-  }
-
-  .total-value {
-    font-size: 1.2rem;
-  }
-
   /* Notes */
   .notes-section {
-    padding: 20px 36px 32px;
+    padding: 16px 32px 24px !important;
   }
 
   .notes-textarea {
     border: 1px solid #e0e0e0 !important;
-    min-height: 60px;
+    min-height: 50px !important;
     background: transparent !important;
+    font-size: 0.82rem !important;
   }
 }
