@@ -1,131 +1,83 @@
 <template>
-  <div>
-    <div class="toolbar">
-      <h1>CotizaYa by Vēlum</h1>
-      <div class="toolbar-actions">
-        <router-link to="/" class="toolbar-btn">Dashboard</router-link>
-        <button class="toolbar-btn danger" @click="handleLogout">Salir</button>
-      </div>
-    </div>
-
+  <AppLayout>
     <div class="profile-page">
-      <div class="profile-card">
-        <h2>Mi Perfil</h2>
+      <div class="profile-hero">
+        <div class="profile-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h1>Mi perfil</h1>
+      </div>
 
+      <div class="profile-content">
         <div class="profile-section">
-          <label class="profile-label">Logo de la empresa</label>
-          <p class="profile-hint">
-            Este logo aparecerá en todas tus cotizaciones
-          </p>
+          <h2>Logo de la empresa</h2>
 
-          <div class="logo-upload-area" @click="triggerUpload">
-            <img
-              v-if="auth.userLogo"
-              :src="auth.userLogo"
-              alt="Logo actual"
-              class="logo-preview"
-            />
+          <div class="logo-upload" @click="triggerUpload">
+            <img v-if="auth.userLogo" :src="auth.userLogo" alt="Logo" class="logo-preview" />
             <div v-else class="logo-empty">
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <polyline points="21 15 16 10 5 21" />
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
               </svg>
-              <span>Click para subir tu logo</span>
-              <span class="logo-upload-hint">PNG, JPG o SVG</span>
+              <span class="logo-empty-text">Clic aquí para subir tu logo</span>
+              <span class="logo-empty-hint">PNG, JPG, SVG</span>
             </div>
-            <input
-              ref="fileInput"
-              type="file"
-              accept="image/*"
-              hidden
-              @change="handleLogoUpload"
-            />
+            <input ref="fileInput" type="file" accept="image/*" hidden @change="handleLogoUpload" />
           </div>
-
-          <button
-            v-if="auth.userLogo"
-            class="btn-remove-logo"
-            @click="removeLogo"
-          >
-            Quitar logo
-          </button>
+          <p class="logo-hint">Este logo aparecerá en todas tus cotizaciones</p>
         </div>
 
         <div class="profile-section">
-          <label class="profile-label">Información de la cuenta</label>
-          <div class="profile-info">
-            <div class="profile-info-row">
-              <span class="profile-info-label">Nombre:</span>
-              <span class="profile-info-value">{{
-                auth.currentUser?.fullName
-              }}</span>
+          <h2>Información de la cuenta</h2>
+          <div class="account-card">
+            <div class="account-row">
+              <span class="account-label">Nombre:</span>
+              <span class="account-value">{{ auth.profile?.full_name || '—' }}</span>
             </div>
-            <div class="profile-info-row">
-              <span class="profile-info-label">Usuario:</span>
-              <span class="profile-info-value">{{
-                auth.currentUser?.username
-              }}</span>
+            <div class="account-row">
+              <span class="account-label">Usuario:</span>
+              <span class="account-value">{{ auth.currentUser?.email }}</span>
             </div>
-            <div class="profile-info-row">
-              <span class="profile-info-label">Rol:</span>
-              <span class="profile-info-value">{{
-                auth.currentUser?.role
-              }}</span>
+            <div class="account-row">
+              <span class="account-label">Rol:</span>
+              <span class="account-value">Administrador</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </AppLayout>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { useAuthStore } from "../stores/auth";
+import { ref } from 'vue'
+import { useAuthStore } from '../stores/auth'
+import AppLayout from '../components/AppLayout.vue'
 
-const auth = useAuthStore();
-const router = useRouter();
-const fileInput = ref(null);
+const auth = useAuthStore()
+const fileInput = ref(null)
 
 function triggerUpload() {
-  fileInput.value.click();
+  fileInput.value.click()
 }
 
 async function handleLogoUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-
+  const file = e.target.files[0]
+  if (!file) return
   if (file.size > 2 * 1024 * 1024) {
-    alert("El logo debe ser menor a 2MB");
-    return;
+    alert('El logo debe ser menor a 2MB')
+    return
   }
-
-  const reader = new FileReader();
+  const reader = new FileReader()
   reader.onload = async (ev) => {
-    await auth.updateLogo(ev.target.result);
-  };
-  reader.readAsDataURL(file);
-  e.target.value = "";
-}
-
-async function removeLogo() {
-  if (confirm("¿Quitar el logo de tu perfil?")) {
-    await auth.updateLogo("");
+    await auth.updateLogo(ev.target.result)
   }
-}
-
-async function handleLogout() {
-  await auth.logout();
-  router.push("/login");
+  reader.readAsDataURL(file)
+  e.target.value = ''
 }
 </script>
 
@@ -133,51 +85,43 @@ async function handleLogout() {
 .profile-page {
   max-width: 600px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 40px 24px;
 }
 
-.profile-card {
-  background: var(--white);
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+.profile-hero {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.profile-card h2 {
-  font-family: "Google Sans", sans-serif;
-  font-size: 1.4rem;
+.profile-icon {
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.profile-hero h1 {
+  font-size: 1.6rem;
   font-weight: 600;
-  margin-bottom: 28px;
+  color: var(--black);
 }
 
-.profile-section {
-  margin-bottom: 28px;
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.profile-section:last-child {
-  margin-bottom: 0;
-}
-
-.profile-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gray-text);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.profile-hint {
-  font-size: 0.8rem;
-  color: var(--gray-text);
+.profile-section h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--black);
   margin-bottom: 16px;
 }
 
 /* Logo upload */
-.logo-upload-area {
-  width: 160px;
-  height: 160px;
+.logo-upload {
+  width: 100%;
+  max-width: 360px;
+  height: 140px;
   border: 2px dashed var(--gray-border);
   border-radius: 12px;
   cursor: pointer;
@@ -188,78 +132,68 @@ async function handleLogout() {
   justify-content: center;
 }
 
-.logo-upload-area:hover {
+.logo-upload:hover {
   border-color: var(--gold);
-  background: var(--gold-light);
+  background: rgba(201, 168, 106, 0.04);
 }
 
 .logo-preview {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 8px;
+  padding: 12px;
 }
 
 .logo-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: var(--gray-text);
-  text-align: center;
-  padding: 16px;
+  gap: 6px;
+  color: #bbb;
 }
 
-.logo-empty span {
-  font-size: 0.8rem;
+.logo-empty-text {
+  font-size: 0.85rem;
+  color: #999;
 }
 
-.logo-upload-hint {
-  font-size: 0.7rem !important;
-  color: #bbb !important;
-}
-
-.btn-remove-logo {
-  margin-top: 12px;
-  background: none;
-  border: 1px solid var(--danger);
-  color: var(--danger);
-  padding: 6px 14px;
-  border-radius: 6px;
+.logo-empty-hint {
   font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s;
+  color: #ccc;
 }
 
-.btn-remove-logo:hover {
-  background: var(--danger);
-  color: var(--white);
+.logo-hint {
+  font-size: 0.8rem;
+  color: var(--gray-text);
+  margin-top: 10px;
 }
 
-/* Account info */
-.profile-info {
-  background: var(--gray-light);
-  border-radius: 8px;
-  padding: 16px 20px;
+/* Account card */
+.account-card {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 20px 24px;
 }
 
-.profile-info-row {
+.account-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  align-items: center;
+  padding: 10px 0;
 }
 
-.profile-info-row:not(:last-child) {
+.account-row:not(:last-child) {
   border-bottom: 1px solid var(--gray-border);
 }
 
-.profile-info-label {
-  font-size: 0.8rem;
+.account-label {
+  font-size: 0.85rem;
   color: var(--gray-text);
 }
 
-.profile-info-value {
+.account-value {
   font-size: 0.85rem;
   font-weight: 500;
+  color: var(--black);
 }
 </style>
