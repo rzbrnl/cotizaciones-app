@@ -13,7 +13,7 @@
             @blur="emit('update:clientName', $event.target.value)"
             @keyup.enter="$event.target.blur()"
           />
-          <span v-else class="form-display">{{ data.clientName || '—' }}</span>
+          <span v-else class="form-display">{{ data.clientName || "—" }}</span>
           <span class="input-icon"><HIcon name="user" :size="16" /></span>
         </div>
       </div>
@@ -32,7 +32,7 @@
             @blur="emit('update:clientPhone', $event.target.value)"
             @keyup.enter="$event.target.blur()"
           />
-          <span v-else class="form-display">{{ data.clientPhone || '—' }}</span>
+          <span v-else class="form-display">{{ data.clientPhone || "—" }}</span>
           <span class="input-icon"><HIcon name="phone" :size="16" /></span>
         </div>
       </div>
@@ -47,7 +47,7 @@
           />
           <span class="input-icon"><HIcon name="calendar" :size="16" /></span>
         </div>
-        <span v-else class="form-display">{{ data.eventDate || '—' }}</span>
+        <span v-else class="form-display">{{ data.eventDate || "—" }}</span>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
             @blur="emit('update:venue', $event.target.value)"
             @keyup.enter="$event.target.blur()"
           />
-          <span v-else class="form-display">{{ data.venue || '—' }}</span>
+          <span v-else class="form-display">{{ data.venue || "—" }}</span>
           <span class="input-icon"><HIcon name="location" :size="16" /></span>
         </div>
       </div>
@@ -86,8 +86,10 @@
             <option value="Graduación">Graduación</option>
             <option value="Otro">Otro</option>
           </select>
-          <span v-else class="form-display">{{ data.eventType || '—' }}</span>
-          <span class="input-icon input-icon--select"><HIcon name="chevron-down" :size="14" /></span>
+          <span v-else class="form-display">{{ data.eventType || "—" }}</span>
+          <span class="input-icon input-icon--select"
+            ><HIcon name="chevron-down" :size="14"
+          /></span>
         </div>
       </div>
     </div>
@@ -95,23 +97,25 @@
 </template>
 
 <script setup>
-import HIcon from './HIcon.vue'
+import HIcon from "./HIcon.vue";
 
 defineProps({
   data: { type: Object, required: true },
   readonly: { type: Boolean, default: false },
-})
+});
 
 const emit = defineEmits([
-  'update:clientName', 'update:clientPhone',
-  'update:eventType', 'update:eventDate', 'update:venue',
-])
+  "update:clientName",
+  "update:clientPhone",
+  "update:eventType",
+  "update:eventDate",
+  "update:venue",
+]);
 </script>
 
 <style scoped>
 .client-form {
   padding: 28px 40px 24px;
-  border-bottom: 1px solid var(--gray-border);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -155,7 +159,7 @@ const emit = defineEmits([
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.85rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   background: var(--white);
   outline: none;
