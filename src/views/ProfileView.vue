@@ -3,10 +3,7 @@
     <div class="profile-page">
       <div class="profile-hero">
         <div class="profile-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
+          <HIcon name="user" :size="48" />
         </div>
         <h1>Mi perfil</h1>
       </div>
@@ -18,11 +15,7 @@
           <div class="logo-upload" @click="triggerUpload">
             <img v-if="auth.userLogo" :src="auth.userLogo" alt="Logo" class="logo-preview" />
             <div v-else class="logo-empty">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
+              <HIcon name="image" :size="32" color="#ccc" />
               <span class="logo-empty-text">Clic aquí para subir tu logo</span>
               <span class="logo-empty-hint">PNG, JPG, SVG</span>
             </div>
@@ -57,6 +50,7 @@
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import AppLayout from '../components/AppLayout.vue'
+import HIcon from '../components/HIcon.vue'
 
 const auth = useAuthStore()
 const fileInput = ref(null)
@@ -117,7 +111,6 @@ async function handleLogoUpload(e) {
   margin-bottom: 16px;
 }
 
-/* Logo upload */
 .logo-upload {
   width: 100%;
   max-width: 360px;
@@ -149,7 +142,6 @@ async function handleLogoUpload(e) {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  color: #bbb;
 }
 
 .logo-empty-text {
@@ -168,7 +160,6 @@ async function handleLogoUpload(e) {
   margin-top: 10px;
 }
 
-/* Account card */
 .account-card {
   background: #f7f7f7;
   border-radius: 12px;

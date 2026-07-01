@@ -2,25 +2,13 @@
   <AppLayout>
     <template #actions>
       <button class="topbar-icon-btn" @click="shareOpen = true" title="Compartir">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
-          <polyline points="16 6 12 2 8 6"/>
-          <line x1="12" y1="2" x2="12" y2="15"/>
-        </svg>
+        <HIcon name="share" :size="20" />
       </button>
       <button class="topbar-icon-btn" @click="handleSave" title="Guardar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-          <polyline points="17 21 17 13 7 13 7 21"/>
-          <polyline points="7 3 7 8 15 8"/>
-        </svg>
+        <HIcon name="save" :size="20" />
       </button>
       <button class="topbar-icon-btn" @click="printPage" title="Imprimir">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polyline points="6 9 6 2 18 2 18 9"/>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-          <rect x="6" y="14" width="12" height="8"/>
-        </svg>
+        <HIcon name="printer" :size="20" />
       </button>
     </template>
 
@@ -87,10 +75,7 @@
                 </td>
                 <td class="cell-center">
                   <button v-if="allItems.length > 1" class="item-remove" @click="removeItem(item.id)">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <line x1="18" y1="6" x2="6" y2="18"/>
-                      <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
+                    <HIcon name="close" :size="16" />
                   </button>
                 </td>
               </tr>
@@ -137,6 +122,7 @@ import AppLayout from '../components/AppLayout.vue'
 import QuoteHeader from '../components/QuoteHeader.vue'
 import ClientInfoForm from '../components/ClientInfoForm.vue'
 import ShareModal from '../components/ShareModal.vue'
+import HIcon from '../components/HIcon.vue'
 
 const store = useQuotationStore()
 const route = useRoute()
@@ -229,7 +215,6 @@ function printPage() {
   overflow: hidden;
 }
 
-/* Items table */
 .items-section {
   padding: 0 40px;
   margin-top: 8px;
@@ -304,7 +289,6 @@ function printPage() {
   padding-right: 8px;
 }
 
-/* Qty stepper */
 .qty-stepper {
   display: inline-flex;
   align-items: center;
@@ -352,7 +336,6 @@ function printPage() {
   -webkit-appearance: none;
 }
 
-/* Remove button */
 .item-remove {
   background: none;
   border: none;
@@ -375,7 +358,6 @@ function printPage() {
   background: #fef2f2;
 }
 
-/* Add concept button */
 .btn-add-concept {
   display: inline-block;
   background: var(--black);
@@ -397,7 +379,6 @@ function printPage() {
   background: #4a4a4a;
 }
 
-/* Total */
 .total-bar {
   display: flex;
   justify-content: space-between;
@@ -418,7 +399,6 @@ function printPage() {
   font-variant-numeric: tabular-nums;
 }
 
-/* Notes */
 .notes-section {
   padding: 24px 40px 36px;
 }

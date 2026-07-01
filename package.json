@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hugeicons/core-free-icons": "^4.2.2",
     "@supabase/supabase-js": "^2.110.0",
     "lz-string": "^1.5.0",
     "pinia": "^3.0.4",
