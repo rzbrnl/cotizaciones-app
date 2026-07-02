@@ -4,6 +4,7 @@
       <div class="topbar-brand">CotizaYa by Vēlum</div>
       <nav class="topbar-nav">
         <slot name="actions" />
+        <router-link to="/nueva" class="topbar-btn-new">Nueva cotización</router-link>
         <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
         <router-link to="/usuarios" class="topbar-link" v-if="isAdmin">Usuarios</router-link>
         <router-link to="/" class="topbar-link">Dashboard</router-link>
@@ -91,6 +92,22 @@ async function handleLogout() {
 
 .topbar-icon-btn:hover {
   opacity: 0.7;
+}
+
+.topbar-btn-new {
+  background: var(--gold);
+  color: var(--black);
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.topbar-btn-new:hover {
+  background: var(--gold-hover);
+  color: var(--white);
 }
 
 .topbar-logout {
