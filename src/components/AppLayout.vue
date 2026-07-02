@@ -5,6 +5,7 @@
       <nav class="topbar-nav">
         <slot name="actions" />
         <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
+        <router-link to="/usuarios" class="topbar-link" v-if="isAdmin">Usuarios</router-link>
         <router-link to="/" class="topbar-link">Dashboard</router-link>
         <button class="topbar-logout" @click="handleLogout">Cerrar sesión</button>
       </nav>
@@ -16,11 +17,16 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 
 const auth = useAuthStore()
 const router = useRouter()
+
+const isAdmin = computed(() => {
+  return auth.profile?.role === 'admin' || auth.currentUser?.user_metadata?.role === 'admin'
+})
 
 async function handleLogout() {
   await auth.logout()
