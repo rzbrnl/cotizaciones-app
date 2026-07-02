@@ -43,16 +43,6 @@ export const useQuotationStore = defineStore('quotation', () => {
     return total
   })
 
-  function sectionTotal(sectionId) {
-    const section = active.value.sections.find(s => s.id === sectionId)
-    if (!section) return 0
-    let total = 0
-    for (const item of section.items) {
-      total += (item.qty || 0) * (item.unitPrice || 0)
-    }
-    return total
-  }
-
   function createNew() {
     active.value = createBlank()
   }
@@ -164,19 +154,11 @@ export const useQuotationStore = defineStore('quotation', () => {
     active.value.sections = active.value.sections.filter(s => s.id !== sectionId)
   }
 
-  function addProductFromCatalog(product) {
-    const sections = active.value.sections
-    if (sections.length > 0) {
-      addItem(sections[sections.length - 1].id, product)
-    }
-  }
-
   return {
     active,
     savedList,
     saving,
     grandTotal,
-    sectionTotal,
     createNew,
     loadAll,
     loadById,
@@ -186,6 +168,5 @@ export const useQuotationStore = defineStore('quotation', () => {
     removeItem,
     addSection,
     removeSection,
-    addProductFromCatalog,
   }
 })
