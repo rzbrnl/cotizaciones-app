@@ -3,10 +3,22 @@
     <template #actions>
       <div class="status-dropdown" ref="statusDropdownRef">
         <button class="status-trigger" @click="statusOpen = !statusOpen">
-          <span class="status-dot" :class="store.active.status || 'borrador'"></span>
-          <span class="status-text">{{ statusLabels[store.active.status] || 'Borrador' }}</span>
-          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="3,4.5 6,7.5 9,4.5"/>
+          <span
+            class="status-dot"
+            :class="store.active.status || 'borrador'"
+          ></span>
+          <span class="status-text">{{
+            statusLabels[store.active.status] || "Borrador"
+          }}</span>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="3,4.5 6,7.5 9,4.5" />
           </svg>
         </button>
         <div v-if="statusOpen" class="status-menu">
@@ -19,8 +31,16 @@
           >
             <span class="status-dot" :class="key"></span>
             <span>{{ label }}</span>
-            <svg v-if="store.active.status === key" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="20 6 9 17 4 12"/>
+            <svg
+              v-if="store.active.status === key"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <polyline points="20 6 9 17 4 12" />
             </svg>
           </button>
         </div>
@@ -181,10 +201,10 @@ const statusOpen = ref(false);
 const statusDropdownRef = ref(null);
 
 const statusLabels = {
-  borrador: 'Borrador',
-  enviada: 'Enviada',
-  aprobada: 'Aprobada',
-  rechazada: 'Rechazada',
+  borrador: "Borrador",
+  enviada: "Enviada",
+  aprobada: "Aprobada",
+  rechazada: "Rechazada",
 };
 
 function selectStatus(key) {
@@ -202,7 +222,7 @@ function handleClickOutside(e) {
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
+  document.addEventListener("click", handleClickOutside);
 });
 
 const allItems = computed(() => {
@@ -566,19 +586,19 @@ function printPage() {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--white);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 7px 16px;
   border-radius: 8px;
   font-size: 0.78rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .status-trigger:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .status-dot {
@@ -588,10 +608,18 @@ function printPage() {
   flex-shrink: 0;
 }
 
-.status-dot.borrador { background: #9ca3af; }
-.status-dot.enviada { background: #3b82f6; }
-.status-dot.aprobada { background: #22c55e; }
-.status-dot.rechazada { background: #ef4444; }
+.status-dot.borrador {
+  background: #9ca3af;
+}
+.status-dot.enviada {
+  background: #3b82f6;
+}
+.status-dot.aprobada {
+  background: #22c55e;
+}
+.status-dot.rechazada {
+  background: #ef4444;
+}
 
 .status-text {
   white-space: nowrap;
@@ -603,7 +631,7 @@ function printPage() {
   right: 0;
   background: var(--white);
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   min-width: 180px;
   z-index: 150;
@@ -618,7 +646,7 @@ function printPage() {
   border: none;
   background: none;
   font-size: 0.82rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   cursor: pointer;
   transition: background 0.15s;
