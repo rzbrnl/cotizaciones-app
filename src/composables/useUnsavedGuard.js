@@ -1,8 +1,10 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useConfirmStore } from '../stores/confirm'
 
 export function useUnsavedGuard(isDirty) {
   const router = useRouter()
+  const confirmStore = useConfirmStore()
   const confirmed = ref(false)
 
   function onBeforeUnload(e) {
@@ -22,7 +24,13 @@ export function useUnsavedGuard(isDirty) {
   function patchRouter() {
     router.push = async (...args) => {
       if (isDirty.value && !confirmed.value) {
-        const answer = window.confirm('Tienes cambios sin guardar. ¿Salir de todas formas?')
+        const answer = await confirmStore.show({
+          title: 'Cambios sin guardar',
+          message: 'Tienes cambios pendientes. Si sales, se perderán.',
+          confirmText: 'Salir',
+          cancelText: 'Quedarme',
+          type: 'warning',
+        })
         if (!answer) return
       }
       confirmed.value = true
@@ -31,7 +39,13 @@ export function useUnsavedGuard(isDirty) {
 
     router.replace = async (...args) => {
       if (isDirty.value && !confirmed.value) {
-        const answer = window.confirm('Tienes cambios sin guardar. ¿Salir de todas formas?')
+        const answer = await confirmStore.show({
+          title: 'Cambios sin guardar',
+          message: 'Tienes cambios pendientes. Si sales, se perderán.',
+          confirmText: 'Salir',
+          cancelText: 'Quedarme',
+          type: 'warning',
+        })
         if (!answer) return
       }
       confirmed.value = true

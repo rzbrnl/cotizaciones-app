@@ -87,6 +87,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
+import { useConfirmStore } from '../stores/confirm'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
@@ -94,6 +95,7 @@ import HIcon from '../components/HIcon.vue'
 
 const store = useQuotationStore()
 const toast = useToastStore()
+const confirmStore = useConfirmStore()
 const router = useRouter()
 
 const loading = ref(true)
@@ -142,7 +144,14 @@ function editQuotation(id) {
 }
 
 async function deleteQuotation(id) {
-  if (confirm('¿Eliminar esta cotización?')) {
+  const answer = await confirmStore.show({
+    title: 'Eliminar cotización',
+    message: '¿Estás seguro de que quieres eliminar esta cotización? Esta acción no se puede deshacer.',
+    confirmText: 'Eliminar',
+    cancelText: 'Cancelar',
+    type: 'danger',
+  })
+  if (answer) {
     await store.deleteById(id)
     toast.success('Cotización eliminada')
   }

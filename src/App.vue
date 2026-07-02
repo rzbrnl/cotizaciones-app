@@ -6,11 +6,25 @@
       </Transition>
     </router-view>
     <ToastContainer />
+    <ConfirmModal
+      :open="confirmStore.open"
+      :title="confirmStore.title"
+      :message="confirmStore.message"
+      :confirm-text="confirmStore.confirmText"
+      :cancel-text="confirmStore.cancelText"
+      :type="confirmStore.type"
+      @confirm="confirmStore.confirm"
+      @cancel="confirmStore.cancel"
+    />
   </div>
 </template>
 
 <script setup>
 import ToastContainer from './components/ToastContainer.vue'
+import ConfirmModal from './components/ConfirmModal.vue'
+import { useConfirmStore } from './stores/confirm'
+
+const confirmStore = useConfirmStore()
 </script>
 
 <style>
