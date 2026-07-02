@@ -15,7 +15,7 @@ const routes = [
   { path: '/nueva', name: 'new', component: BuilderView, meta: { auth: true } },
   { path: '/editar/:id', name: 'edit', component: BuilderView, meta: { auth: true } },
   { path: '/perfil', name: 'profile', component: ProfileView, meta: { auth: true } },
-  { path: '/usuarios', name: 'users', component: UsersAdminView, meta: { auth: true } },
+  { path: '/usuarios', name: 'users', component: UsersAdminView, meta: { auth: true, admin: true } },
   { path: '/compartir/:hash', name: 'share', component: ShareView },
 ]
 
@@ -30,11 +30,28 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.meta.auth && !isLoggedIn) {
     next('/login')
-  } else if (to.meta.guest && isLoggedIn) {
-    next('/')
-  } else {
-    next()
+    return
   }
+
+  if (to.meta.guest && isLoggedIn) {
+    next('/')
+    return
+  }
+
+  if (to.meta.admin && isLoggedIn) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', session.user.id)
+      .single()
+
+    if (data?.role !== 'admin') {
+      next('/')
+      return
+    }
+  }
+
+  next()
 })
 
 export default router
