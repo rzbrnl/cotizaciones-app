@@ -31,11 +31,16 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchProfile(userId) {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
       .single()
+
+    if (error) {
+      console.error('Error fetching profile:', error.message)
+      return
+    }
 
     if (data) {
       profile.value = data
@@ -92,10 +97,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function getAllUsers() {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Error fetching users:', error.message)
+      return []
+    }
     return data || []
   }
 
