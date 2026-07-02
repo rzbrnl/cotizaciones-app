@@ -1,12 +1,30 @@
 <template>
   <AppLayout>
     <template #actions>
-      <select class="status-select" :value="store.active.status" @change="handleStatusChange">
-        <option value="borrador">Borrador</option>
-        <option value="enviada">Enviada</option>
-        <option value="aprobada">Aprobada</option>
-        <option value="rechazada">Rechazada</option>
-      </select>
+      <div class="status-dropdown" ref="statusDropdownRef">
+        <button class="status-trigger" @click="statusOpen = !statusOpen">
+          <span class="status-dot" :class="store.active.status || 'borrador'"></span>
+          <span class="status-text">{{ statusLabels[store.active.status] || 'Borrador' }}</span>
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3,4.5 6,7.5 9,4.5"/>
+          </svg>
+        </button>
+        <div v-if="statusOpen" class="status-menu">
+          <button
+            v-for="(label, key) in statusLabels"
+            :key="key"
+            class="status-option"
+            :class="{ active: store.active.status === key }"
+            @click="selectStatus(key)"
+          >
+            <span class="status-dot" :class="key"></span>
+            <span>{{ label }}</span>
+            <svg v-if="store.active.status === key" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
       <button
         class="topbar-icon-btn"
         @click="shareOpen = true"
@@ -159,6 +177,33 @@ const route = useRoute();
 const router = useRouter();
 
 const shareOpen = ref(false);
+const statusOpen = ref(false);
+const statusDropdownRef = ref(null);
+
+const statusLabels = {
+  borrador: 'Borrador',
+  enviada: 'Enviada',
+  aprobada: 'Aprobada',
+  rechazada: 'Rechazada',
+};
+
+function selectStatus(key) {
+  store.active.status = key;
+  store.updateStatus(store.active.id, key);
+  statusOpen.value = false;
+  toast.success(`Estado: ${statusLabels[key]}`);
+}
+
+// Close dropdown on outside click
+function handleClickOutside(e) {
+  if (statusDropdownRef.value && !statusDropdownRef.value.contains(e.target)) {
+    statusOpen.value = false;
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
+});
 
 const allItems = computed(() => {
   const items = [];
@@ -226,20 +271,6 @@ async function handleSave() {
   await store.save();
   toast.success("Cotización guardada");
 }
-
-async function handleStatusChange(e) {
-  const newStatus = e.target.value;
-  store.active.status = newStatus;
-  await store.updateStatus(store.active.id, newStatus);
-  toast.success(`Estado cambiado a "${statusLabels[newStatus]}"`);
-}
-
-const statusLabels = {
-  borrador: 'Borrador',
-  enviada: 'Enviada',
-  aprobada: 'Aprobada',
-  rechazada: 'Rechazada',
-};
 
 async function exportPdf() {
   const element = document.querySelector(".builder-page");
@@ -526,26 +557,86 @@ function printPage() {
   color: #ccc;
 }
 
-/* Status select */
-.status-select {
+/* Status dropdown */
+.status-dropdown {
+  position: relative;
+}
+
+.status-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   background: rgba(255,255,255,0.1);
   color: var(--white);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
   font-family: 'Google Sans', sans-serif;
   cursor: pointer;
-  outline: none;
+  transition: all 0.2s;
 }
 
-.status-select:focus {
-  border-color: var(--gold);
+.status-trigger:hover {
+  background: rgba(255,255,255,0.15);
 }
 
-.status-select option {
-  background: #353535;
-  color: var(--white);
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.borrador { background: #9ca3af; }
+.status-dot.enviada { background: #3b82f6; }
+.status-dot.aprobada { background: #22c55e; }
+.status-dot.rechazada { background: #ef4444; }
+
+.status-text {
+  white-space: nowrap;
+}
+
+.status-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  overflow: hidden;
+  min-width: 180px;
+  z-index: 150;
+}
+
+.status-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 0.82rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--black);
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.status-option:hover {
+  background: var(--gray-light);
+}
+
+.status-option.active {
+  font-weight: 600;
+  background: rgba(201, 168, 106, 0.08);
+}
+
+.status-option svg {
+  margin-left: auto;
+  color: var(--gold);
 }
 
 /* Print-only qty */
