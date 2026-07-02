@@ -139,32 +139,26 @@ async function handleReject() {
 async function updateStatus(newStatus) {
   if (!quotation.value) return
 
-  // Try by _dbId first
-  if (quotation.value._dbId) {
-    const { error } = await supabase
-      .from('quotations')
-      .update({ data: { ...quotation.value, status: newStatus } })
-      .eq('id', quotation.value._dbId)
-    if (!error) return
-  }
+  const searchData = { ...quotation.value, status: newStatus }
 
-  // Fallback: find by matching data
+  // Search for matching quotation by clientName + date
   const { data: all } = await supabase
     .from('quotations')
     .select('id, data')
 
-  if (all) {
-    const match = all.find(q =>
-      q.data?.id === quotation.value.id ||
-      (q.data?.clientName === quotation.value.clientName &&
-       q.data?.date === quotation.value.date)
-    )
-    if (match) {
-      await supabase
-        .from('quotations')
-        .update({ data: { ...quotation.value, status: newStatus } })
-        .eq('id', match.id)
-    }
+  if (!all) return
+
+  const match = all.find(q =>
+    q.data?.clientName === quotation.value.clientName &&
+    q.data?.date === quotation.value.date &&
+    q.data?.venue === quotation.value.venue
+  )
+
+  if (match) {
+    await supabase
+      .from('quotations')
+      .update({ data: searchData })
+      .eq('id', match.id)
   }
 }
 

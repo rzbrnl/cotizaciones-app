@@ -124,6 +124,7 @@ export const useQuotationStore = defineStore('quotation', () => {
         .from('quotations')
         .update({ data: copy, updated_at: new Date().toISOString() })
         .eq('id', existing._dbId)
+      active.value._dbId = existing._dbId
     } else {
       const { data } = await supabase
         .from('quotations')
@@ -135,7 +136,7 @@ export const useQuotationStore = defineStore('quotation', () => {
         .single()
 
       if (data) {
-        copy._dbId = data.id
+        active.value._dbId = data.id
       }
     }
 
