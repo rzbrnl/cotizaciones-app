@@ -8,6 +8,8 @@ import RegisterView from '../views/RegisterView.vue'
 import UsersAdminView from '../views/UsersAdminView.vue'
 import ProfileView from '../views/ProfileView.vue'
 
+import PublicQuotationView from '../views/PublicQuotationView.vue'
+
 const routes = [
   { path: '/login', name: 'login', component: LoginView, meta: { guest: true } },
   { path: '/registro', name: 'register', component: RegisterView, meta: { guest: true } },
@@ -17,6 +19,7 @@ const routes = [
   { path: '/perfil', name: 'profile', component: ProfileView, meta: { auth: true } },
   { path: '/usuarios', name: 'users', component: UsersAdminView, meta: { auth: true, admin: true } },
   { path: '/compartir/:hash', name: 'share', component: ShareView },
+  { path: '/publica/:hash', name: 'public', component: PublicQuotationView },
 ]
 
 const router = createRouter({

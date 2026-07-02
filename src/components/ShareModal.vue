@@ -17,7 +17,20 @@
             </div>
             <div class="share-option-text">
               <h4>Enlace compartible</h4>
-              <p>Genera un enlace URL con la cotización</p>
+              <p>Enlace para ver la cotización (solo lectura)</p>
+            </div>
+          </div>
+          <div class="share-option" @click="selectOption('public')">
+            <div class="share-option-icon public">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="share-option-text">
+              <h4>Enlace público</h4>
+              <p>El cliente puede aprobar o rechazar la cotización</p>
             </div>
           </div>
           <div class="share-option" @click="selectOption('whatsapp')">
@@ -54,6 +67,22 @@
           </div>
           <div class="share-result-actions">
             <button class="action-btn primary" @click="copyLink">{{ copied ? 'Copiado!' : 'Copiar enlace' }}</button>
+            <button class="action-btn" @click="activeOption = null">Volver</button>
+          </div>
+        </div>
+
+        <!-- Resultado Enlace Público -->
+        <div v-else-if="activeOption === 'public'" class="share-result">
+          <p class="share-result-label">Envía este enlace para que el cliente apruebe o rechace:</p>
+          <div class="share-link-box">
+            <input type="text" class="share-link-input" :value="publicUrl" readonly />
+            <button class="share-link-copy" @click="copyPublicLink">
+              <HIcon name="copy" :size="16" v-if="!copied" />
+              <span v-else>✓</span>
+            </button>
+          </div>
+          <div class="share-result-actions">
+            <button class="action-btn primary" @click="copyPublicLink">{{ copied ? 'Copiado!' : 'Copiar enlace' }}</button>
             <button class="action-btn" @click="activeOption = null">Volver</button>
           </div>
         </div>
@@ -96,6 +125,12 @@ const shareUrl = computed(() => {
   const json = JSON.stringify(props.quotation)
   const hash = compressToEncodedURIComponent(json)
   return `${window.location.origin}/compartir/${hash}`
+})
+
+const publicUrl = computed(() => {
+  const json = JSON.stringify(props.quotation)
+  const hash = compressToEncodedURIComponent(json)
+  return `${window.location.origin}/publica/${hash}`
 })
 
 const whatsappText = computed(() => {
@@ -152,6 +187,16 @@ async function copyLink() {
     document.execCommand('copy')
     copied.value = true
     setTimeout(() => { copied.value = false }, 2000)
+  }
+}
+
+async function copyPublicLink() {
+  try {
+    await navigator.clipboard.writeText(publicUrl.value)
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
+  } catch {
+    copied.value = false
   }
 }
 
@@ -260,6 +305,7 @@ function generatePdf() {
 }
 
 .share-option-icon.link { background: #f0fdf4; color: #16a34a; }
+.share-option-icon.public { background: #eff6ff; color: #2563eb; }
 .share-option-icon.whatsapp { background: #f0fdf4; color: #16a34a; }
 .share-option-icon.pdf { background: #fef2f2; color: #e74c3c; }
 

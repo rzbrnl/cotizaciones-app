@@ -14,11 +14,15 @@ function createBlank() {
     status: 'borrador',
     date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase(),
     clientName: '',
+    clientEmail: '',
     clientPhone: '',
     eventType: '',
     eventDate: '',
     venue: '',
     notes: '',
+    reminderDate: '',
+    reminderNote: '',
+    createdAt: new Date().toISOString(),
     sections: [
       {
         id: generateId(),
@@ -43,6 +47,39 @@ export const useQuotationStore = defineStore('quotation', () => {
     }
     return total
   })
+
+  const pendingReminders = computed(() => {
+    const today = new Date().toISOString().split('T')[0]
+    return savedList.value.filter(q =>
+      q.reminderDate && q.reminderDate <= today && q.status !== 'aprobada' && q.status !== 'rechazada'
+    )
+  })
+
+  const metrics = computed(() => {
+    const list = savedList.value
+    const total = list.length
+    const borradores = list.filter(q => (q.status || 'borrador') === 'borrador').length
+    const enviadas = list.filter(q => q.status === 'enviada').length
+    const aprobadas = list.filter(q => q.status === 'aprobada').length
+    const rechazadas = list.filter(q => q.status === 'rechazada').length
+
+    let totalRevenue = 0
+    for (const q of aprobadas_list(list)) {
+      for (const s of q.sections || []) {
+        for (const i of s.items || []) {
+          totalRevenue += (i.qty || 0) * (i.unitPrice || 0)
+        }
+      }
+    }
+
+    const approvalRate = total > 0 ? Math.round((aprobadas / total) * 100) : 0
+
+    return { total, borradores, enviadas, aprobadas, rechazadas, totalRevenue, approvalRate }
+  })
+
+  function aprobadas_list(list) {
+    return list.filter(q => q.status === 'aprobada')
+  }
 
   function createNew() {
     active.value = createBlank()
@@ -181,6 +218,8 @@ export const useQuotationStore = defineStore('quotation', () => {
     savedList,
     saving,
     grandTotal,
+    pendingReminders,
+    metrics,
     createNew,
     loadAll,
     loadById,

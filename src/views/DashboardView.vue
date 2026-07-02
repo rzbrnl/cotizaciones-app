@@ -15,6 +15,51 @@
 
       <!-- With data -->
       <template v-else>
+        <!-- Reminders -->
+        <div v-if="store.pendingReminders.length > 0" class="reminders-section">
+          <div class="reminders-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span>Recordatorios pendientes ({{ store.pendingReminders.length }})</span>
+          </div>
+          <div class="reminders-list">
+            <div
+              v-for="q in store.pendingReminders"
+              :key="q.id"
+              class="reminder-card"
+              @click="router.push(`/editar/${q.id}`)"
+            >
+              <div class="reminder-info">
+                <div class="reminder-client">{{ q.clientName || 'Sin cliente' }}</div>
+                <div class="reminder-note">{{ q.reminderNote || 'Sin nota' }}</div>
+              </div>
+              <div class="reminder-date">{{ formatDate(q.reminderDate) }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-value">{{ store.metrics.total }}</div>
+            <div class="metric-label">Total cotizaciones</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value gold">{{ formatCurrency(store.metrics.totalRevenue) }}</div>
+            <div class="metric-label">Ingresos (aprobadas)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value green">{{ store.metrics.approvalRate }}%</div>
+            <div class="metric-label">Tasa de aprobación</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value blue">{{ store.metrics.enviadas }}</div>
+            <div class="metric-label">Pendientes de respuesta</div>
+          </div>
+        </div>
+
         <div class="dashboard-header">
           <div class="header-left">
             <div class="header-icon">
@@ -88,6 +133,7 @@ import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
 import { useConfirmStore } from '../stores/confirm'
+import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
@@ -134,6 +180,11 @@ function getCount(filterValue) {
   return store.savedList.filter(q => (q.status || 'borrador') === filterValue).length
 }
 
+function formatDate(dateStr) {
+  if (!dateStr) return ''
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
+}
+
 onMounted(async () => {
   await store.loadAll()
   loading.value = false
@@ -163,6 +214,97 @@ async function deleteQuotation(id) {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 24px;
+}
+
+/* Reminders */
+.reminders-section {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.reminders-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 12px;
+}
+
+.reminders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reminder-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reminder-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.reminder-client {
+  font-weight: 500;
+  color: var(--black);
+  font-size: 0.88rem;
+}
+
+.reminder-note {
+  font-size: 0.78rem;
+  color: var(--gray-text);
+  margin-top: 2px;
+}
+
+.reminder-date {
+  font-size: 0.78rem;
+  color: #92400e;
+  font-weight: 500;
+}
+
+/* Metrics */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.metric-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 18px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+
+.metric-value.gold { color: var(--gold); }
+.metric-value.green { color: #16a34a; }
+.metric-value.blue { color: #3b82f6; }
+
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Empty state */
@@ -372,6 +514,10 @@ async function deleteQuotation(id) {
 }
 
 @media (max-width: 700px) {
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
   }

@@ -175,6 +175,38 @@
             rows="4"
           ></textarea>
         </div>
+
+        <!-- Reminder -->
+        <div class="reminder-section">
+          <div class="reminder-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span>Recordatorio de seguimiento</span>
+          </div>
+          <div class="reminder-fields">
+            <div class="reminder-field">
+              <label class="notes-label">Fecha</label>
+              <input
+                type="date"
+                class="reminder-input"
+                :value="store.active.reminderDate"
+                @input="store.active.reminderDate = $event.target.value"
+              />
+            </div>
+            <div class="reminder-field">
+              <label class="notes-label">Nota</label>
+              <input
+                type="text"
+                class="reminder-input"
+                placeholder="Ej: Seguimiento post-evento"
+                :value="store.active.reminderNote"
+                @input="store.active.reminderNote = $event.target.value"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -645,6 +677,48 @@ function printPage() {
 
 .notes-textarea::placeholder {
   color: #ccc;
+}
+
+/* Reminder */
+.reminder-section {
+  padding: 20px 40px 28px;
+  border-top: 1px solid var(--gray-border);
+}
+
+.reminder-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-text);
+  font-size: 0.82rem;
+  margin-bottom: 14px;
+}
+
+.reminder-fields {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 14px;
+}
+
+.reminder-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reminder-input {
+  padding: 10px 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.reminder-input:focus {
+  border-color: var(--gold);
 }
 
 /* Status dropdown */
