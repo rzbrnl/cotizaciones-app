@@ -185,16 +185,25 @@ function formatDate(dateStr) {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
 }
 
+let refreshInterval = null
+
 onMounted(async () => {
   await store.loadAll()
   loading.value = false
 
-  // Reload data when tab becomes visible
   document.addEventListener('visibilitychange', handleVisibility)
+
+  // Poll for changes every 10 seconds when tab is visible
+  refreshInterval = setInterval(async () => {
+    if (document.visibilityState === 'visible') {
+      await store.loadAll()
+    }
+  }, 10000)
 })
 
 onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibility)
+  if (refreshInterval) clearInterval(refreshInterval)
 })
 
 async function handleVisibility() {
