@@ -128,7 +128,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
@@ -188,7 +188,20 @@ function formatDate(dateStr) {
 onMounted(async () => {
   await store.loadAll()
   loading.value = false
+
+  // Reload data when tab becomes visible
+  document.addEventListener('visibilitychange', handleVisibility)
 })
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', handleVisibility)
+})
+
+async function handleVisibility() {
+  if (document.visibilityState === 'visible') {
+    await store.loadAll()
+  }
+}
 
 function editQuotation(id) {
   router.push(`/editar/${id}`)
