@@ -2,7 +2,12 @@
   <div class="quote-card" @click="emit('edit', quotation.id)">
     <div class="quote-card-body">
       <div class="quote-card-info">
-        <div class="quote-card-name">{{ quotation.clientName || 'Sin cliente' }}</div>
+        <div class="quote-card-top">
+          <div class="quote-card-name">{{ quotation.clientName || 'Sin cliente' }}</div>
+          <span class="status-badge" :class="quotation.status || 'borrador'">
+            {{ statusLabel }}
+          </span>
+        </div>
         <div class="quote-card-venue">{{ quotation.venue || 'Sin venue' }}</div>
         <div class="quote-card-date">{{ quotation.eventDate || quotation.date }}</div>
       </div>
@@ -29,6 +34,15 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['edit', 'delete'])
+
+const statusLabels = {
+  borrador: 'Borrador',
+  enviada: 'Enviada',
+  aprobada: 'Aprobada',
+  rechazada: 'Rechazada',
+}
+
+const statusLabel = computed(() => statusLabels[props.quotation.status] || 'Borrador')
 
 const total = computed(() => {
   let t = 0
@@ -67,11 +81,18 @@ const total = computed(() => {
   min-width: 0;
 }
 
+.quote-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
 .quote-card-name {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--black);
-  margin-bottom: 2px;
 }
 
 .quote-card-venue {
@@ -92,6 +113,37 @@ const total = computed(() => {
   font-weight: 700;
   color: var(--gold);
   white-space: nowrap;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-badge.borrador {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.status-badge.enviada {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.aprobada {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge.rechazada {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 .quote-card-actions {

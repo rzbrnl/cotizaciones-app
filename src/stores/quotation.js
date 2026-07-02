@@ -11,6 +11,7 @@ function createBlank() {
   return {
     id: generateId(),
     title: 'Cotización',
+    status: 'borrador',
     date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase(),
     clientName: '',
     clientPhone: '',
@@ -154,6 +155,27 @@ export const useQuotationStore = defineStore('quotation', () => {
     active.value.sections = active.value.sections.filter(s => s.id !== sectionId)
   }
 
+  async function updateStatus(quotationId, newStatus) {
+    const auth = useAuthStore()
+    if (!auth.currentUser) return
+
+    const found = savedList.value.find(q => q.id === quotationId)
+    if (found) {
+      found.status = newStatus
+    }
+
+    if (found?._dbId) {
+      await supabase
+        .from('quotations')
+        .update({ data: { ...found, status: newStatus } })
+        .eq('id', found._dbId)
+    }
+
+    if (active.value.id === quotationId) {
+      active.value.status = newStatus
+    }
+  }
+
   return {
     active,
     savedList,
@@ -168,5 +190,6 @@ export const useQuotationStore = defineStore('quotation', () => {
     removeItem,
     addSection,
     removeSection,
+    updateStatus,
   }
 })

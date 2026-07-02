@@ -1,6 +1,12 @@
 <template>
   <AppLayout>
     <template #actions>
+      <select class="status-select" :value="store.active.status" @change="handleStatusChange">
+        <option value="borrador">Borrador</option>
+        <option value="enviada">Enviada</option>
+        <option value="aprobada">Aprobada</option>
+        <option value="rechazada">Rechazada</option>
+      </select>
       <button
         class="topbar-icon-btn"
         @click="shareOpen = true"
@@ -128,6 +134,7 @@
       :open="shareOpen"
       :quotation="store.active"
       @close="shareOpen = false"
+      @export-pdf="exportPdf"
     />
   </AppLayout>
 </template>
@@ -136,14 +143,18 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuotationStore } from "../stores/quotation";
+import { useToastStore } from "../stores/toast";
 import { formatCurrency } from "../utils/format";
 import AppLayout from "../components/AppLayout.vue";
 import QuoteHeader from "../components/QuoteHeader.vue";
 import ClientInfoForm from "../components/ClientInfoForm.vue";
 import ShareModal from "../components/ShareModal.vue";
 import HIcon from "../components/HIcon.vue";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 const store = useQuotationStore();
+const toast = useToastStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -213,7 +224,52 @@ function formatNumber(num) {
 
 async function handleSave() {
   await store.save();
-  alert("Cotización guardada");
+  toast.success("Cotización guardada");
+}
+
+async function handleStatusChange(e) {
+  const newStatus = e.target.value;
+  store.active.status = newStatus;
+  await store.updateStatus(store.active.id, newStatus);
+  toast.success(`Estado cambiado a "${statusLabels[newStatus]}"`);
+}
+
+const statusLabels = {
+  borrador: 'Borrador',
+  enviada: 'Enviada',
+  aprobada: 'Aprobada',
+  rechazada: 'Rechazada',
+};
+
+async function exportPdf() {
+  const element = document.querySelector(".builder-page");
+  if (!element) return;
+
+  toast.info("Generando PDF...");
+
+  try {
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const imgData = canvas.toDataURL("image/png");
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+    const clientName = store.active.clientName || "cotizacion";
+    const fileName = `cotizacion-${clientName.replace(/\s+/g, "-").toLowerCase()}.pdf`;
+    pdf.save(fileName);
+
+    toast.success("PDF descargado");
+  } catch (err) {
+    console.error("Error generating PDF:", err);
+    toast.error("Error al generar PDF");
+  }
 }
 
 function printPage() {
@@ -468,6 +524,28 @@ function printPage() {
 
 .notes-textarea::placeholder {
   color: #ccc;
+}
+
+/* Status select */
+.status-select {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'Google Sans', sans-serif;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-select:focus {
+  border-color: var(--gold);
+}
+
+.status-select option {
+  background: #353535;
+  color: var(--white);
 }
 
 /* Print-only qty */

@@ -37,11 +37,13 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
+import { useToastStore } from '../stores/toast'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
 import HIcon from '../components/HIcon.vue'
 
 const store = useQuotationStore()
+const toast = useToastStore()
 const router = useRouter()
 
 onMounted(() => {
@@ -55,6 +57,7 @@ function editQuotation(id) {
 async function deleteQuotation(id) {
   if (confirm('¿Eliminar esta cotización?')) {
     await store.deleteById(id)
+    toast.success('Cotización eliminada')
   }
 }
 </script>

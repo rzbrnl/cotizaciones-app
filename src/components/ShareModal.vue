@@ -84,7 +84,7 @@ const props = defineProps({
   quotation: { type: Object, required: true },
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'export-pdf'])
 
 const auth = useAuthStore()
 const activeOption = ref(null)
@@ -169,8 +169,8 @@ async function copyWhatsApp() {
 }
 
 function generatePdf() {
+  emit('export-pdf')
   emit('close')
-  setTimeout(() => window.print(), 300)
 }
 </script>
 
