@@ -141,24 +141,26 @@ async function updateStatus(newStatus) {
 
   const searchData = { ...quotation.value, status: newStatus }
 
-  // Search for matching quotation by clientName + date
+  // Search by local ID
   const { data: all } = await supabase
     .from('quotations')
     .select('id, data')
 
   if (!all) return
 
-  const match = all.find(q =>
-    q.data?.clientName === quotation.value.clientName &&
-    q.data?.date === quotation.value.date &&
-    q.data?.venue === quotation.value.venue
-  )
+  const match = all.find(q => q.data?.id === quotation.value.id)
 
   if (match) {
-    await supabase
+    const { error } = await supabase
       .from('quotations')
       .update({ data: searchData })
       .eq('id', match.id)
+
+    if (error) {
+      console.error('Update error:', error)
+    }
+  } else {
+    console.error('No matching quotation found for id:', quotation.value.id)
   }
 }
 
