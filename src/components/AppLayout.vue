@@ -4,11 +4,11 @@
       <div class="topbar-brand">CotizaYa by Vēlum</div>
       <nav class="topbar-nav">
         <slot name="actions" />
-        <router-link to="/nueva" class="topbar-btn-new">Nueva cotización</router-link>
+        <div class="topbar-separator" v-if="$slots.actions"></div>
         <div class="topbar-links-desktop">
+          <router-link to="/" class="topbar-link">Dashboard</router-link>
           <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
           <router-link to="/usuarios" class="topbar-link" v-if="isAdmin">Usuarios</router-link>
-          <router-link to="/" class="topbar-link">Dashboard</router-link>
         </div>
         <button class="topbar-logout" @click="handleLogout">Salir</button>
         <button class="topbar-menu-btn" @click="menuOpen = !menuOpen">
@@ -21,10 +21,8 @@
       </nav>
     </header>
 
-    <!-- Mobile menu -->
     <div v-if="menuOpen" class="mobile-menu" @click="menuOpen = false">
       <nav class="mobile-menu-nav" @click.stop>
-        <router-link to="/nueva" class="mobile-menu-link" @click="menuOpen = false">Nueva cotización</router-link>
         <router-link to="/" class="mobile-menu-link" @click="menuOpen = false">Dashboard</router-link>
         <router-link to="/perfil" class="mobile-menu-link" @click="menuOpen = false">Mi perfil</router-link>
         <router-link v-if="isAdmin" to="/usuarios" class="mobile-menu-link" @click="menuOpen = false">Usuarios</router-link>
@@ -86,17 +84,23 @@ async function handleLogout() {
 .topbar-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+}
+
+.topbar-separator {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.15);
 }
 
 .topbar-links-desktop {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .topbar-link {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
   font-size: 0.82rem;
   font-weight: 400;
   text-decoration: none;
@@ -107,36 +111,22 @@ async function handleLogout() {
   color: var(--white);
 }
 
-.topbar-btn-new {
-  background: var(--gold);
-  color: var(--black);
-  padding: 7px 16px;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.topbar-btn-new:hover {
-  background: var(--gold-hover);
-  color: var(--white);
-}
-
 .topbar-logout {
-  background: #e74c3c;
-  color: var(--white);
+  background: none;
+  color: rgba(255,255,255,0.5);
   border: none;
-  padding: 7px 16px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .topbar-logout:hover {
-  opacity: 0.9;
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
 }
 
 .topbar-menu-btn {
@@ -186,15 +176,21 @@ async function handleLogout() {
 
 .mobile-menu-logout {
   margin-top: 16px;
-  background: #e74c3c;
-  color: var(--white);
-  border: none;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 0.85rem;
-  font-weight: 500;
   cursor: pointer;
   text-align: center;
+  font-family: 'Google Sans', sans-serif;
+  transition: all 0.2s;
+}
+
+.mobile-menu-logout:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
 }
 
 .topbar-main {
@@ -211,6 +207,10 @@ async function handleLogout() {
   }
 
   .topbar-logout {
+    display: none;
+  }
+
+  .topbar-separator {
     display: none;
   }
 
