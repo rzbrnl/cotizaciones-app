@@ -63,6 +63,7 @@ export const useAuthStore = defineStore('auth', () => {
       await supabase.from('profiles').insert({
         id: data.user.id,
         full_name: fullName,
+        email: email,
         logo_url: '',
       })
 

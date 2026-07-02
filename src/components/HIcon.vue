@@ -78,6 +78,8 @@ import {
   DocumentValidationIcon,
   ChevronDownIcon,
   Copy01Icon,
+  ExternalLinkIcon,
+  InformationCircleIcon,
 } from '@hugeicons/core-free-icons'
 
 const props = defineProps({
@@ -106,6 +108,8 @@ const iconMap = {
   'doc-check': DocumentValidationIcon,
   'chevron-down': ChevronDownIcon,
   copy: Copy01Icon,
+  external: ExternalLinkIcon,
+  info: InformationCircleIcon,
 }
 
 const paths = computed(() => {
