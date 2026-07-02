@@ -30,6 +30,7 @@
             <tr>
               <th>Nombre</th>
               <th>Email</th>
+              <th>Rol</th>
               <th>Registro</th>
             </tr>
           </thead>
@@ -40,6 +41,10 @@
               </td>
               <td>
                 <div class="user-email">{{ user.email || '—' }}</div>
+              </td>
+              <td>
+                <span v-if="user.role === 'admin'" class="role-badge admin">Admin</span>
+                <span v-else class="role-badge user">Usuario</span>
               </td>
               <td>
                 <div class="user-date">{{ formatDate(user.created_at) }}</div>
@@ -204,6 +209,27 @@ function formatDate(iso) {
 .user-date {
   color: var(--gray-text);
   font-size: 0.85rem;
+}
+
+/* Role badge */
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.role-badge.admin {
+  background: var(--gold-light);
+  color: var(--gold-hover);
+}
+
+.role-badge.user {
+  background: var(--gray-light);
+  color: var(--gray-text);
 }
 
 /* States */
