@@ -86,7 +86,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in allItems" :key="item.id" class="item-row">
+              <tr
+                v-for="(item, index) in allItems"
+                :key="item.id"
+                class="item-row"
+                :class="{ 'drag-over': dragOverIndex === index, 'dragging': draggedIndex === index }"
+                draggable="true"
+                @dragstart="onDragStart(index)"
+                @dragover.prevent="onDragOver(index)"
+                @dragend="onDragEnd"
+                @dragleave="onDragLeave"
+              >
                 <td>
                   <input
                     type="text"
@@ -178,10 +188,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuotationStore } from "../stores/quotation";
 import { useToastStore } from "../stores/toast";
+import { useUnsavedGuard } from "../composables/useUnsavedGuard";
 import { formatCurrency } from "../utils/format";
 import AppLayout from "../components/AppLayout.vue";
 import QuoteHeader from "../components/QuoteHeader.vue";
@@ -199,6 +210,21 @@ const router = useRouter();
 const shareOpen = ref(false);
 const statusOpen = ref(false);
 const statusDropdownRef = ref(null);
+const isDirty = ref(false);
+const savedSnapshot = ref('');
+
+const { confirmLeave } = useUnsavedGuard(isDirty);
+
+// Track changes
+watch(() => JSON.stringify(store.active), (newVal) => {
+  if (savedSnapshot.value && newVal !== savedSnapshot.value) {
+    isDirty.value = true;
+  }
+});
+
+// Drag & drop state
+const draggedIndex = ref(null);
+const dragOverIndex = ref(null);
 
 const statusLabels = {
   borrador: "Borrador",
@@ -223,6 +249,9 @@ function handleClickOutside(e) {
 
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+  setTimeout(() => {
+    savedSnapshot.value = JSON.stringify(store.active);
+  }, 500);
 });
 
 const allItems = computed(() => {
@@ -259,6 +288,33 @@ function removeItem(itemId) {
   }
 }
 
+// Drag & drop
+function onDragStart(index) {
+  draggedIndex.value = index;
+}
+
+function onDragOver(index) {
+  if (draggedIndex.value === null) return;
+  dragOverIndex.value = index;
+}
+
+function onDragEnd() {
+  if (draggedIndex.value !== null && dragOverIndex.value !== null && draggedIndex.value !== dragOverIndex.value) {
+    const section = store.active.sections[0];
+    if (!section) return;
+    const list = [...section.items];
+    const [moved] = list.splice(draggedIndex.value, 1);
+    list.splice(dragOverIndex.value, 0, moved);
+    section.items = list;
+  }
+  draggedIndex.value = null;
+  dragOverIndex.value = null;
+}
+
+function onDragLeave() {
+  dragOverIndex.value = null;
+}
+
 function changeQty(itemId, delta) {
   const item = allItems.value.find((i) => i.id === itemId);
   if (!item) return;
@@ -289,6 +345,8 @@ function formatNumber(num) {
 
 async function handleSave() {
   await store.save();
+  isDirty.value = false;
+  savedSnapshot.value = JSON.stringify(store.active);
   toast.success("Cotización guardada");
 }
 
@@ -381,6 +439,18 @@ function printPage() {
 }
 .th-actions {
   width: 8%;
+}
+
+.item-row {
+  transition: all 0.2s;
+}
+
+.item-row.dragging {
+  opacity: 0.4;
+}
+
+.item-row.drag-over {
+  border-top: 2px solid var(--gold);
 }
 
 .item-row td {
