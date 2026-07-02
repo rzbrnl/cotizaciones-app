@@ -4,11 +4,17 @@
       <div class="topbar-brand">CotizaYa by Vēlum</div>
       <nav class="topbar-nav">
         <slot name="actions" />
-        <router-link to="/nueva" class="topbar-btn-new">Nueva cotización</router-link>
+        <router-link to="/nueva" class="topbar-btn-new"
+          >Nueva cotización</router-link
+        >
         <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
-        <router-link to="/usuarios" class="topbar-link" v-if="isAdmin">Usuarios</router-link>
+        <router-link to="/usuarios" class="topbar-link" v-if="isAdmin"
+          >Usuarios</router-link
+        >
         <router-link to="/" class="topbar-link">Dashboard</router-link>
-        <button class="topbar-logout" @click="handleLogout">Cerrar sesión</button>
+        <button class="topbar-logout" @click="handleLogout">
+          Cerrar sesión
+        </button>
       </nav>
     </header>
     <main class="topbar-main">
@@ -18,20 +24,23 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
-const auth = useAuthStore()
-const router = useRouter()
+const auth = useAuthStore();
+const router = useRouter();
 
 const isAdmin = computed(() => {
-  return auth.profile?.role === 'admin' || auth.currentUser?.user_metadata?.role === 'admin'
-})
+  return (
+    auth.profile?.role === "admin" ||
+    auth.currentUser?.user_metadata?.role === "admin"
+  );
+});
 
 async function handleLogout() {
-  await auth.logout()
-  router.push('/login')
+  await auth.logout();
+  router.push("/login");
 }
 </script>
 
@@ -67,7 +76,7 @@ async function handleLogout() {
 }
 
 .topbar-link {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
   font-weight: 400;
   text-decoration: none;
@@ -97,10 +106,10 @@ async function handleLogout() {
 .topbar-btn-new {
   background: var(--gold);
   color: var(--black);
-  padding: 7px 16px;
+  padding: 8px 18px;
   border-radius: 8px;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
   transition: background 0.2s;
 }
@@ -116,8 +125,8 @@ async function handleLogout() {
   border: none;
   padding: 8px 18px;
   border-radius: 8px;
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 400;
   cursor: pointer;
   transition: opacity 0.2s;
 }
