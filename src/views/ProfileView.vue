@@ -37,7 +37,7 @@
             </div>
             <div class="account-row">
               <span class="account-label">Rol:</span>
-              <span class="account-value">Administrador</span>
+              <span class="account-value">{{ auth.profile?.role === 'admin' ? 'Administrador' : 'Usuario' }}</span>
             </div>
           </div>
         </div>
