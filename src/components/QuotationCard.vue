@@ -7,6 +7,9 @@
           <span class="status-badge" :class="quotation.status || 'borrador'">
             {{ statusLabel }}
           </span>
+          <span v-if="paymentBadge" class="payment-badge" :class="paymentBadge">
+            {{ paymentBadgeLabel }}
+          </span>
         </div>
         <div class="quote-card-venue">{{ quotation.venue || 'Sin venue' }}</div>
         <div class="quote-card-date">{{ quotation.eventDate || quotation.date }}</div>
@@ -14,6 +17,12 @@
       <div class="quote-card-price">{{ formatCurrency(total) }}</div>
     </div>
     <div class="quote-card-actions">
+      <button class="quote-action duplicate" @click.stop="emit('duplicate', quotation.id)" title="Duplicar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
       <button class="quote-action view" @click.stop="emit('edit', quotation.id)" title="Ver">
         <HIcon name="eye" :size="18" />
       </button>
@@ -33,7 +42,7 @@ const props = defineProps({
   quotation: { type: Object, required: true },
 })
 
-const emit = defineEmits(['edit', 'delete'])
+const emit = defineEmits(['edit', 'delete', 'duplicate'])
 
 const statusLabels = {
   borrador: 'Borrador',
@@ -43,6 +52,19 @@ const statusLabels = {
 }
 
 const statusLabel = computed(() => statusLabels[props.quotation.status] || 'Borrador')
+
+const paymentLabels = {
+  pendiente: 'Pendiente',
+  parcial: 'Parcial',
+  pagado: 'Pagado',
+}
+
+const paymentBadge = computed(() => {
+  if (props.quotation.status !== 'aprobada') return null
+  return props.quotation.paymentStatus || 'pendiente'
+})
+
+const paymentBadgeLabel = computed(() => paymentLabels[paymentBadge.value] || 'Pendiente')
 
 const total = computed(() => {
   let t = 0
@@ -146,6 +168,32 @@ const total = computed(() => {
   color: #dc2626;
 }
 
+/* Payment badges */
+.payment-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.payment-badge.pendiente {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.payment-badge.parcial {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.payment-badge.pagado {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
 .quote-card-actions {
   display: flex;
   justify-content: flex-end;
@@ -169,6 +217,15 @@ const total = computed(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.15s;
+}
+
+.quote-action.duplicate {
+  color: #888;
+}
+
+.quote-action.duplicate:hover {
+  color: var(--black);
+  background: rgba(0,0,0,0.06);
 }
 
 .quote-action.view {

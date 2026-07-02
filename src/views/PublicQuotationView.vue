@@ -126,6 +126,7 @@ async function handleApprove() {
   if (!quotation.value) return
   quotation.value.status = 'aprobada'
   await updateStatus('aprobada')
+  await sendNotification('aprobada')
   toast.success('Cotización aprobada')
 }
 
@@ -133,7 +134,30 @@ async function handleReject() {
   if (!quotation.value) return
   quotation.value.status = 'rechazada'
   await updateStatus('rechazada')
+  await sendNotification('rechazada')
   toast.info('Cotización rechazada')
+}
+
+async function sendNotification(action) {
+  try {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+    await fetch(`${supabaseUrl}/functions/v1/send-notification`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({
+        quotationId: quotation.value.id,
+        action,
+        clientName: quotation.value.clientName,
+        venue: quotation.value.venue,
+        eventDate: quotation.value.eventDate,
+      }),
+    })
+  } catch (err) {
+    console.error('Notification error:', err)
+  }
 }
 
 async function updateStatus(newStatus) {

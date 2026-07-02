@@ -116,6 +116,7 @@
             :quotation="q"
             @edit="editQuotation"
             @delete="deleteQuotation"
+            @duplicate="duplicateQuotation"
           />
         </div>
 
@@ -227,6 +228,15 @@ async function deleteQuotation(id) {
   if (answer) {
     await store.deleteById(id)
     toast.success('Cotización eliminada')
+  }
+}
+
+function duplicateQuotation(id) {
+  const copy = store.duplicate(id)
+  if (copy) {
+    store.active = copy
+    router.push('/nueva')
+    toast.success('Cotización duplicada')
   }
 }
 </script>

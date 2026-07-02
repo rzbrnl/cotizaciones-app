@@ -12,6 +12,7 @@ function createBlank() {
     id: generateId(),
     title: 'Cotización',
     status: 'borrador',
+    paymentStatus: 'pendiente',
     date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase(),
     clientName: '',
     clientEmail: '',
@@ -22,6 +23,7 @@ function createBlank() {
     notes: '',
     reminderDate: '',
     reminderNote: '',
+    payments: [],
     createdAt: new Date().toISOString(),
     sections: [
       {
@@ -214,6 +216,89 @@ export const useQuotationStore = defineStore('quotation', () => {
     }
   }
 
+  function getQuotationTotal(quotation) {
+    let total = 0
+    for (const s of quotation.sections || []) {
+      for (const i of s.items || []) {
+        total += (i.qty || 0) * (i.unitPrice || 0)
+      }
+    }
+    return total
+  }
+
+  function getPaymentsTotal(quotation) {
+    return (quotation.payments || []).reduce((sum, p) => sum + (p.amount || 0), 0)
+  }
+
+  function getPaymentStatus(quotation) {
+    const total = getQuotationTotal(quotation)
+    const paid = getPaymentsTotal(quotation)
+    if (paid === 0) return 'pendiente'
+    if (paid >= total) return 'pagado'
+    return 'parcial'
+  }
+
+  async function addPayment(quotationId, amount, note) {
+    const found = savedList.value.find(q => q.id === quotationId)
+    if (!found) return
+
+    if (!found.payments) found.payments = []
+    found.payments.push({
+      id: generateId(),
+      amount: parseFloat(amount),
+      note: note || '',
+      date: new Date().toISOString(),
+    })
+
+    found.paymentStatus = getPaymentStatus(found)
+
+    if (found._dbId) {
+      await supabase
+        .from('quotations')
+        .update({ data: found })
+        .eq('id', found._dbId)
+    }
+
+    if (active.value.id === quotationId) {
+      active.value.payments = [...found.payments]
+      active.value.paymentStatus = found.paymentStatus
+    }
+  }
+
+  function duplicate(quotationId) {
+    const original = savedList.value.find(q => q.id === quotationId)
+    if (!original) return null
+
+    const copy = JSON.parse(JSON.stringify(original))
+    copy.id = generateId()
+    copy.title = original.title + ' (copia)'
+    copy.status = 'borrador'
+    copy.date = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()
+    copy.clientName = original.clientName
+    copy.clientPhone = original.clientPhone
+    copy.eventType = original.eventType
+    copy.eventDate = original.eventDate
+    copy.venue = original.venue
+    copy.notes = original.notes
+    copy.reminderDate = ''
+    copy.reminderNote = ''
+    copy.createdAt = new Date().toISOString()
+    copy._dbId = null
+
+    copy.sections = original.sections.map(s => ({
+      id: generateId(),
+      name: s.name,
+      items: s.items.map(i => ({
+        id: generateId(),
+        name: i.name,
+        qty: i.qty,
+        unitPrice: i.unitPrice,
+      })),
+    }))
+
+    return copy
+  }
+
   return {
     active,
     savedList,
@@ -231,5 +316,10 @@ export const useQuotationStore = defineStore('quotation', () => {
     addSection,
     removeSection,
     updateStatus,
+    duplicate,
+    getQuotationTotal,
+    getPaymentsTotal,
+    getPaymentStatus,
+    addPayment,
   }
 })
