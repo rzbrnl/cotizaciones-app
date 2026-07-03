@@ -247,10 +247,19 @@ export const useQuotationStore = defineStore('quotation', () => {
     const found = savedList.value.find(q => q.id === quotationId)
     if (!found) return
 
+    // Validate payment amount
+    const total = getQuotationTotal(found)
+    const paid = getPaymentsTotal(found)
+    const remaining = total - paid
+    const paymentAmount = parseFloat(amount)
+
+    if (!paymentAmount || paymentAmount <= 0) return false
+    if (paymentAmount > remaining) return false
+
     if (!found.payments) found.payments = []
     found.payments.push({
       id: generateId(),
-      amount: parseFloat(amount),
+      amount: paymentAmount,
       note: note || '',
       date: new Date().toISOString(),
     })
@@ -268,6 +277,8 @@ export const useQuotationStore = defineStore('quotation', () => {
       active.value.payments = [...found.payments]
       active.value.paymentStatus = found.paymentStatus
     }
+
+    return true
   }
 
   function duplicate(quotationId) {

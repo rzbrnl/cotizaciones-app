@@ -383,10 +383,14 @@ async function addPayment() {
     return;
   }
 
-  await store.addPayment(store.active.id, amount, newPaymentNote.value);
-  newPaymentAmount.value = '';
-  newPaymentNote.value = '';
-  toast.success('Pago registrado');
+  const success = await store.addPayment(store.active.id, amount, newPaymentNote.value);
+  if (success) {
+    newPaymentAmount.value = '';
+    newPaymentNote.value = '';
+    toast.success('Pago registrado');
+  } else {
+    toast.error('No se pudo registrar el pago');
+  }
 }
 
 function formatDate(dateStr) {
