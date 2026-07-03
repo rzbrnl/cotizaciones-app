@@ -877,7 +877,6 @@ function printPage() {
 }
 
 .payment-history {
-  border-top: 1px solid var(--gray-border);
   padding-top: 14px;
 }
 
