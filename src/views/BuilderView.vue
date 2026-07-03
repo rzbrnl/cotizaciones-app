@@ -301,6 +301,8 @@ onMounted(async () => {
     await store.loadAll();
     const found = await store.loadById(route.params.id);
     if (!found) router.push("/");
+  } else if (!store.active._dbId && store.active.sections?.length > 0) {
+    // Already has data (from duplicate) — don't reset
   } else {
     store.createNew();
   }
