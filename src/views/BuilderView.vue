@@ -211,7 +211,7 @@
                 v-model="newPaymentAmount"
                 type="text"
                 class="cell-input"
-                placeholder="Monto"
+                :placeholder="'Máx. ' + formatCurrency(remaining)"
               />
               <input
                 v-model="newPaymentNote"
@@ -377,6 +377,11 @@ const remaining = computed(() => {
 async function addPayment() {
   const amount = parseFloat(newPaymentAmount.value.replace(/[^0-9.]/g, ''));
   if (!amount || amount <= 0) return;
+
+  if (amount > remaining.value) {
+    toast.error(`El monto excede el saldo pendiente de ${formatCurrency(remaining.value)}`);
+    return;
+  }
 
   await store.addPayment(store.active.id, amount, newPaymentNote.value);
   newPaymentAmount.value = '';
