@@ -77,11 +77,6 @@
 /* Notes */
 .dark .notes-textarea { background: #252525; border-color: #3a3a3a; color: #e5e7eb; }
 
-/* Reminder */
-.dark .reminder-section { border-top-color: #333; }
-.dark .reminder-header { color: #888; }
-.dark .reminder-input { background: #252525; border-color: #3a3a3a; color: #e5e7eb; }
-
 /* Dashboard */
 .dark .dashboard-header h1 { color: #e5e7eb; }
 .dark .header-icon { color: #666; }
