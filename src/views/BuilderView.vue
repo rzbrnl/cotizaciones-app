@@ -485,14 +485,16 @@ async function handleSave() {
 }
 
 async function handleShare() {
-  // Save and change status to "enviada" if it's still "borrador"
+  // Open modal immediately for better UX
+  shareOpen.value = true;
+
+  // Save and change status in background
   if (!store.active.status || store.active.status === 'borrador') {
     store.active.status = 'enviada';
   }
   await store.save();
   isDirty.value = false;
   savedSnapshot.value = JSON.stringify(store.active);
-  shareOpen.value = true;
 }
 
 async function exportPdf() {
