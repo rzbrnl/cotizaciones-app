@@ -11,8 +11,8 @@
           <h1>Cotización</h1>
           <div class="public-date">{{ quotation.date }}</div>
         </div>
-        <div v-if="quotation.clientLogo" class="public-header-logo">
-          <img :src="quotation.clientLogo" alt="Logo" />
+        <div v-if="quotation.ownerLogo" class="public-header-logo">
+          <img :src="quotation.ownerLogo" alt="Logo" />
         </div>
       </div>
 
