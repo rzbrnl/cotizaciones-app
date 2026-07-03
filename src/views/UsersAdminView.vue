@@ -36,19 +36,13 @@
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id">
-              <td>
-                <div class="user-name">{{ user.full_name || '—' }}</div>
-              </td>
-              <td>
-                <div class="user-email">{{ user.email || '—' }}</div>
-              </td>
+              <td class="cell-name">{{ user.full_name || '—' }}</td>
+              <td class="cell-email">{{ user.email || '—' }}</td>
               <td>
                 <span v-if="user.role === 'admin'" class="role-badge admin">Admin</span>
                 <span v-else class="role-badge user">Usuario</span>
               </td>
-              <td>
-                <div class="user-date">{{ formatDate(user.created_at) }}</div>
-              </td>
+              <td class="cell-date">{{ formatDate(user.created_at) }}</td>
             </tr>
           </tbody>
         </table>
@@ -108,26 +102,12 @@ function formatDate(iso) {
   margin-bottom: 36px;
 }
 
-.admin-icon {
-  color: #999;
-  margin-bottom: 12px;
-}
+.admin-icon { color: #999; margin-bottom: 12px; }
+.admin-hero h1 { font-size: 1.6rem; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+.admin-hero p { font-size: 0.9rem; color: #666; }
 
-.admin-hero h1 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--black);
-  margin-bottom: 4px;
-}
-
-.admin-hero p {
-  font-size: 0.9rem;
-  color: var(--gray-text);
-}
-
-/* Card */
 .admin-card {
-  background: var(--white);
+  background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   overflow: hidden;
@@ -139,21 +119,21 @@ function formatDate(iso) {
   justify-content: space-between;
   align-items: center;
   padding: 20px 24px;
-  border-bottom: 1px solid var(--gray-border);
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .admin-card-header h2 {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--black);
+  color: #1a1a1a;
 }
 
 .admin-link {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--black);
-  color: var(--white);
+  background: #1a1a1a;
+  color: #fff;
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 0.78rem;
@@ -162,15 +142,9 @@ function formatDate(iso) {
   transition: opacity 0.2s;
 }
 
-.admin-link:hover {
-  opacity: 0.85;
-}
+.admin-link:hover { opacity: 0.85; }
 
-/* Table */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+.admin-table { width: 100%; border-collapse: collapse; }
 
 .admin-table thead th {
   text-align: left;
@@ -178,40 +152,24 @@ function formatDate(iso) {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--gray-text);
-  font-weight: 500;
-  background: var(--gray-light);
+  color: #999;
+  background: #f7f7f7;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.admin-table tbody td {
+.admin-table td {
   padding: 14px 24px;
   border-bottom: 1px solid #f0f0f0;
-}
-
-.admin-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.admin-table tbody tr:hover {
-  background: rgba(201, 168, 106, 0.04);
-}
-
-.user-name {
-  font-weight: 500;
-  color: var(--black);
-}
-
-.user-email {
-  color: var(--gray-text);
   font-size: 0.85rem;
 }
 
-.user-date {
-  color: var(--gray-text);
-  font-size: 0.85rem;
-}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover { background: rgba(201,168,106,0.04); }
 
-/* Role badge */
+.cell-name { font-weight: 500; color: #1a1a1a; }
+.cell-email { color: #666; }
+.cell-date { color: #999; font-size: 0.85rem; }
+
 .role-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -222,58 +180,41 @@ function formatDate(iso) {
   text-transform: uppercase;
 }
 
-.role-badge.admin {
-  background: var(--gold-light);
-  color: var(--gold-hover);
-}
+.role-badge.admin { background: #f0e6d3; color: #b8964e; }
+.role-badge.user { background: #f5f5f5; color: #666; }
 
-.role-badge.user {
-  background: var(--gray-light);
-  color: var(--gray-text);
-}
-
-/* States */
-.admin-loading {
+.admin-loading, .admin-empty {
   padding: 40px;
   text-align: center;
-  color: var(--gray-text);
+  color: #999;
+  font-size: 0.85rem;
 }
 
-.admin-empty {
-  padding: 40px;
-  text-align: center;
-  color: var(--gray-text);
-}
-
-/* Info box */
 .admin-info {
   display: flex;
   gap: 12px;
   padding: 16px 20px;
   background: #f8f9fa;
   border-radius: 10px;
-  color: var(--gray-text);
+  color: #666;
   align-items: flex-start;
 }
 
-.admin-info p {
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
+.admin-info p { font-size: 0.82rem; line-height: 1.5; }
 
-/* Dark mode */
+/* Dark mode overrides */
 .dark .admin-hero h1 { color: #e5e7eb !important; }
 .dark .admin-hero p { color: #999 !important; }
-.dark .admin-card { background: #1a1a1a !important; }
+.dark .admin-card { background: #1a1a1a !important; box-shadow: 0 2px 16px rgba(0,0,0,0.2) !important; }
 .dark .admin-card-header { border-bottom-color: #333 !important; }
 .dark .admin-card-header h2 { color: #e5e7eb !important; }
-.dark .admin-table thead { background: transparent !important; }
-.dark .admin-table thead th { color: #aaa !important; border-bottom-color: #333 !important; background: transparent !important; }
-.dark .admin-table tbody td { border-bottom-color: #2a2a2a !important; color: #ddd !important; }
-.dark .admin-table tbody td.user-name { color: #f0f0f0 !important; }
-.dark .admin-table tbody td.user-email { color: #bbb !important; }
-.dark .admin-table tbody td.user-date { color: #999 !important; }
-.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.08) !important; }
+.dark .admin-table thead { background: #252525 !important; }
+.dark .admin-table thead th { color: #aaa !important; border-bottom-color: #333 !important; }
+.dark .admin-table td { border-bottom-color: #2a2a2a !important; }
+.dark .admin-table tr:hover { background: rgba(201,168,106,0.08) !important; }
+.dark .cell-name { color: #f0f0f0 !important; }
+.dark .cell-email { color: #bbb !important; }
+.dark .cell-date { color: #999 !important; }
 .dark .admin-info { background: #1a1a1a !important; color: #999 !important; }
 .dark .admin-link { background: #e5e7eb !important; color: #1a1a1a !important; }
 .dark .admin-link:hover { background: #ccc !important; }
