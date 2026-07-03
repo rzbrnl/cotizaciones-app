@@ -60,17 +60,17 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #353535;
+  background: #f0f0f0;
   padding: 20px;
 }
 
 .auth-card {
-  background: var(--white);
+  background: #f7f7f7;
   border-radius: 16px;
   width: 100%;
   max-width: 420px;
   padding: 48px 40px 40px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
 }
 
 .auth-title {

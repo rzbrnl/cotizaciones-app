@@ -157,7 +157,7 @@
 
 /* Auth */
 .dark .auth-page { background: #0f0f0f; }
-.dark .auth-card { background: #1a1a1a; }
+.dark .auth-card { background: #1a1a1a; box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
 .dark .auth-title { color: #e5e7eb; }
 .dark .auth-subtitle { color: #888; }
 .dark .auth-field label { color: #e5e7eb; }
