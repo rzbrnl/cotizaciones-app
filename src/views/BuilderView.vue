@@ -291,10 +291,22 @@ useKeyboardShortcuts([
   { key: 'n', ctrl: true, handler: () => { shareOpen.value = true } },
 ]);
 
-// Track changes
+// Track changes + auto-save
+let autoSaveTimer = null;
+
 watch(() => JSON.stringify(store.active), (newVal) => {
   if (savedSnapshot.value && newVal !== savedSnapshot.value) {
     isDirty.value = true;
+
+    // Auto-save after 3 seconds of inactivity
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(async () => {
+      if (store.active._dbId) {
+        await store.save();
+        isDirty.value = false;
+        savedSnapshot.value = JSON.stringify(store.active);
+      }
+    }, 3000);
   }
 });
 
@@ -332,6 +344,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
+  clearTimeout(autoSaveTimer);
 });
 
 const allItems = computed(() => {
