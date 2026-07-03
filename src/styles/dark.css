@@ -140,12 +140,16 @@
 .dark .admin-card-header { border-bottom-color: #333; }
 .dark .admin-card-header h2 { color: #e5e7eb; }
 .dark .admin-table thead { background: transparent; }
-.dark .admin-table thead th { color: #888; border-bottom-color: #333; background: transparent; }
-.dark .admin-table tbody td { border-bottom-color: #222; color: #e5e7eb; }
-.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.06); }
+.dark .admin-table thead th { color: #aaa; border-bottom-color: #333; background: transparent; }
+.dark .admin-table tbody td { border-bottom-color: #2a2a2a; color: #ddd; }
+.dark .admin-table tbody td.user-name { color: #f0f0f0; font-weight: 500; }
+.dark .admin-table tbody td.user-email { color: #bbb; }
+.dark .admin-table tbody td.user-date { color: #999; }
+.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.08); }
+.dark .admin-info { background: #1a1a1a; color: #999; }
+.dark .admin-info p { color: #999; }
 .dark .admin-link { background: #e5e7eb; color: #1a1a1a; }
 .dark .admin-link:hover { background: #ccc; color: #1a1a1a; }
-.dark .admin-info { background: #1a1a1a; color: #888; }
 
 /* Profile */
 .dark .profile-hero h1 { color: #e5e7eb; }
