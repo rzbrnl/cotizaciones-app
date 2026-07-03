@@ -11,15 +11,6 @@
 
         <!-- Opciones -->
         <div v-if="!activeOption" class="share-options">
-          <div class="share-option" @click="selectOption('link')">
-            <div class="share-option-icon link">
-              <HIcon name="share" :size="20" />
-            </div>
-            <div class="share-option-text">
-              <h4>Enlace compartible</h4>
-              <p>Enlace para ver la cotización (solo lectura)</p>
-            </div>
-          </div>
           <div class="share-option" @click="selectOption('public')">
             <div class="share-option-icon public">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -52,22 +43,6 @@
               <h4>Guardar PDF</h4>
               <p>Descarga la cotización como archivo PDF</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Resultado Enlace -->
-        <div v-else-if="activeOption === 'link'" class="share-result">
-          <p class="share-result-label">Copia este enlace y envíalo a tu cliente:</p>
-          <div class="share-link-box">
-            <input type="text" class="share-link-input" :value="shareUrl" readonly ref="linkInput" />
-            <button class="share-link-copy" @click="copyLink">
-              <HIcon name="copy" :size="16" v-if="!copied" />
-              <span v-else>✓</span>
-            </button>
-          </div>
-          <div class="share-result-actions">
-            <button class="action-btn primary" @click="copyLink">{{ copied ? 'Copiado!' : 'Copiar enlace' }}</button>
-            <button class="action-btn" @click="activeOption = null">Volver</button>
           </div>
         </div>
 
@@ -118,14 +93,7 @@ const emit = defineEmits(['close', 'export-pdf'])
 const auth = useAuthStore()
 const activeOption = ref(null)
 const copied = ref(false)
-const linkInput = ref(null)
 const waInput = ref(null)
-
-const shareUrl = computed(() => {
-  const json = JSON.stringify(props.quotation)
-  const hash = compressToEncodedURIComponent(json)
-  return `${window.location.origin}/compartir/${hash}`
-})
 
 const publicUrl = computed(() => {
   const json = JSON.stringify(props.quotation)
@@ -175,19 +143,6 @@ const whatsappText = computed(() => {
 function selectOption(option) {
   activeOption.value = option
   copied.value = false
-}
-
-async function copyLink() {
-  try {
-    await navigator.clipboard.writeText(shareUrl.value)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  } catch {
-    linkInput.value?.select()
-    document.execCommand('copy')
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 2000)
-  }
 }
 
 async function copyPublicLink() {
@@ -304,7 +259,6 @@ function generatePdf() {
   flex-shrink: 0;
 }
 
-.share-option-icon.link { background: #f0fdf4; color: #16a34a; }
 .share-option-icon.public { background: #eff6ff; color: #2563eb; }
 .share-option-icon.whatsapp { background: #f0fdf4; color: #16a34a; }
 .share-option-icon.pdf { background: #fef2f2; color: #e74c3c; }
