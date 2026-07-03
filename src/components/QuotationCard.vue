@@ -13,16 +13,16 @@
         </div>
         <div class="quote-card-venue">{{ quotation.venue || 'Sin venue' }}</div>
         <div class="quote-card-date">{{ quotation.eventDate || quotation.date }}</div>
-        <div v-if="paymentBadge && paymentsTotal > 0" class="quote-card-payment">
-          <div class="payment-progress-bar">
-            <div class="payment-progress-fill" :style="{ width: paymentPercent + '%' }"></div>
-          </div>
-          <div class="payment-progress-text">
-            {{ formatCurrency(paymentsTotal) }} de {{ formatCurrency(total) }}
-          </div>
-        </div>
       </div>
       <div class="quote-card-price">{{ formatCurrency(total) }}</div>
+    </div>
+    <div v-if="paymentBadge && paymentsTotal > 0" class="quote-card-payment">
+      <div class="payment-progress-bar">
+        <div class="payment-progress-fill" :style="{ width: paymentPercent + '%' }"></div>
+      </div>
+      <div class="payment-progress-text">
+        {{ formatCurrency(paymentsTotal) }} de {{ formatCurrency(total) }}
+      </div>
     </div>
     <div class="quote-card-actions">
       <button class="quote-action duplicate" @click.stop="emit('duplicate', quotation.id)" title="Duplicar">
@@ -148,7 +148,9 @@ const paymentPercent = computed(() => {
 }
 
 .quote-card-payment {
-  margin-top: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .payment-progress-bar {
