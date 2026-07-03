@@ -3,13 +3,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { action, clientName, venue, eventDate } = req.body
+  const { action, clientName, venue, eventDate, ownerEmail } = req.body
 
   const resendKey = process.env.RESEND_API_KEY
   if (!resendKey) {
     return res.status(500).json({ error: 'RESEND_API_KEY not configured' })
   }
 
+  const toEmail = ownerEmail || 'hi@josue.work'
   const actionText = action === 'aprobada' ? 'aprobó' : 'rechazó'
   const actionColor = action === 'aprobada' ? '#16a34a' : '#dc2626'
   const actionLabel = action === 'aprobada' ? 'Aprobada' : 'Rechazada'
@@ -45,7 +46,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'CotizaYa <no.reply@velum.events>',
-        to: ['hi@josue.work'],
+        to: [toEmail],
         subject: `Cotización ${actionLabel} — ${clientName || 'Cliente'}`,
         html,
       }),

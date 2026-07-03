@@ -148,6 +148,7 @@ async function sendNotification(action) {
         clientName: quotation.value.clientName,
         venue: quotation.value.venue,
         eventDate: quotation.value.eventDate,
+        ownerEmail: quotation.value.ownerEmail,
       }),
     })
   } catch (err) {
