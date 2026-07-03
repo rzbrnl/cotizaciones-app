@@ -136,7 +136,7 @@ async function handleLogin() {
 }
 
 .auth-submit {
-  background: var(--black);
+  background: var(--gold);
   color: var(--white);
   border: none;
   padding: 14px;
@@ -144,12 +144,12 @@ async function handleLogin() {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
   margin-top: 4px;
 }
 
 .auth-submit:hover:not(:disabled) {
-  opacity: 0.9;
+  background: #b8944d;
 }
 
 .auth-submit:disabled {
