@@ -207,6 +207,72 @@
             </div>
           </div>
         </div>
+
+        <!-- Payments (solo aprobadas) -->
+        <div v-if="store.active.status === 'aprobada'" class="payments-section">
+          <div class="payments-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+              <line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            <span>Pagos</span>
+          </div>
+
+          <!-- Payment summary -->
+          <div class="payment-summary">
+            <div class="payment-summary-row">
+              <span>Total</span>
+              <span class="payment-summary-value">{{ formatCurrency(store.grandTotal) }}</span>
+            </div>
+            <div class="payment-summary-row">
+              <span>Abonado</span>
+              <span class="payment-summary-value paid">{{ formatCurrency(paymentsTotal) }}</span>
+            </div>
+            <div class="payment-summary-row">
+              <span>Pendiente</span>
+              <span class="payment-summary-value" :class="remaining > 0 ? 'pending' : 'complete'">
+                {{ formatCurrency(remaining) }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Add payment form -->
+          <div class="payment-form">
+            <div class="payment-form-row">
+              <input
+                v-model="newPaymentAmount"
+                type="text"
+                class="cell-input"
+                placeholder="Monto"
+              />
+              <input
+                v-model="newPaymentNote"
+                type="text"
+                class="cell-input"
+                placeholder="Nota (opcional)"
+              />
+              <button class="btn-add-payment" @click="addPayment" :disabled="!newPaymentAmount">
+                Agregar
+              </button>
+            </div>
+          </div>
+
+          <!-- Payment history -->
+          <div v-if="payments.length > 0" class="payment-history">
+            <div class="payment-history-header">Historial</div>
+            <div
+              v-for="payment in payments"
+              :key="payment.id"
+              class="payment-item"
+            >
+              <div class="payment-item-info">
+                <div class="payment-item-amount">{{ formatCurrency(payment.amount) }}</div>
+                <div class="payment-item-note" v-if="payment.note">{{ payment.note }}</div>
+              </div>
+              <div class="payment-item-date">{{ formatDate(payment.date) }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -245,6 +311,8 @@ const statusOpen = ref(false);
 const statusDropdownRef = ref(null);
 const isDirty = ref(false);
 const savedSnapshot = ref('');
+const newPaymentAmount = ref('');
+const newPaymentNote = ref('');
 
 const { confirmLeave } = useUnsavedGuard(isDirty);
 
@@ -307,6 +375,31 @@ const allItems = computed(() => {
   }
   return items;
 });
+
+const payments = computed(() => store.active.payments || []);
+
+const paymentsTotal = computed(() => {
+  return payments.value.reduce((sum, p) => sum + (p.amount || 0), 0);
+});
+
+const remaining = computed(() => {
+  return Math.max(0, store.grandTotal - paymentsTotal.value);
+});
+
+async function addPayment() {
+  const amount = parseFloat(newPaymentAmount.value.replace(/[^0-9.]/g, ''));
+  if (!amount || amount <= 0) return;
+
+  await store.addPayment(store.active.id, amount, newPaymentNote.value);
+  newPaymentAmount.value = '';
+  newPaymentNote.value = '';
+  toast.success('Pago registrado');
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 
 onMounted(async () => {
   if (route.params.id) {
@@ -733,6 +826,141 @@ function printPage() {
 
 .reminder-input:focus {
   border-color: var(--gold);
+}
+
+/* Payments */
+.payments-section {
+  padding: 20px 40px 28px;
+  border-top: 1px solid var(--gray-border);
+}
+
+.payments-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-text);
+  font-size: 0.82rem;
+  margin-bottom: 16px;
+}
+
+.payment-summary {
+  background: var(--gray-light);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.payment-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  padding: 4px 0;
+}
+
+.payment-summary-row + .payment-summary-row {
+  border-top: 1px solid var(--gray-border);
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
+.payment-summary-value {
+  font-weight: 600;
+  color: var(--black);
+}
+
+.payment-summary-value.paid {
+  color: #16a34a;
+}
+
+.payment-summary-value.pending {
+  color: #d97706;
+}
+
+.payment-summary-value.complete {
+  color: #16a34a;
+}
+
+.payment-form {
+  margin-bottom: 16px;
+}
+
+.payment-form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-form-row .cell-input {
+  flex: 1;
+}
+
+.payment-form-row .cell-input:last-of-type {
+  flex: 2;
+}
+
+.btn-add-payment {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Google Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.btn-add-payment:hover:not(:disabled) {
+  background: #4a4a4a;
+}
+
+.btn-add-payment:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.payment-history {
+  border-top: 1px solid var(--gray-border);
+  padding-top: 14px;
+}
+
+.payment-history-header {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-text);
+  margin-bottom: 10px;
+}
+
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+.payment-item:last-child {
+  border-bottom: none;
+}
+
+.payment-item-amount {
+  font-weight: 600;
+  color: #16a34a;
+  font-size: 0.88rem;
+}
+
+.payment-item-note {
+  font-size: 0.78rem;
+  color: var(--gray-text);
+  margin-top: 2px;
+}
+
+.payment-item-date {
+  font-size: 0.75rem;
+  color: var(--gray-text);
 }
 
 /* Status dropdown */

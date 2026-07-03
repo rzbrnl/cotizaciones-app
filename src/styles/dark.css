@@ -224,3 +224,18 @@
 .dark .upcoming-venue { color: #888; }
 .dark .upcoming-date { color: #888; }
 .dark .calendario-page h1 { color: #e5e7eb; }
+
+/* Payments */
+.dark .payments-section { border-top-color: #333; }
+.dark .payments-header { color: #888; }
+.dark .payment-summary { background: #252525; }
+.dark .payment-summary-row { color: #888; border-top-color: #333; }
+.dark .payment-summary-value { color: #e5e7eb; }
+.dark .btn-add-payment { background: #e5e7eb; color: #1a1a1a; }
+.dark .btn-add-payment:hover:not(:disabled) { background: #ccc; }
+.dark .payment-history { border-top-color: #333; }
+.dark .payment-history-header { color: #888; }
+.dark .payment-item { border-bottom-color: #333; }
+.dark .payment-item-amount { color: #4ade80; }
+.dark .payment-item-note { color: #888; }
+.dark .payment-item-date { color: #888; }
