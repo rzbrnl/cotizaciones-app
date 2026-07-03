@@ -21,7 +21,7 @@ const routes = [
   { path: '/perfil', name: 'profile', component: ProfileView, meta: { auth: true } },
   { path: '/usuarios', name: 'users', component: UsersAdminView, meta: { auth: true, admin: true } },
   { path: '/compartir/:hash', name: 'share', component: ShareView },
-  { path: '/publica/:hash', name: 'public', component: PublicQuotationView },
+  { path: '/publica/:id', name: 'public', component: PublicQuotationView },
 ]
 
 const router = createRouter({

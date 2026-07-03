@@ -96,9 +96,8 @@ const copied = ref(false)
 const waInput = ref(null)
 
 const publicUrl = computed(() => {
-  const json = JSON.stringify(props.quotation)
-  const hash = compressToEncodedURIComponent(json)
-  return `${window.location.origin}/publica/${hash}`
+  const id = props.quotation._dbId || props.quotation.id
+  return `${window.location.origin}/publica/${id}`
 })
 
 const whatsappText = computed(() => {

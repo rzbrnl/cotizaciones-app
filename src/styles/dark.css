@@ -205,9 +205,16 @@
 .dark .public-page { background: #0f0f0f; }
 .dark .public-quotation { background: #1a1a1a; }
 .dark .public-header { background: #2a2a2a; }
+.dark .public-client { border-bottom-color: #333; }
+.dark .public-client .client-label { color: #888; }
+.dark .public-client .client-value { color: #e5e7eb; }
+.dark .public-table thead th { color: #888; border-bottom-color: #333; }
 .dark .public-table tbody td { border-bottom-color: #222; color: #e5e7eb; }
+.dark .public-table tbody tr:last-child td { border-bottom-color: transparent; }
 .dark .public-total { border-color: #333; color: #e5e7eb; }
 .dark .public-notes { border-color: #333; color: #888; }
+.dark .public-loading p { color: #888; }
+.dark .spinner { border-color: #333; border-top-color: #C9A86A; }
 
 /* Calendar */
 .dark .calendar-view { background: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }

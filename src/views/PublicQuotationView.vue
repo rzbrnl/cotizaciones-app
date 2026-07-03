@@ -1,6 +1,10 @@
 <template>
   <div class="public-page">
-    <div v-if="quotation" class="public-quotation">
+    <div v-if="loading" class="public-loading">
+      <div class="spinner"></div>
+      <p>Cargando cotización...</p>
+    </div>
+    <div v-else-if="quotation" class="public-quotation">
       <div class="public-header">
         <h1>Cotización</h1>
         <div class="public-date">{{ quotation.date }}</div>
@@ -98,7 +102,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { decodeQuotation } from '../utils/share'
 import { supabase } from '../lib/supabase'
 import { formatCurrency } from '../utils/format'
 import { useToastStore } from '../stores/toast'
@@ -106,6 +109,7 @@ import { useToastStore } from '../stores/toast'
 const route = useRoute()
 const toast = useToastStore()
 const quotation = ref(null)
+const loading = ref(true)
 
 const allItems = computed(() => {
   if (!quotation.value) return []
@@ -184,10 +188,44 @@ async function updateStatus(newStatus) {
   }
 }
 
+async function loadQuotation(id) {
+  loading.value = true
+  try {
+    // Try to find by _dbId first (Supabase ID)
+    let { data, error } = await supabase
+      .from('quotations')
+      .select('data')
+      .eq('id', id)
+      .single()
+
+    if (error || !data) {
+      // Fallback: search all quotations for matching local ID
+      const { data: all } = await supabase
+        .from('quotations')
+        .select('id, data')
+
+      if (all) {
+        const match = all.find(q => q.data?.id === id || q.data?._dbId === id)
+        if (match) {
+          quotation.value = match.data
+        }
+      }
+    } else {
+      quotation.value = data.data
+    }
+  } catch (err) {
+    console.error('Error loading quotation:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
 onMounted(() => {
-  const hash = route.params.hash
-  if (hash) {
-    quotation.value = decodeQuotation(hash)
+  const id = route.params.id
+  if (id) {
+    loadQuotation(id)
+  } else {
+    loading.value = false
   }
 })
 </script>
@@ -388,5 +426,29 @@ onMounted(() => {
   margin-top: 32px;
   font-size: 0.75rem;
   color: var(--gray-text);
+}
+
+.public-loading {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #C9A86A;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.public-loading p {
+  color: var(--gray-text);
+  font-size: 0.9rem;
 }
 </style>
