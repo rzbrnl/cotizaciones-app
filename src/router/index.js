@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '../lib/supabase'
 import DashboardView from '../views/DashboardView.vue'
+import CalendarioView from '../views/CalendarioView.vue'
 import BuilderView from '../views/BuilderView.vue'
 import ShareView from '../views/ShareView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -14,6 +15,7 @@ const routes = [
   { path: '/login', name: 'login', component: LoginView, meta: { guest: true } },
   { path: '/registro', name: 'register', component: RegisterView, meta: { guest: true } },
   { path: '/', name: 'dashboard', component: DashboardView, meta: { auth: true } },
+  { path: '/calendario', name: 'calendario', component: CalendarioView, meta: { auth: true } },
   { path: '/nueva', name: 'new', component: BuilderView, meta: { auth: true } },
   { path: '/editar/:id', name: 'edit', component: BuilderView, meta: { auth: true } },
   { path: '/perfil', name: 'profile', component: ProfileView, meta: { auth: true } },

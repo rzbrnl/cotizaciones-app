@@ -60,12 +60,6 @@
           </div>
         </div>
 
-        <!-- Calendar -->
-        <CalendarView
-          :quotations="store.savedList"
-          @select="editQuotation"
-        />
-
         <div class="dashboard-header">
           <div class="header-left">
             <div class="header-icon">
@@ -143,7 +137,6 @@ import { useConfirmStore } from '../stores/confirm'
 import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
-import CalendarView from '../components/CalendarView.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
 import HIcon from '../components/HIcon.vue'
 

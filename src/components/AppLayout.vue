@@ -23,6 +23,7 @@
         </button>
         <div class="topbar-links-desktop">
           <router-link to="/" class="topbar-link">Dashboard</router-link>
+          <router-link to="/calendario" class="topbar-link">Calendario</router-link>
           <router-link to="/perfil" class="topbar-link">Mi perfil</router-link>
           <router-link to="/usuarios" class="topbar-link" v-if="isAdmin">Usuarios</router-link>
         </div>
@@ -40,6 +41,7 @@
     <div v-if="menuOpen" class="mobile-menu" @click="menuOpen = false">
       <nav class="mobile-menu-nav" @click.stop>
         <router-link to="/" class="mobile-menu-link" @click="menuOpen = false">Dashboard</router-link>
+        <router-link to="/calendario" class="mobile-menu-link" @click="menuOpen = false">Calendario</router-link>
         <router-link to="/perfil" class="mobile-menu-link" @click="menuOpen = false">Mi perfil</router-link>
         <router-link v-if="isAdmin" to="/usuarios" class="mobile-menu-link" @click="menuOpen = false">Usuarios</router-link>
         <button class="mobile-menu-logout" @click="handleLogout">Cerrar sesión</button>
