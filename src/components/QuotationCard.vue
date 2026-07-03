@@ -25,6 +25,9 @@
       </div>
     </div>
     <div class="quote-card-actions">
+      <button class="quote-action share" @click.stop="emit('share', quotation)" title="Compartir">
+        <HIcon name="share" :size="18" />
+      </button>
       <button class="quote-action duplicate" @click.stop="emit('duplicate', quotation.id)" title="Duplicar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
@@ -50,7 +53,7 @@ const props = defineProps({
   quotation: { type: Object, required: true },
 })
 
-const emit = defineEmits(['edit', 'delete', 'duplicate'])
+const emit = defineEmits(['edit', 'delete', 'duplicate', 'share'])
 
 const statusLabels = {
   borrador: 'Borrador',
@@ -259,6 +262,15 @@ const paymentPercent = computed(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.15s;
+}
+
+.quote-action.share {
+  color: #888;
+}
+
+.quote-action.share:hover {
+  color: var(--black);
+  background: rgba(0,0,0,0.06);
 }
 
 .quote-action.duplicate {

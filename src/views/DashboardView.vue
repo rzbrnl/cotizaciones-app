@@ -117,6 +117,7 @@
             @edit="editQuotation"
             @delete="deleteQuotation"
             @duplicate="duplicateQuotation"
+            @share="openShareModal"
           />
         </div>
 
@@ -125,6 +126,12 @@
         </div>
       </template>
     </div>
+
+    <ShareModal
+      :open="shareModalOpen"
+      :quotation="shareQuotation"
+      @close="shareModalOpen = false"
+    />
   </AppLayout>
 </template>
 
@@ -137,6 +144,7 @@ import { useConfirmStore } from '../stores/confirm'
 import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
+import ShareModal from '../components/ShareModal.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
 import HIcon from '../components/HIcon.vue'
 
@@ -148,6 +156,8 @@ const router = useRouter()
 const loading = ref(true)
 const search = ref('')
 const activeFilter = ref('todos')
+const shareModalOpen = ref(false)
+const shareQuotation = ref(null)
 
 const filters = [
   { value: 'todos', label: 'Todos' },
@@ -215,6 +225,11 @@ async function handleVisibility() {
 
 function editQuotation(id) {
   router.push(`/editar/${id}`)
+}
+
+function openShareModal(quotation) {
+  shareQuotation.value = quotation
+  shareModalOpen.value = true
 }
 
 async function deleteQuotation(id) {
