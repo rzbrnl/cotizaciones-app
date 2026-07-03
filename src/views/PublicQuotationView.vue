@@ -6,6 +6,7 @@
     </div>
     <div v-else-if="quotation" class="public-quotation">
       <div class="public-header">
+        <div class="public-brand">CotizaYa by Vēlum</div>
         <h1>Cotización</h1>
         <div class="public-date">{{ quotation.date }}</div>
       </div>
@@ -238,6 +239,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .public-quotation {
@@ -255,10 +257,17 @@ onMounted(() => {
   color: var(--white);
 }
 
+.public-brand {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
 .public-header h1 {
-  font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
