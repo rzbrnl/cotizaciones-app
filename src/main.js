@@ -6,6 +6,7 @@ import App from './App.vue'
 import './styles/variables.css'
 import './styles/base.css'
 import './styles/components.css'
+import './styles/dark.css'
 import './styles/print.css'
 import './styles/responsive.css'
 

@@ -1,0 +1,143 @@
+/* Dark mode variables */
+.dark {
+  --black: #e5e7eb;
+  --white: #1a1a1a;
+  --gray-light: #2a2a2a;
+  --gray-border: #404040;
+  --gray-text: #9ca3af;
+}
+
+.dark body {
+  background: #111111;
+}
+
+.dark .topbar {
+  background: #1a1a1a;
+}
+
+.dark .app-layout {
+  background: #111111;
+}
+
+.dark .page {
+  background: #1a1a1a;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.dark .header-banner {
+  background: #2a2a2a;
+}
+
+.dark .form-input,
+.dark .cell-input,
+.dark .qty-input,
+.dark .qty-stepper,
+.dark .notes-textarea,
+.dark .reminder-input,
+.dark .search-input,
+.dark .status-menu {
+  background: #2a2a2a;
+  border-color: #404040;
+  color: #e5e7eb;
+}
+
+.dark .form-input::placeholder,
+.dark .cell-input::placeholder,
+.dark .notes-textarea::placeholder,
+.dark .search-input::placeholder {
+  color: #6b7280;
+}
+
+.dark .search-box {
+  background: #1a1a1a;
+  border-color: #404040;
+}
+
+.dark .quote-card {
+  background: #1a1a1a;
+}
+
+.dark .quote-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.dark .filter-tab {
+  background: #1a1a1a;
+  border-color: #404040;
+  color: #9ca3af;
+}
+
+.dark .filter-tab.active {
+  background: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #1a1a1a;
+}
+
+.dark .metric-card {
+  background: #1a1a1a;
+}
+
+.dark .admin-card {
+  background: #1a1a1a;
+}
+
+.dark .admin-table thead {
+  background: #2a2a2a;
+}
+
+.dark .admin-table tbody tr:hover {
+  background: rgba(201,168,106,0.1);
+}
+
+.dark .profile-card {
+  background: #1a1a1a;
+}
+
+.dark .account-card {
+  background: #2a2a2a;
+}
+
+.dark .empty-hero h1,
+.dark .dashboard-header h1,
+.dark .admin-hero h1,
+.dark .profile-hero h1 {
+  color: #e5e7eb;
+}
+
+.dark .share-modal {
+  background: #1a1a1a;
+}
+
+.dark .confirm-card {
+  background: #1a1a1a;
+}
+
+.dark .confirm-title {
+  color: #e5e7eb;
+}
+
+.dark .mobile-menu {
+  background: rgba(0,0,0,0.7);
+}
+
+.dark .mobile-menu-nav {
+  background: #1a1a1a;
+}
+
+.dark .public-quotation {
+  background: #1a1a1a;
+}
+
+.dark .public-table tbody td {
+  border-bottom-color: #333;
+}
+
+.dark .auth-card {
+  background: #1a1a1a;
+}
+
+.dark .auth-field input {
+  background: #2a2a2a;
+  border-color: #404040;
+  color: #e5e7eb;
+}
