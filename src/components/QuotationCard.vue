@@ -149,8 +149,6 @@ const paymentPercent = computed(() => {
 
 .quote-card-payment {
   margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
 }
 
 .payment-progress-bar {
