@@ -205,7 +205,7 @@
           </div>
 
           <!-- Add payment form -->
-          <div class="payment-form">
+          <div v-if="remaining > 0" class="payment-form">
             <div class="payment-form-row">
               <input
                 v-model="newPaymentAmount"
@@ -223,6 +223,13 @@
                 Agregar
               </button>
             </div>
+          </div>
+          <div v-else class="payment-complete">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Pago completo</span>
           </div>
 
           <!-- Payment history -->
@@ -894,7 +901,23 @@ function printPage() {
 .payment-item-note {
   font-size: 0.78rem;
   color: var(--gray-text);
-  margin-top: 2px;
+}
+
+.payment-item-date {
+  font-size: 0.75rem;
+  color: var(--gray-text);
+}
+
+.payment-complete {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #dcfce7;
+  border-radius: 8px;
+  color: #16a34a;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 .payment-item-date {
