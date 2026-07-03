@@ -65,12 +65,12 @@ export const useAuthStore = defineStore('auth', () => {
     if (error) return { success: false, error: error.message }
 
     if (data.user) {
-      await supabase.from('profiles').insert({
+      await supabase.from('profiles').upsert({
         id: data.user.id,
         full_name: fullName,
         email: email,
         logo_url: '',
-      })
+      }, { onConflict: 'id' })
 
       currentUser.value = data.user
       await fetchProfile(data.user.id)
