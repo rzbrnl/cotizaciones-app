@@ -121,8 +121,8 @@ export const useQuotationStore = defineStore('quotation', () => {
     if (!auth.currentUser) return
 
     saving.value = true
+    active.value.ownerEmail = auth.currentUser.email
     const copy = JSON.parse(JSON.stringify(active.value))
-    copy.ownerEmail = auth.currentUser.email
 
     const existing = savedList.value.find(q => q.id === copy.id)
 
