@@ -170,6 +170,8 @@
 .dark .auth-submit:hover:not(:disabled) { background: #d4b87a; }
 .dark .auth-footer { color: #888; }
 .dark .auth-footer a { color: var(--gold); }
+.dark .theme-toggle { color: #666; }
+.dark .theme-toggle:hover { color: #aaa; background: rgba(255,255,255,0.05); }
 
 /* Share modal */
 .dark .modal-overlay { background: rgba(0,0,0,0.7); }
