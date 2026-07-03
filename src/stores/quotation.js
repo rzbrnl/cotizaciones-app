@@ -107,6 +107,10 @@ export const useQuotationStore = defineStore('quotation', () => {
     const found = savedList.value.find(q => q.id === id)
     if (found) {
       active.value = JSON.parse(JSON.stringify(found))
+      // Ensure ownerEmail exists for old quotations
+      if (!active.value.ownerEmail && auth.currentUser?.email) {
+        active.value.ownerEmail = auth.currentUser.email
+      }
       return true
     }
     return false
