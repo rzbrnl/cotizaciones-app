@@ -6,12 +6,21 @@
     </div>
     <div v-else-if="quotation" class="public-quotation">
       <div class="public-header">
-        <div class="public-brand">CotizaYa by Vēlum</div>
-        <h1>Cotización</h1>
-        <div class="public-date">{{ quotation.date }}</div>
+        <div class="public-header-left">
+          <div class="public-brand">CotizaYa by Vēlum</div>
+          <h1>Cotización</h1>
+          <div class="public-date">{{ quotation.date }}</div>
+        </div>
+        <div v-if="quotation.clientLogo" class="public-header-logo">
+          <img :src="quotation.clientLogo" alt="Logo" />
+        </div>
       </div>
 
       <div class="public-client">
+        <div class="client-row">
+          <span class="client-label">Cliente:</span>
+          <span class="client-value">{{ quotation.clientName || '—' }}</span>
+        </div>
         <div class="client-row">
           <span class="client-label">Evento:</span>
           <span class="client-value">{{ quotation.eventType || '—' }}</span>
@@ -255,6 +264,13 @@ onMounted(() => {
   background: var(--black);
   padding: 28px 32px;
   color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.public-header-left {
+  flex: 1;
 }
 
 .public-brand {
@@ -269,6 +285,19 @@ onMounted(() => {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 4px;
+}
+
+.public-header-logo {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.public-header-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 .public-date {
