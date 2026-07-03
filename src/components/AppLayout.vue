@@ -1,7 +1,7 @@
 <template>
   <div class="app-layout">
     <header class="topbar">
-      <div class="topbar-brand">CotizaYa by Vēlum</div>
+      <router-link to="/" class="topbar-brand">CotizaYa by Vēlum</router-link>
       <nav class="topbar-nav">
         <slot name="actions" />
         <div class="topbar-separator" v-if="$slots.actions"></div>
