@@ -140,41 +140,14 @@ async function handleReject() {
 
 async function sendNotification(action) {
   try {
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-    const actionText = action === 'aprobada' ? 'aprobó' : 'rechazó'
-    const actionColor = action === 'aprobada' ? '#16a34a' : '#dc2626'
-
-    const html = `
-      <div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;">
-        <div style="background:#353535;padding:24px;text-align:center;">
-          <h1 style="color:white;font-size:20px;margin:0;">CotizaYa by Vēlum</h1>
-        </div>
-        <div style="padding:24px;background:#f9fafb;">
-          <h2 style="color:#1a1a1a;font-size:18px;">Actualización de cotización</h2>
-          <p style="color:#666;font-size:14px;line-height:1.6;">
-            El cliente <strong>${quotation.value.clientName || '—'}</strong> ${actionText} la cotización para el evento en <strong>${quotation.value.venue || '—'}</strong> (${quotation.value.eventDate || '—'}).
-          </p>
-          <div style="text-align:center;margin:24px 0;">
-            <span style="display:inline-block;padding:8px 20px;border-radius:8px;font-weight:600;font-size:14px;color:white;background:${actionColor};">
-              ${action === 'aprobada' ? 'Aprobada' : 'Rechazada'}
-            </span>
-          </div>
-          <p style="color:#999;font-size:12px;margin-top:24px;">CotizaYa by Vēlum</p>
-        </div>
-      </div>
-    `
-
-    await fetch(`${supabaseUrl}/functions/v1/resend-email`, {
+    await fetch('/api/send-email', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'CotizaYa <notificaciones@cotizador.velum.events>',
-        to: ['hi@josue.work'],
-        subject: `Cotización ${action === 'aprobada' ? 'aprobada' : 'rechazada'} — ${quotation.value.clientName || 'Cliente'}`,
-        html,
+        action,
+        clientName: quotation.value.clientName,
+        venue: quotation.value.venue,
+        eventDate: quotation.value.eventDate,
       }),
     })
   } catch (err) {
