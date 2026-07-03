@@ -202,3 +202,24 @@
 .dark .public-table tbody td { border-bottom-color: #222; color: #e5e7eb; }
 .dark .public-total { border-color: #333; color: #e5e7eb; }
 .dark .public-notes { border-color: #333; color: #888; }
+
+/* Calendar */
+.dark .calendar-view { background: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.dark .cal-month { color: #e5e7eb; }
+.dark .cal-nav { border-color: #3a3a3a; color: #888; }
+.dark .cal-nav:hover { border-color: var(--gold); color: #e5e7eb; }
+.dark .cal-weekday { color: #888; }
+.dark .cal-day:hover { background: #252525; }
+.dark .cal-day.today { background: rgba(201,168,106,0.15); }
+.dark .cal-day-number { color: #e5e7eb; }
+.dark .cal-day.today .cal-day-number { color: var(--gold); }
+.dark .cal-event.borrador { background: #333; color: #ccc; }
+.dark .cal-event.enviada { background: #1e3a5f; color: #60a5fa; }
+.dark .cal-event.aprobada { background: #14532d; color: #4ade80; }
+.dark .cal-event.rechazada { background: #450a0a; color: #f87171; }
+.dark .upcoming-section { border-top-color: #333; }
+.dark .upcoming-section h4 { color: #888; }
+.dark .upcoming-item:hover { background: #252525; }
+.dark .upcoming-name { color: #e5e7eb; }
+.dark .upcoming-venue { color: #888; }
+.dark .upcoming-date { color: #888; }
