@@ -47,7 +47,7 @@
       </div>
       <button
         class="topbar-icon-btn"
-        @click="shareOpen = true"
+        @click="handleShare"
         title="Compartir"
       >
         <HIcon name="share" :size="22" :stroke-width="1.5" />
@@ -484,6 +484,17 @@ async function handleSave() {
   isDirty.value = false;
   savedSnapshot.value = JSON.stringify(store.active);
   toast.success("Cotización guardada");
+}
+
+async function handleShare() {
+  // Save and change status to "enviada" if it's still "borrador"
+  if (!store.active.status || store.active.status === 'borrador') {
+    store.active.status = 'enviada';
+  }
+  await store.save();
+  isDirty.value = false;
+  savedSnapshot.value = JSON.stringify(store.active);
+  shareOpen.value = true;
 }
 
 async function exportPdf() {
