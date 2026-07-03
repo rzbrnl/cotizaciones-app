@@ -260,4 +260,18 @@ function formatDate(iso) {
   font-size: 0.82rem;
   line-height: 1.5;
 }
+
+/* Dark mode */
+.dark .admin-hero h1 { color: #e5e7eb; }
+.dark .admin-hero p { color: #999; }
+.dark .admin-card { background: #1a1a1a; }
+.dark .admin-card-header { border-bottom-color: #333; }
+.dark .admin-card-header h2 { color: #e5e7eb; }
+.dark .admin-table thead { background: transparent; }
+.dark .admin-table thead th { color: #aaa; border-bottom-color: #333; background: transparent; }
+.dark .admin-table tbody td { border-bottom-color: #2a2a2a; color: #ddd; }
+.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.08); }
+.dark .admin-info { background: #1a1a1a; color: #999; }
+.dark .admin-link { background: #e5e7eb; color: #1a1a1a; }
+.dark .admin-link:hover { background: #ccc; }
 </style>
