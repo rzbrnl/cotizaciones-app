@@ -13,6 +13,14 @@
         </div>
         <div class="quote-card-venue">{{ quotation.venue || 'Sin venue' }}</div>
         <div class="quote-card-date">{{ quotation.eventDate || quotation.date }}</div>
+        <div v-if="paymentBadge && paymentsTotal > 0" class="quote-card-payment">
+          <div class="payment-progress-bar">
+            <div class="payment-progress-fill" :style="{ width: paymentPercent + '%' }"></div>
+          </div>
+          <div class="payment-progress-text">
+            {{ formatCurrency(paymentsTotal) }} de {{ formatCurrency(total) }}
+          </div>
+        </div>
       </div>
       <div class="quote-card-price">{{ formatCurrency(total) }}</div>
     </div>
@@ -75,6 +83,15 @@ const total = computed(() => {
   }
   return t
 })
+
+const paymentsTotal = computed(() => {
+  return (props.quotation.payments || []).reduce((sum, p) => sum + (p.amount || 0), 0)
+})
+
+const paymentPercent = computed(() => {
+  if (total.value === 0) return 0
+  return Math.min(100, (paymentsTotal.value / total.value) * 100)
+})
 </script>
 
 <style scoped>
@@ -128,6 +145,31 @@ const total = computed(() => {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: #999;
+}
+
+.quote-card-payment {
+  margin-top: 10px;
+}
+
+.payment-progress-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.payment-progress-fill {
+  height: 100%;
+  background: #16a34a;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.payment-progress-text {
+  font-size: 0.7rem;
+  color: #16a34a;
+  font-weight: 500;
 }
 
 .quote-card-price {

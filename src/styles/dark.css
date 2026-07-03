@@ -234,3 +234,8 @@
 .dark .payment-item-amount { color: #4ade80; }
 .dark .payment-item-note { color: #888; }
 .dark .payment-item-date { color: #888; }
+
+/* Payment progress in cards */
+.dark .payment-progress-bar { background: #333; }
+.dark .payment-progress-fill { background: #4ade80; }
+.dark .payment-progress-text { color: #4ade80; }
