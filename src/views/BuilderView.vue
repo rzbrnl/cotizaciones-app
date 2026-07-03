@@ -45,18 +45,16 @@
           </button>
         </div>
       </div>
-      <button
-        class="topbar-icon-btn"
-        @click="handleShare"
-        title="Compartir"
-      >
-        <HIcon name="share" :size="22" :stroke-width="1.5" />
-      </button>
       <button class="topbar-icon-btn" @click="handleSave" title="Guardar">
         <HIcon name="save" :size="22" :stroke-width="1.5" />
       </button>
-      <button class="topbar-icon-btn" @click="printPage" title="Imprimir">
-        <HIcon name="printer" :size="22" :stroke-width="1.5" />
+      <button
+        class="topbar-share-btn"
+        @click="handleShare"
+        title="Compartir"
+      >
+        <HIcon name="share" :size="18" :stroke-width="1.5" />
+        <span>Compartir</span>
       </button>
     </template>
 
@@ -295,7 +293,7 @@ const { confirmLeave } = useUnsavedGuard(isDirty);
 useKeyboardShortcuts([
   { key: 's', ctrl: true, handler: handleSave },
   { key: 'p', ctrl: true, handler: printPage },
-  { key: 'n', ctrl: true, handler: () => { shareOpen.value = true } },
+  { key: 'n', ctrl: true, handler: handleShare },
 ]);
 
 // Track changes + auto-save
@@ -1042,6 +1040,26 @@ function printPage() {
   background-color: transparent;
   color: white;
   border: none;
+}
+
+.topbar-share-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: "Google Sans", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.topbar-share-btn:hover {
+  background: #b8944d;
 }
 
 @media print {
