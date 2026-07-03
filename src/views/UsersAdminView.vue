@@ -262,16 +262,19 @@ function formatDate(iso) {
 }
 
 /* Dark mode */
-.dark .admin-hero h1 { color: #e5e7eb; }
-.dark .admin-hero p { color: #999; }
-.dark .admin-card { background: #1a1a1a; }
-.dark .admin-card-header { border-bottom-color: #333; }
-.dark .admin-card-header h2 { color: #e5e7eb; }
-.dark .admin-table thead { background: transparent; }
-.dark .admin-table thead th { color: #aaa; border-bottom-color: #333; background: transparent; }
-.dark .admin-table tbody td { border-bottom-color: #2a2a2a; color: #ddd; }
-.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.08); }
-.dark .admin-info { background: #1a1a1a; color: #999; }
-.dark .admin-link { background: #e5e7eb; color: #1a1a1a; }
-.dark .admin-link:hover { background: #ccc; }
+.dark .admin-hero h1 { color: #e5e7eb !important; }
+.dark .admin-hero p { color: #999 !important; }
+.dark .admin-card { background: #1a1a1a !important; }
+.dark .admin-card-header { border-bottom-color: #333 !important; }
+.dark .admin-card-header h2 { color: #e5e7eb !important; }
+.dark .admin-table thead { background: transparent !important; }
+.dark .admin-table thead th { color: #aaa !important; border-bottom-color: #333 !important; background: transparent !important; }
+.dark .admin-table tbody td { border-bottom-color: #2a2a2a !important; color: #ddd !important; }
+.dark .admin-table tbody td.user-name { color: #f0f0f0 !important; }
+.dark .admin-table tbody td.user-email { color: #bbb !important; }
+.dark .admin-table tbody td.user-date { color: #999 !important; }
+.dark .admin-table tbody tr:hover { background: rgba(201,168,106,0.08) !important; }
+.dark .admin-info { background: #1a1a1a !important; color: #999 !important; }
+.dark .admin-link { background: #e5e7eb !important; color: #1a1a1a !important; }
+.dark .admin-link:hover { background: #ccc !important; }
 </style>
