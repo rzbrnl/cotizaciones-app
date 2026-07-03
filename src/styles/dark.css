@@ -224,7 +224,7 @@
 .dark .payments-section { border-top-color: #333; }
 .dark .payments-header { color: #888; }
 .dark .payment-summary { background: #252525; }
-.dark .payment-summary-row { color: #888; border-top-color: #333; }
+.dark .payment-summary-row { color: #888; }
 .dark .payment-summary-value { color: #e5e7eb; }
 .dark .btn-add-payment { background: #e5e7eb; color: #1a1a1a; }
 .dark .btn-add-payment:hover:not(:disabled) { background: #ccc; }

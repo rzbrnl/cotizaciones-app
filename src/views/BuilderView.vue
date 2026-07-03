@@ -814,7 +814,6 @@ function printPage() {
 }
 
 .payment-summary-row + .payment-summary-row {
-  border-top: 1px solid var(--gray-border);
   margin-top: 4px;
   padding-top: 8px;
 }
