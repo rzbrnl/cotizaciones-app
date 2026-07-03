@@ -220,11 +220,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuotationStore } from "../stores/quotation";
 import { useToastStore } from "../stores/toast";
 import { useUnsavedGuard } from "../composables/useUnsavedGuard";
+import { useKeyboardShortcuts } from "../composables/useKeyboardShortcuts";
 import { formatCurrency } from "../utils/format";
 import AppLayout from "../components/AppLayout.vue";
 import QuoteHeader from "../components/QuoteHeader.vue";
@@ -246,6 +247,13 @@ const isDirty = ref(false);
 const savedSnapshot = ref('');
 
 const { confirmLeave } = useUnsavedGuard(isDirty);
+
+// Keyboard shortcuts
+useKeyboardShortcuts([
+  { key: 's', ctrl: true, handler: handleSave },
+  { key: 'p', ctrl: true, handler: printPage },
+  { key: 'n', ctrl: true, handler: () => { shareOpen.value = true } },
+]);
 
 // Track changes
 watch(() => JSON.stringify(store.active), (newVal) => {
@@ -284,6 +292,10 @@ onMounted(() => {
   setTimeout(() => {
     savedSnapshot.value = JSON.stringify(store.active);
   }, 500);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
 });
 
 const allItems = computed(() => {
