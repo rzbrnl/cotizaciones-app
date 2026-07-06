@@ -5,11 +5,30 @@
       <template v-if="!loading && store.savedList.length === 0">
         <div class="empty-hero">
           <div class="empty-icon">
-            <HIcon name="document" :size="48" />
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
           </div>
-          <h1>No hay cotizaciones</h1>
-          <p>Crea tu primera cotización para comenzar</p>
-          <router-link to="/nueva" class="empty-btn">Crear mi primer cotización</router-link>
+          <h1>Empieza a cotizar</h1>
+          <p>Crea cotizaciones profesionales, compártelas con tus clientes y recibe pagos</p>
+          <div class="empty-features">
+            <div class="empty-feature">
+              <span class="empty-feature-icon">1</span>
+              <span>Crea tu cotización con conceptos y precios</span>
+            </div>
+            <div class="empty-feature">
+              <span class="empty-feature-icon">2</span>
+              <span>Compártela por WhatsApp o enlace público</span>
+            </div>
+            <div class="empty-feature">
+              <span class="empty-feature-icon">3</span>
+              <span>El cliente aprueba y tú recibes el pago</span>
+            </div>
+          </div>
+          <router-link to="/nueva" class="empty-btn">Crear mi primera cotización</router-link>
         </div>
       </template>
 
@@ -411,21 +430,55 @@ function duplicateQuotation(id) {
 }
 
 .empty-icon {
-  color: #999;
-  margin-bottom: 16px;
+  color: #ccc;
+  margin-bottom: 20px;
 }
 
 .empty-hero h1 {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--black);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .empty-hero p {
   font-size: 0.9rem;
   color: var(--gray-text);
   margin-bottom: 28px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto 32px;
+  text-align: left;
+}
+
+.empty-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--gray-text);
+}
+
+.empty-feature-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .empty-btn {
@@ -437,11 +490,11 @@ function duplicateQuotation(id) {
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
 }
 
 .empty-btn:hover {
-  opacity: 0.9;
+  background: #4a4a4a;
 }
 
 /* Header */

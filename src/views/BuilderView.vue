@@ -266,6 +266,19 @@
       @close="shareOpen = false"
       @export-pdf="exportPdf"
     />
+
+    <!-- Keyboard shortcuts help -->
+    <div class="shortcuts-help" @click="showShortcuts = !showShortcuts">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+        <path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M7 16h10"/>
+      </svg>
+      <span v-if="showShortcuts" class="shortcuts-list">
+        <kbd>Ctrl+S</kbd> Guardar
+        <kbd>Ctrl+P</kbd> Imprimir
+        <kbd>Ctrl+N</kbd> Compartir
+      </span>
+    </div>
   </AppLayout>
 </template>
 
@@ -299,6 +312,7 @@ const isDirty = ref(false);
 const savedSnapshot = ref('');
 const newPaymentAmount = ref('');
 const newPaymentNote = ref('');
+const showShortcuts = ref(false);
 
 const { confirmLeave } = useUnsavedGuard(isDirty);
 
@@ -1136,6 +1150,52 @@ function printPage() {
 
 .topbar-whatsapp-btn:hover {
   background: #1da851;
+}
+
+/* Keyboard shortcuts help */
+.shortcuts-help {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.2s;
+  z-index: 50;
+}
+
+.shortcuts-help:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.shortcuts-help svg {
+  color: var(--gray-text);
+  flex-shrink: 0;
+}
+
+.shortcuts-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--gray-text);
+  white-space: nowrap;
+}
+
+.shortcuts-list kbd {
+  background: var(--gray-light);
+  border: 1px solid var(--gray-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-family: monospace;
 }
 
 @media print {

@@ -83,6 +83,21 @@
 .dark .new-quote-btn { background: #e5e7eb; color: #1a1a1a; }
 .dark .new-quote-btn:hover { background: #ccc; }
 
+/* Empty state */
+.dark .empty-icon { color: #444; }
+.dark .empty-hero h1 { color: #e5e7eb; }
+.dark .empty-hero p { color: #888; }
+.dark .empty-feature { color: #888; }
+.dark .empty-btn { background: #e5e7eb; color: #1a1a1a; }
+.dark .empty-btn:hover { background: #ccc; color: #1a1a1a; }
+
+/* Shortcuts help */
+.dark .shortcuts-help { background: #1a1a1a; border-color: #333; }
+.dark .shortcuts-help:hover { border-color: var(--gold); }
+.dark .shortcuts-help svg { color: #888; }
+.dark .shortcuts-list { color: #888; }
+.dark .shortcuts-list kbd { background: #252525; border-color: #3a3a3a; color: #aaa; }
+
 /* Search */
 .dark .search-box { background: #1a1a1a; border-color: #333; }
 .dark .search-input { color: #e5e7eb; background: transparent; }
