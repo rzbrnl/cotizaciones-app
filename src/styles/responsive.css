@@ -192,6 +192,7 @@
     padding: 12px 20px;
     font-size: 0.8rem;
     min-height: 44px;
+    width: 100%;
   }
 
   .total-bar {
