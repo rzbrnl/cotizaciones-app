@@ -92,13 +92,9 @@
               <label>CLABE</label>
               <input v-model="paymentData.clabe" type="text" placeholder="18 dígitos" maxlength="18" class="mono-input" />
             </div>
-            <div class="form-field">
+            <div class="form-field full">
               <label>Cuenta</label>
               <input v-model="paymentData.account" type="text" placeholder="Número de cuenta" class="mono-input" />
-            </div>
-            <div class="form-field">
-              <label>PayPal</label>
-              <input v-model="paymentData.paypal" type="email" placeholder="Opcional" />
             </div>
           </div>
           <div class="panel-actions">

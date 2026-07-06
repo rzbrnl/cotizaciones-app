@@ -153,12 +153,14 @@
   /* Header Banner */
   .header-banner {
     padding: 20px;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    align-items: flex-start;
   }
 
   .header-logo {
-    text-align: left;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
 
   .header-title {
@@ -250,19 +252,60 @@
   }
 
   .filter-tabs {
+    display: flex;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-tab {
     white-space: nowrap;
     flex-shrink: 0;
+    padding: 6px 12px;
   }
 
   .sort-select {
     width: 100%;
+  }
+
+  /* Builder items table mobile */
+  .items-table {
+    min-width: 100%;
+  }
+
+  .items-table thead th {
+    font-size: 0.6rem;
+    padding: 0 0 8px;
+  }
+
+  .th-concept { width: 40%; }
+  .th-qty { width: 20%; text-align: center; }
+  .th-price { width: 22%; text-align: right; }
+  .th-subtotal { width: 18%; text-align: right; }
+
+  .cell-input {
+    font-size: 0.82rem;
+    padding: 10px 8px;
+  }
+
+  .cell-input--right {
+    width: 70px;
+  }
+
+  .qty-stepper {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+
+  .cell-subtotal {
+    font-size: 0.78rem;
   }
 
   /* Metrics grid - 2 columns on mobile */
@@ -304,10 +347,22 @@
   }
 
   /* Share buttons in builder */
-  .topbar-share-btn,
+  .topbar-share-btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .topbar-share-btn span {
+    display: none;
+  }
+
   .topbar-whatsapp-btn {
-    padding: 10px 14px;
-    font-size: 0.78rem;
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+
+  .topbar-whatsapp-btn span {
+    display: none;
   }
 
   /* Auth */

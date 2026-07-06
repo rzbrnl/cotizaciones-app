@@ -39,6 +39,7 @@ const logo = computed(() => auth.userLogo)
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  position: relative;
 }
 
 .header-left {
