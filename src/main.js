@@ -9,6 +9,7 @@ import './styles/components.css'
 import './styles/dark.css'
 import './styles/print.css'
 import './styles/responsive.css'
+import './styles/transitions.css'
 
 const app = createApp(App)
 const pinia = createPinia()
