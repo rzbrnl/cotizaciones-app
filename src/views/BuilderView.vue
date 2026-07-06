@@ -84,7 +84,8 @@
 
         <!-- Items -->
         <div class="items-section">
-          <table class="items-table">
+          <!-- Desktop table -->
+          <table class="items-table items-table-desktop">
             <thead>
               <tr>
                 <th class="th-concept">Concepto</th>
@@ -159,6 +160,59 @@
               </tr>
             </tbody>
           </table>
+
+          <!-- Mobile cards -->
+          <div class="items-mobile">
+            <div
+              v-for="(item, index) in allItems"
+              :key="'m-' + item.id"
+              class="item-card"
+            >
+              <div class="item-card-header">
+                <input
+                  type="text"
+                  class="cell-input"
+                  placeholder="Nombre del concepto"
+                  :value="item.name"
+                  @input="updateItem(item.id, 'name', $event.target.value)"
+                />
+                <button
+                  v-if="allItems.length > 1"
+                  class="item-remove-mobile"
+                  @click="removeItem(item.id)"
+                >
+                  <HIcon name="close" :size="16" />
+                </button>
+              </div>
+              <div class="item-card-body">
+                <div class="item-card-qty">
+                  <div class="qty-stepper">
+                    <button class="qty-btn" @click="changeQty(item.id, -1)">−</button>
+                    <input
+                      type="number"
+                      class="qty-input"
+                      :value="item.qty"
+                      min="1"
+                      @input="updateItem(item.id, 'qty', $event.target.value)"
+                    />
+                    <button class="qty-btn" @click="changeQty(item.id, 1)">+</button>
+                  </div>
+                </div>
+                <div class="item-card-price">
+                  <span class="cell-currency">$</span>
+                  <input
+                    type="text"
+                    class="cell-input cell-input--right"
+                    :value="formatNumber(item.unitPrice)"
+                    @blur="updateItem(item.id, 'unitPrice', $event.target.value)"
+                  />
+                </div>
+                <div class="item-card-subtotal">
+                  {{ formatCurrency(item.qty * item.unitPrice) }}
+                </div>
+              </div>
+            </div>
+          </div>
 
           <button class="btn-add-concept" @click="addItem">
             Agregar concepto
@@ -1104,6 +1158,54 @@ function printPage() {
 /* Print-only qty */
 .qty-print {
   display: none;
+}
+
+/* Mobile items */
+.items-mobile {
+  display: none;
+}
+
+.item-card {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.item-card-header {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.item-card-header .cell-input {
+  width: 100%;
+  padding-right: 32px;
+}
+
+.item-remove-mobile {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #ccc;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.item-remove-mobile:hover {
+  color: #e74c3c;
+  background: #fef2f2;
+}
+
+.item-card-body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
 }
 
 .topbar-icon-btn {

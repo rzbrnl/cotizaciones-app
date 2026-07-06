@@ -275,37 +275,17 @@
     width: 100%;
   }
 
-  /* Builder items table mobile */
-  .items-table {
-    min-width: 100%;
+  /* Builder items - mobile card layout */
+  .items-section {
+    padding: 0 16px;
   }
 
-  .items-table thead th {
-    font-size: 0.6rem;
-    padding: 0 0 8px;
+  .items-table-desktop {
+    display: none;
   }
 
-  .th-concept { width: 40%; }
-  .th-qty { width: 20%; text-align: center; }
-  .th-price { width: 22%; text-align: right; }
-  .th-subtotal { width: 18%; text-align: right; }
-
-  .cell-input {
-    font-size: 0.82rem;
-    padding: 10px 8px;
-  }
-
-  .cell-input--right {
-    width: 70px;
-  }
-
-  .qty-stepper {
-    transform: scale(0.9);
-    transform-origin: center;
-  }
-
-  .cell-subtotal {
-    font-size: 0.78rem;
+  .items-mobile {
+    display: block;
   }
 
   /* Metrics grid - 2 columns on mobile */
