@@ -751,6 +751,7 @@ function duplicateQuotation(id) {
   border-radius: 50%;
 }
 
+.filter-dot.todos { background: #6b7280; }
 .filter-dot.borrador { background: #9ca3af; }
 .filter-dot.enviada { background: #3b82f6; }
 .filter-dot.aprobada { background: #22c55e; }
