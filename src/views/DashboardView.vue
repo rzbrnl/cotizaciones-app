@@ -103,18 +103,26 @@
               class="search-input"
             />
           </div>
-          <div class="filter-tabs">
-            <button
-              v-for="f in filters"
-              :key="f.value"
-              class="filter-tab"
-              :class="{ active: activeFilter === f.value }"
-              @click="activeFilter = f.value"
-            >
-              <span class="filter-dot" :class="f.value"></span>
-              {{ f.label }}
-              <span class="filter-count">{{ getCount(f.value) }}</span>
-            </button>
+          <div class="filter-row">
+            <div class="filter-tabs">
+              <button
+                v-for="f in filters"
+                :key="f.value"
+                class="filter-tab"
+                :class="{ active: activeFilter === f.value }"
+                @click="activeFilter = f.value"
+              >
+                <span class="filter-dot" :class="f.value"></span>
+                {{ f.label }}
+                <span class="filter-count">{{ getCount(f.value) }}</span>
+              </button>
+            </div>
+            <select v-model="sortBy" class="sort-select">
+              <option value="newest">Más reciente</option>
+              <option value="oldest">Más antiguo</option>
+              <option value="highest">Mayor monto</option>
+              <option value="lowest">Menor monto</option>
+            </select>
           </div>
         </div>
 
@@ -183,6 +191,7 @@ const router = useRouter()
 const loading = ref(true)
 const search = ref('')
 const activeFilter = ref('todos')
+const sortBy = ref('newest')
 const shareModalOpen = ref(false)
 const shareQuotation = ref(null)
 
@@ -195,7 +204,7 @@ const filters = [
 ]
 
 const filtered = computed(() => {
-  let list = store.savedList
+  let list = [...store.savedList]
 
   if (activeFilter.value !== 'todos') {
     list = list.filter(q => (q.status || 'borrador') === activeFilter.value)
@@ -209,6 +218,21 @@ const filtered = computed(() => {
       (item.eventType || '').toLowerCase().includes(q)
     )
   }
+
+  // Sort
+  list.sort((a, b) => {
+    const dateA = a.eventDate || a.date || ''
+    const dateB = b.eventDate || b.date || ''
+    const totalA = (a.sections || []).reduce((sum, s) => sum + (s.items || []).reduce((sum2, i) => sum2 + (i.qty || 0) * (i.unitPrice || 0), 0), 0)
+    const totalB = (b.sections || []).reduce((sum, s) => sum + (s.items || []).reduce((sum2, i) => sum2 + (i.qty || 0) * (i.unitPrice || 0), 0), 0)
+
+    switch (sortBy.value) {
+      case 'oldest': return dateA.localeCompare(dateB)
+      case 'highest': return totalB - totalA
+      case 'lowest': return totalA - totalB
+      default: return dateB.localeCompare(dateA) // newest
+    }
+  })
 
   return list
 })
@@ -550,6 +574,34 @@ function duplicateQuotation(id) {
   flex-direction: column;
   gap: 14px;
   margin-bottom: 24px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sort-select {
+  padding: 6px 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 20px;
+  background: var(--white);
+  font-size: 0.78rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--gray-text);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.sort-select:hover {
+  border-color: var(--gold);
+}
+
+.sort-select:focus {
+  border-color: var(--gold);
 }
 
 .search-box {

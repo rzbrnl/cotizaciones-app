@@ -102,6 +102,11 @@
 .dark .dashboard-empty svg { color: #444; }
 .dark .dashboard-empty-hint { color: #555; }
 
+/* Sort select */
+.dark .sort-select { background: #1a1a1a; border-color: #333; color: #888; }
+.dark .sort-select:hover { border-color: var(--gold); }
+.dark .sort-select:focus { border-color: var(--gold); }
+
 /* Search */
 .dark .search-box { background: #1a1a1a; border-color: #333; }
 .dark .search-input { color: #e5e7eb; background: transparent; }
