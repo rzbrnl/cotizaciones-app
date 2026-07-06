@@ -107,6 +107,20 @@
 .dark .sort-select:hover { border-color: var(--gold); }
 .dark .sort-select:focus { border-color: var(--gold); }
 
+/* Client History Modal */
+.dark .modal-overlay { background: rgba(0,0,0,0.7); }
+.dark .client-history-modal { background: #1a1a1a; }
+.dark .client-history-header { border-bottom-color: #333; }
+.dark .client-history-header h3 { color: #e5e7eb; }
+.dark .modal-close { color: #888; }
+.dark .modal-close:hover { background: #333; color: #e5e7eb; }
+.dark .client-history-item { border-color: #333; }
+.dark .client-history-item:hover { border-color: var(--gold); background: rgba(201, 168, 106, 0.06); }
+.dark .client-history-event { color: #e5e7eb; }
+.dark .client-history-date { color: #888; }
+.dark .client-history-total { color: var(--gold); }
+.dark .client-history-empty { color: #888; }
+
 /* Search */
 .dark .search-box { background: #1a1a1a; border-color: #333; }
 .dark .search-input { color: #e5e7eb; background: transparent; }

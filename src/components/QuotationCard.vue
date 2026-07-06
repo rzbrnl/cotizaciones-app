@@ -3,7 +3,9 @@
     <div class="quote-card-body">
       <div class="quote-card-info">
         <div class="quote-card-top">
-          <div class="quote-card-name">{{ quotation.clientName || 'Sin cliente' }}</div>
+          <div class="quote-card-name" @click.stop="emit('client-history', quotation.clientName)">
+            {{ quotation.clientName || 'Sin cliente' }}
+          </div>
           <span class="status-badge" :class="quotation.status || 'borrador'">
             {{ statusLabel }}
           </span>
@@ -64,7 +66,7 @@ const props = defineProps({
   quotation: { type: Object, required: true },
 })
 
-const emit = defineEmits(['edit', 'delete', 'duplicate', 'share', 'request-payment'])
+const emit = defineEmits(['edit', 'delete', 'duplicate', 'share', 'request-payment', 'client-history'])
 
 const statusLabels = {
   borrador: 'Borrador',
@@ -147,6 +149,11 @@ const paymentPercent = computed(() => {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--black);
+  cursor: pointer;
+}
+
+.quote-card-name:hover {
+  color: var(--gold);
 }
 
 .quote-card-venue {

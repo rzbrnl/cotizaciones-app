@@ -146,6 +146,7 @@
             @duplicate="duplicateQuotation"
             @share="openShareModal"
             @request-payment="sendPaymentWhatsApp"
+            @client-history="openClientHistory"
           />
         </div>
 
@@ -165,6 +166,45 @@
       :quotation="shareQuotation"
       @close="shareModalOpen = false"
     />
+
+    <!-- Client History Modal -->
+    <Teleport to="body">
+      <div v-if="clientHistoryOpen" class="modal-overlay" @click.self="clientHistoryOpen = false">
+        <div class="client-history-modal">
+          <div class="client-history-header">
+            <h3>{{ clientHistoryName }}</h3>
+            <button class="modal-close" @click="clientHistoryOpen = false">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="client-history-list">
+            <div
+              v-for="q in clientQuotations"
+              :key="q.id"
+              class="client-history-item"
+              @click="editQuotation(q.id)"
+            >
+              <div class="client-history-info">
+                <div class="client-history-event">{{ q.eventType || 'Sin tipo' }}</div>
+                <div class="client-history-date">{{ q.eventDate || q.date || 'Sin fecha' }}</div>
+              </div>
+              <div class="client-history-right">
+                <span class="status-badge" :class="q.status || 'borrador'">
+                  {{ statusLabels[q.status] || 'Borrador' }}
+                </span>
+                <div class="client-history-total">{{ formatCurrency(getQuotationTotal(q)) }}</div>
+              </div>
+            </div>
+            <div v-if="clientQuotations.length === 0" class="client-history-empty">
+              No hay cotizaciones para este cliente
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </AppLayout>
 </template>
 
@@ -194,6 +234,8 @@ const activeFilter = ref('todos')
 const sortBy = ref('newest')
 const shareModalOpen = ref(false)
 const shareQuotation = ref(null)
+const clientHistoryOpen = ref(false)
+const clientHistoryName = ref('')
 
 const filters = [
   { value: 'todos', label: 'Todos' },
@@ -202,6 +244,33 @@ const filters = [
   { value: 'aprobada', label: 'Aprobada' },
   { value: 'rechazada', label: 'Rechazada' },
 ]
+
+const statusLabels = {
+  borrador: 'Borrador',
+  enviada: 'Enviada',
+  aprobada: 'Aprobada',
+  rechazada: 'Rechazada',
+}
+
+const clientQuotations = computed(() => {
+  if (!clientHistoryName.value) return []
+  return store.savedList.filter(q => q.clientName === clientHistoryName.value)
+})
+
+function getQuotationTotal(q) {
+  let total = 0
+  for (const section of q.sections || []) {
+    for (const item of section.items || []) {
+      total += (item.qty || 0) * (item.unitPrice || 0)
+    }
+  }
+  return total
+}
+
+function openClientHistory(clientName) {
+  clientHistoryName.value = clientName
+  clientHistoryOpen.value = true
+}
 
 const filtered = computed(() => {
   let list = [...store.savedList]
@@ -738,6 +807,120 @@ function duplicateQuotation(id) {
 .dashboard-empty-hint {
   font-size: 0.8rem;
   color: #bbb;
+}
+
+/* Client History Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client-history-modal {
+  background: var(--white);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+}
+
+.client-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+.client-history-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--gray-text);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--gray-light);
+  color: var(--black);
+}
+
+.client-history-list {
+  padding: 16px;
+  max-height: calc(80vh - 80px);
+  overflow-y: auto;
+}
+
+.client-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--gray-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+}
+
+.client-history-item:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 106, 0.04);
+}
+
+.client-history-item:last-child {
+  margin-bottom: 0;
+}
+
+.client-history-info {
+  flex: 1;
+}
+
+.client-history-event {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+
+.client-history-date {
+  font-size: 0.78rem;
+  color: var(--gray-text);
+}
+
+.client-history-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.client-history-total {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.client-history-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray-text);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 700px) {
