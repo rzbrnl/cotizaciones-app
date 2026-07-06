@@ -131,7 +131,7 @@
 
   /* Keyboard shortcuts help - hide on tablet */
   .shortcuts-help {
-    display: none;
+    display: none !important;
   }
 }
 
