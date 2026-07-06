@@ -84,6 +84,23 @@
             </button>
           </div>
         </div>
+
+        <div class="profile-section">
+          <h2>Seguridad</h2>
+          <div class="password-form">
+            <div class="form-field">
+              <label>Nueva contraseña</label>
+              <input v-model="newPassword" type="password" placeholder="Mínimo 6 caracteres" />
+            </div>
+            <div class="form-field">
+              <label>Confirmar contraseña</label>
+              <input v-model="confirmPassword" type="password" placeholder="Repite la contraseña" />
+            </div>
+            <button class="save-payment-btn" @click="handleChangePassword" :disabled="changingPassword">
+              {{ changingPassword ? 'Cambiando...' : 'Cambiar contraseña' }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </AppLayout>
@@ -103,6 +120,9 @@ const savingPayment = ref(false)
 const editingProfile = ref(false)
 const savingProfile = ref(false)
 const editName = ref('')
+const newPassword = ref('')
+const confirmPassword = ref('')
+const changingPassword = ref(false)
 
 const paymentData = reactive({
   bank: '',
@@ -164,6 +184,35 @@ async function savePaymentInfo() {
   await auth.updatePaymentInfo({ ...paymentData })
   savingPayment.value = false
   toast.success('Datos de pago guardados')
+}
+
+async function handleChangePassword() {
+  if (!newPassword.value || !confirmPassword.value) {
+    toast.error('Completa ambos campos')
+    return
+  }
+
+  if (newPassword.value.length < 6) {
+    toast.error('La contraseña debe tener al menos 6 caracteres')
+    return
+  }
+
+  if (newPassword.value !== confirmPassword.value) {
+    toast.error('Las contraseñas no coinciden')
+    return
+  }
+
+  changingPassword.value = true
+  const result = await auth.changePassword(newPassword.value)
+  changingPassword.value = false
+
+  if (result.success) {
+    newPassword.value = ''
+    confirmPassword.value = ''
+    toast.success('Contraseña actualizada')
+  } else {
+    toast.error(result.error || 'Error al cambiar contraseña')
+  }
 }
 </script>
 

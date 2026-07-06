@@ -113,6 +113,12 @@ export const useAuthStore = defineStore('auth', () => {
     profile.value = { ...profile.value, ...data }
   }
 
+  async function changePassword(newPassword) {
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
+    if (error) return { success: false, error: error.message }
+    return { success: true }
+  }
+
   async function logout() {
     await supabase.auth.signOut()
     currentUser.value = null
@@ -145,6 +151,7 @@ export const useAuthStore = defineStore('auth', () => {
     updateLogo,
     updatePaymentInfo,
     updateProfile,
+    changePassword,
     logout,
     getAllUsers,
   }
