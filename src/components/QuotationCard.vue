@@ -113,6 +113,7 @@ const paymentPercent = computed(() => {
   background: #f7f7f7;
   border-radius: 12px;
   padding: 20px;
+  padding-bottom: 12px;
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
@@ -253,8 +254,8 @@ const paymentPercent = computed(() => {
 .quote-card-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 6px;
-  margin-top: 10px;
+  gap: 4px;
+  margin-top: 8px;
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -266,7 +267,7 @@ const paymentPercent = computed(() => {
 .quote-action {
   background: none;
   border: none;
-  padding: 4px;
+  padding: 6px;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
