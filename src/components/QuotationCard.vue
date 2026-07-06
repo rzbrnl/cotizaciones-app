@@ -25,6 +25,17 @@
       </div>
     </div>
     <div class="quote-card-actions">
+      <button
+        v-if="quotation.status === 'aprobada' || quotation.status === 'enviada'"
+        class="quote-action request-payment"
+        @click.stop="emit('request-payment', quotation)"
+        title="Solicitar pago"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="12" y1="1" x2="12" y2="23"/>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+      </button>
       <button class="quote-action share" @click.stop="emit('share', quotation)" title="Compartir">
         <HIcon name="share" :size="18" />
       </button>
@@ -53,7 +64,7 @@ const props = defineProps({
   quotation: { type: Object, required: true },
 })
 
-const emit = defineEmits(['edit', 'delete', 'duplicate', 'share'])
+const emit = defineEmits(['edit', 'delete', 'duplicate', 'share', 'request-payment'])
 
 const statusLabels = {
   borrador: 'Borrador',
@@ -271,6 +282,15 @@ const paymentPercent = computed(() => {
 .quote-action.share:hover {
   color: var(--black);
   background: rgba(0,0,0,0.06);
+}
+
+.quote-action.request-payment {
+  color: #25D366;
+}
+
+.quote-action.request-payment:hover {
+  color: #1da851;
+  background: rgba(37, 211, 102, 0.1);
 }
 
 .quote-action.duplicate {

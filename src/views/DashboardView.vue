@@ -118,6 +118,7 @@
             @delete="deleteQuotation"
             @duplicate="duplicateQuotation"
             @share="openShareModal"
+            @request-payment="sendPaymentWhatsApp"
           />
         </div>
 
@@ -141,6 +142,7 @@ import { useRouter } from 'vue-router'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
 import { useConfirmStore } from '../stores/confirm'
+import { useAuthStore } from '../stores/auth'
 import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
@@ -151,6 +153,7 @@ import HIcon from '../components/HIcon.vue'
 const store = useQuotationStore()
 const toast = useToastStore()
 const confirmStore = useConfirmStore()
+const auth = useAuthStore()
 const router = useRouter()
 
 const loading = ref(true)
@@ -230,6 +233,53 @@ function editQuotation(id) {
 function openShareModal(quotation) {
   shareQuotation.value = quotation
   shareModalOpen.value = true
+}
+
+async function sendPaymentWhatsApp(quotation) {
+  const pi = auth.paymentInfo
+  if (!pi || (!pi.bank && !pi.clabe && !pi.paypal)) {
+    toast.error('Configura tus datos de pago en tu perfil')
+    return
+  }
+
+  const q = quotation
+  let total = 0
+  for (const section of q.sections || []) {
+    for (const item of section.items || []) {
+      total += (item.qty || 0) * (item.unitPrice || 0)
+    }
+  }
+
+  const userName = auth.profile?.full_name || ''
+
+  let message = `✨ *Cotización aprobada*\n\n`
+  message += `Hola ${q.clientName || ''},\n\n`
+  message += `Tu cotización ha sido aprobada. A continuación los datos para realizar el depósito:\n\n`
+  message += `📅 *Evento:* ${q.eventType || '—'}\n`
+  message += `📍 *Venue:* ${q.venue || '—'}\n`
+  message += `📆 *Fecha:* ${q.eventDate || '—'}\n`
+  message += `💰 *Total:* $${total.toLocaleString('es-MX')} MXN\n\n`
+  message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`
+  message += `🏦 *Datos de pago:*\n\n`
+
+  if (pi.bank) message += `*Banco:* ${pi.bank}\n`
+  if (pi.clabe) message += `*CLABE:* ${pi.clabe}\n`
+  if (pi.account) message += `*Cuenta:* ${pi.account}\n`
+  if (pi.holder) message += `*Titular:* ${pi.holder}\n`
+  if (pi.paypal) message += `*PayPal:* ${pi.paypal}\n`
+
+  message += `\nUna vez realizado el pago, por favor envíame el comprobante 🙏\n\n`
+  message += `Saludos,\n${userName}`
+
+  const encoded = encodeURIComponent(message)
+  const clientPhone = q.clientPhone?.replace(/\D/g, '')
+
+  if (clientPhone) {
+    window.open(`https://api.whatsapp.com/send?phone=52${clientPhone}&text=${encoded}`, '_blank')
+  } else {
+    await navigator.clipboard.writeText(message)
+    toast.info('No se encontró teléfono. Mensaje copiado al portapapeles.')
+  }
 }
 
 async function deleteQuotation(id) {
