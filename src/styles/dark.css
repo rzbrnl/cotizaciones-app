@@ -313,5 +313,6 @@
 .dark .item-card { background: #252525; }
 .dark .item-card .cell-input { background: #1a1a1a; border-color: #3a3a3a; color: #e5e7eb; }
 .dark .item-card .cell-input::placeholder { color: #555; }
+.dark .item-card .cell-subtotal { color: var(--gold); }
 .dark .item-remove-mobile { color: #555; }
 .dark .item-remove-mobile:hover { color: #f87171; background: rgba(248,113,113,0.1); }
