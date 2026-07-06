@@ -269,19 +269,9 @@
 
   .filter-tabs {
     display: flex;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 8px;
-    margin: 0 -16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    flex-wrap: wrap;
     gap: 6px;
-  }
-
-  .filter-tabs::-webkit-scrollbar {
-    display: none;
+    padding-bottom: 4px;
   }
 
   .filter-tab {
