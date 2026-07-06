@@ -140,7 +140,53 @@ async function handleApprove() {
   quotation.value.status = 'aprobada'
   await updateStatus('aprobada')
   await sendNotification('aprobada')
+  await sendPaymentWhatsApp()
   toast.success('Cotización aprobada')
+}
+
+async function sendPaymentWhatsApp() {
+  try {
+    // Fetch owner's payment info
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('payment_info, full_name')
+      .eq('id', quotation.value.ownerId)
+      .single()
+
+    if (!profile?.payment_info) return
+
+    const pi = profile.payment_info
+    const q = quotation.value
+    const total = allItems.value.reduce((sum, item) => sum + (item.qty || 0) * (item.unitPrice || 0), 0)
+
+    let message = `✅ *Cotización aprobada*\n\n`
+    message += `Cliente: ${q.clientName || '—'}\n`
+    message += `Evento: ${q.eventType || '—'}\n`
+    message += `Fecha: ${q.eventDate || '—'}\n`
+    message += `Total: $${total.toLocaleString('es-MX')} MXN\n\n`
+    message += `*Datos de pago:*\n`
+
+    if (pi.bank) message += `Banco: ${pi.bank}\n`
+    if (pi.clabe) message += `CLABE: ${pi.clabe}\n`
+    if (pi.account) message += `Cuenta: ${pi.account}\n`
+    if (pi.holder) message += `Titular: ${pi.holder}\n`
+    if (pi.paypal) message += `PayPal: ${pi.paypal}\n`
+
+    message += `\nUna vez realizado el pago, favor de comprobarlo.`
+
+    const encoded = encodeURIComponent(message)
+    const clientPhone = q.clientPhone?.replace(/\D/g, '')
+
+    if (clientPhone) {
+      window.open(`https://wa.me/52${clientPhone}?text=${encoded}`, '_blank')
+    } else {
+      // Copy to clipboard if no phone
+      await navigator.clipboard.writeText(message)
+      toast.info('Mensaje copiado. Pégalo en WhatsApp.')
+    }
+  } catch (err) {
+    console.error('WhatsApp error:', err)
+  }
 }
 
 async function handleReject() {

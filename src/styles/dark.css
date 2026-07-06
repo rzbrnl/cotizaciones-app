@@ -173,6 +173,14 @@
 .dark .theme-toggle { color: #666; }
 .dark .theme-toggle:hover { color: #aaa; background: rgba(255,255,255,0.05); }
 
+/* Profile payment form */
+.dark .section-hint { color: #888; }
+.dark .form-field label { color: #888; }
+.dark .form-field input { background: #252525; border-color: #3a3a3a; color: #e5e7eb; }
+.dark .form-field input::placeholder { color: #555; }
+.dark .save-payment-btn { background: #e5e7eb; color: #1a1a1a; }
+.dark .save-payment-btn:hover { background: #ccc; }
+
 /* Share modal */
 .dark .modal-overlay { background: rgba(0,0,0,0.7); }
 .dark .share-modal { background: #1a1a1a; }

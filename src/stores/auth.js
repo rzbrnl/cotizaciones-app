@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isLoggedIn = computed(() => !!currentUser.value)
   const userLogo = computed(() => profile.value?.logo_url || '')
+  const paymentInfo = computed(() => profile.value?.payment_info || {})
 
   async function init() {
     const { data: { session } } = await supabase.auth.getSession()
@@ -90,6 +91,17 @@ export const useAuthStore = defineStore('auth', () => {
     profile.value = { ...profile.value, logo_url: dataUrl }
   }
 
+  async function updatePaymentInfo(info) {
+    if (!currentUser.value) return
+
+    await supabase
+      .from('profiles')
+      .update({ payment_info: info })
+      .eq('id', currentUser.value.id)
+
+    profile.value = { ...profile.value, payment_info: info }
+  }
+
   async function logout() {
     await supabase.auth.signOut()
     currentUser.value = null
@@ -115,10 +127,12 @@ export const useAuthStore = defineStore('auth', () => {
     loading,
     isLoggedIn,
     userLogo,
+    paymentInfo,
     init,
     login,
     register,
     updateLogo,
+    updatePaymentInfo,
     logout,
     getAllUsers,
   }
