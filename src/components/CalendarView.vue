@@ -236,6 +236,7 @@ function formatEventDate(dateStr) {
 .cal-day-number {
   font-size: 0.8rem;
   font-weight: 500;
+  font-family: 'Google Sans Code', monospace;
   color: var(--black);
   display: block;
   margin-bottom: 4px;

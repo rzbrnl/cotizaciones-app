@@ -65,11 +65,11 @@
             </div>
             <div class="form-field">
               <label>CLABE</label>
-              <input v-model="paymentData.clabe" type="text" placeholder="18 dígitos" maxlength="18" />
+              <input v-model="paymentData.clabe" type="text" placeholder="18 dígitos" maxlength="18" class="mono-input" />
             </div>
             <div class="form-field">
               <label>Número de cuenta</label>
-              <input v-model="paymentData.account" type="text" placeholder="Número de cuenta" />
+              <input v-model="paymentData.account" type="text" placeholder="Número de cuenta" class="mono-input" />
             </div>
             <div class="form-field">
               <label>Nombre del titular</label>
@@ -411,6 +411,11 @@ async function savePaymentInfo() {
 
 .form-field input::placeholder {
   color: #bbb;
+}
+
+.mono-input {
+  font-family: 'Google Sans Code', monospace !important;
+  letter-spacing: 0.5px;
 }
 
 .save-payment-btn {

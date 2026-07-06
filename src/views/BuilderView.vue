@@ -1195,7 +1195,7 @@ function printPage() {
   border-radius: 4px;
   padding: 2px 6px;
   font-size: 0.7rem;
-  font-family: monospace;
+  font-family: 'Google Sans Code', monospace;
 }
 
 @media print {

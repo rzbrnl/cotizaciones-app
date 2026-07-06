@@ -57,10 +57,11 @@ const logo = computed(() => auth.userLogo)
 }
 
 .header-date {
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'Google Sans Code', monospace;
   font-size: 0.75rem;
   color: rgba(255,255,255,0.5);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   padding: 2px 6px;
 }
 
