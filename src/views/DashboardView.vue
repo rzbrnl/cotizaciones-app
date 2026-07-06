@@ -428,6 +428,7 @@ function duplicateQuotation(id) {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 24px;
+  overflow: hidden;
 }
 
 /* Reminders */

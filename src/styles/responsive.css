@@ -276,7 +276,6 @@
 
   .filter-tab {
     white-space: nowrap;
-    flex-shrink: 0;
     padding: 5px 8px;
     font-size: 0.7rem;
     gap: 4px;
