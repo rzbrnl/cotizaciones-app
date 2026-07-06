@@ -281,11 +281,11 @@
   }
 
   .items-table-desktop {
-    display: none;
+    display: none !important;
   }
 
   .items-mobile {
-    display: block;
+    display: block !important;
   }
 
   /* Metrics grid - 2 columns on mobile */
