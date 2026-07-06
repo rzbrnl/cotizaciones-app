@@ -256,4 +256,47 @@ async function handleLogout() {
     display: flex;
   }
 }
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 12px;
+  }
+
+  .topbar-brand {
+    font-size: 0.85rem;
+    letter-spacing: 0.1px;
+    max-width: none;
+    overflow: visible;
+  }
+
+  .topbar-nav {
+    gap: 6px;
+  }
+
+  .status-trigger {
+    padding: 4px 6px;
+    font-size: 0.65rem;
+    gap: 2px;
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .status-text {
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status-trigger svg {
+    width: 8px;
+    height: 8px;
+  }
+
+  .topbar-icon-btn {
+    padding: 6px;
+  }
+}
 </style>
