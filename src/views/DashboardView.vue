@@ -104,7 +104,8 @@
             />
           </div>
           <div class="filter-row">
-            <div class="filter-tabs">
+            <!-- Desktop: pill tabs -->
+            <div class="filter-tabs-desktop">
               <button
                 v-for="f in filters"
                 :key="f.value"
@@ -117,6 +118,12 @@
                 <span class="filter-count">{{ getCount(f.value) }}</span>
               </button>
             </div>
+            <!-- Mobile: dropdown -->
+            <select v-model="activeFilter" class="filter-select-mobile">
+              <option v-for="f in filters" :key="f.value" :value="f.value">
+                {{ f.label }} ({{ getCount(f.value) }})
+              </option>
+            </select>
             <select v-model="sortBy" class="sort-select">
               <option value="newest">Más reciente</option>
               <option value="oldest">Más antiguo</option>
@@ -772,6 +779,16 @@ function duplicateQuotation(id) {
 
 .filter-tab.active .filter-count {
   background: rgba(255,255,255,0.2);
+}
+
+.filter-tabs-desktop {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-select-mobile {
+  display: none;
 }
 
 /* Grid */
