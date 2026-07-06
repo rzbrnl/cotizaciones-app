@@ -263,20 +263,20 @@ async function handleLogout() {
   }
 
   .topbar-brand {
-    font-size: 0.85rem;
-    letter-spacing: 0.1px;
-    max-width: none;
-    overflow: visible;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.1px !important;
+    max-width: none !important;
+    overflow: visible !important;
   }
 
   .topbar-nav {
-    gap: 6px;
+    gap: 6px !important;
   }
 
   .status-trigger {
-    padding: 4px 6px;
-    font-size: 0.65rem;
-    gap: 2px;
+    padding: 4px 6px !important;
+    font-size: 0.65rem !important;
+    gap: 2px !important;
   }
 
   .status-dot {
