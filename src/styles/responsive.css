@@ -273,7 +273,13 @@
   .filter-tab {
     white-space: nowrap;
     flex-shrink: 0;
-    padding: 6px 12px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .filter-count {
+    font-size: 0.65rem;
+    padding: 1px 5px;
   }
 
   .sort-select {
@@ -332,9 +338,34 @@
   }
 
   /* Status dropdown mobile */
+  .status-dropdown {
+    position: relative;
+  }
+
   .status-trigger {
-    padding: 5px 10px;
-    font-size: 0.72rem;
+    padding: 5px 8px;
+    font-size: 0.68rem;
+    gap: 4px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .status-text {
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status-menu {
+    min-width: 140px;
+  }
+
+  .status-option {
+    padding: 8px 12px;
+    font-size: 0.78rem;
   }
 
   .topbar-icon-btn {
