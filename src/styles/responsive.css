@@ -152,13 +152,14 @@
   }
 
   .topbar-brand {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1px;
     max-width: none;
     overflow: visible;
   }
 
   .topbar-nav {
-    gap: 4px;
+    gap: 6px;
   }
 
   .topbar-link {
@@ -353,7 +354,7 @@
   .status-trigger {
     padding: 4px 6px;
     font-size: 0.65rem;
-    gap: 3px;
+    gap: 2px;
     border-radius: 6px;
   }
 
