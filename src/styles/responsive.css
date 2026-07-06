@@ -331,32 +331,14 @@
     width: 100%;
   }
 
-  /* Share buttons in builder */
-  .topbar-share-btn {
-    padding: 6px 10px;
-    font-size: 0.72rem;
-  }
-
-  .topbar-share-btn span {
-    display: none;
-  }
-
-  .topbar-whatsapp-btn {
-    padding: 6px 8px;
-    font-size: 0.72rem;
-  }
-
-  .topbar-whatsapp-btn span {
-    display: none;
-  }
-
+  /* Status dropdown mobile */
   .status-trigger {
     padding: 5px 10px;
     font-size: 0.72rem;
   }
 
   .topbar-icon-btn {
-    padding: 4px;
+    padding: 6px;
   }
 
   /* Auth */
