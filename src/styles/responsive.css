@@ -139,11 +139,15 @@
 @media (max-width: 480px) {
   /* Topbar */
   .topbar-brand {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .topbar-nav {
-    gap: 6px;
+    gap: 4px;
   }
 
   .topbar-link {
@@ -329,8 +333,8 @@
 
   /* Share buttons in builder */
   .topbar-share-btn {
-    padding: 8px 12px;
-    font-size: 0.75rem;
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 
   .topbar-share-btn span {
@@ -338,12 +342,21 @@
   }
 
   .topbar-whatsapp-btn {
-    padding: 8px 10px;
-    font-size: 0.75rem;
+    padding: 6px 8px;
+    font-size: 0.72rem;
   }
 
   .topbar-whatsapp-btn span {
     display: none;
+  }
+
+  .status-trigger {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .topbar-icon-btn {
+    padding: 4px;
   }
 
   /* Auth */
