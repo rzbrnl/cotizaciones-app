@@ -57,7 +57,7 @@
         <span>Compartir</span>
       </button>
       <button
-        v-if="store.active.status === 'aprobada' || store.active.status === 'enviada'"
+        v-if="store.active.status === 'aprobada'"
         class="topbar-whatsapp-btn"
         @click="sendWhatsApp"
         title="Solicitar pago por WhatsApp"

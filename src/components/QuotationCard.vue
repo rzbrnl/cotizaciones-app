@@ -26,7 +26,7 @@
     </div>
     <div class="quote-card-actions">
       <button
-        v-if="quotation.status === 'aprobada' || quotation.status === 'enviada'"
+        v-if="quotation.status === 'aprobada'"
         class="quote-action request-payment"
         @click.stop="emit('request-payment', quotation)"
         title="Solicitar pago"
