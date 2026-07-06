@@ -142,7 +142,12 @@
         </div>
 
         <div v-else class="dashboard-empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
           <p>No se encontraron cotizaciones</p>
+          <span class="dashboard-empty-hint">Prueba con otros filtros o términos de búsqueda</span>
         </div>
       </template>
     </div>
@@ -661,6 +666,20 @@ function duplicateQuotation(id) {
   padding: 48px 20px;
   color: var(--gray-text);
   font-size: 0.9rem;
+}
+
+.dashboard-empty svg {
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.dashboard-empty p {
+  margin-bottom: 4px;
+}
+
+.dashboard-empty-hint {
+  font-size: 0.8rem;
+  color: #bbb;
 }
 
 @media (max-width: 700px) {

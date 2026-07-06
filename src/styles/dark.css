@@ -98,6 +98,10 @@
 .dark .shortcuts-list { color: #888; }
 .dark .shortcuts-list kbd { background: #252525; border-color: #3a3a3a; color: #aaa; }
 
+/* Dashboard empty search */
+.dark .dashboard-empty svg { color: #444; }
+.dark .dashboard-empty-hint { color: #555; }
+
 /* Search */
 .dark .search-box { background: #1a1a1a; border-color: #333; }
 .dark .search-input { color: #e5e7eb; background: transparent; }
