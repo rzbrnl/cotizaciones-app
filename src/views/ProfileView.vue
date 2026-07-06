@@ -79,10 +79,12 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
+import { useToastStore } from '../stores/toast'
 import AppLayout from '../components/AppLayout.vue'
 import HIcon from '../components/HIcon.vue'
 
 const auth = useAuthStore()
+const toast = useToastStore()
 const fileInput = ref(null)
 const savingPayment = ref(false)
 
@@ -108,7 +110,7 @@ async function handleLogoUpload(e) {
   const file = e.target.files[0]
   if (!file) return
   if (file.size > 2 * 1024 * 1024) {
-    alert('El logo debe ser menor a 2MB')
+    toast.error('El logo debe ser menor a 2MB')
     return
   }
   const reader = new FileReader()
@@ -123,7 +125,7 @@ async function savePaymentInfo() {
   savingPayment.value = true
   await auth.updatePaymentInfo({ ...paymentData })
   savingPayment.value = false
-  alert('Datos de pago guardados')
+  toast.success('Datos de pago guardados')
 }
 </script>
 
