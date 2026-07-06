@@ -301,16 +301,17 @@
 .dark .payment-summary-value { color: #e5e7eb; }
 .dark .btn-add-payment { background: #e5e7eb; color: #1a1a1a; }
 .dark .btn-add-payment:hover:not(:disabled) { background: #ccc; }
+.dark .payment-history { padding-top: 14px; }
 .dark .payment-history-header { color: #888; }
 .dark .payment-item { border-bottom-color: #333; }
 .dark .payment-item-amount { color: #4ade80; }
 .dark .payment-item-note { color: #888; }
 .dark .payment-item-date { color: #888; }
-
-/* Payment progress in cards */
-.dark .payment-progress-bar { background: #333; }
-.dark .payment-progress-fill { background: #4ade80; }
-.dark .payment-progress-text { color: #4ade80; }
-
-/* Payment complete */
 .dark .payment-complete { background: #14532d; color: #4ade80; }
+
+/* Mobile items dark mode */
+.dark .item-card { background: #252525; }
+.dark .item-card .cell-input { background: #1a1a1a; border-color: #3a3a3a; color: #e5e7eb; }
+.dark .item-card .cell-input::placeholder { color: #555; }
+.dark .item-remove-mobile { color: #555; }
+.dark .item-remove-mobile:hover { color: #f87171; background: rgba(248,113,113,0.1); }
