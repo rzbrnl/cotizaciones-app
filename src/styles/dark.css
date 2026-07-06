@@ -181,6 +181,15 @@
 .dark .save-payment-btn { background: #e5e7eb; color: #1a1a1a; }
 .dark .save-payment-btn:hover { background: #ccc; }
 
+/* Profile edit */
+.dark .edit-btn { border-color: #3a3a3a; color: #888; }
+.dark .edit-btn:hover { border-color: var(--gold); color: #e5e7eb; }
+.dark .inline-input { background: #252525; border-color: var(--gold); color: #e5e7eb; }
+.dark .save-btn { background: #e5e7eb; color: #1a1a1a; }
+.dark .save-btn:hover:not(:disabled) { background: #ccc; }
+.dark .cancel-btn { border-color: #3a3a3a; color: #888; }
+.dark .cancel-btn:hover { border-color: #e5e7eb; color: #e5e7eb; }
+
 /* Share modal */
 .dark .modal-overlay { background: rgba(0,0,0,0.7); }
 .dark .share-modal { background: #1a1a1a; }

@@ -25,11 +25,18 @@
         </div>
 
         <div class="profile-section">
-          <h2>Información de la cuenta</h2>
+          <div class="section-header">
+            <h2>Información de la cuenta</h2>
+            <button v-if="!editingProfile" class="edit-btn" @click="startEditProfile">
+              <HIcon name="edit" :size="16" />
+              Editar
+            </button>
+          </div>
           <div class="account-card">
             <div class="account-row">
               <span class="account-label">Nombre:</span>
-              <span class="account-value">{{ auth.profile?.full_name || '—' }}</span>
+              <input v-if="editingProfile" v-model="editName" type="text" class="inline-input" />
+              <span v-else class="account-value">{{ auth.profile?.full_name || '—' }}</span>
             </div>
             <div class="account-row">
               <span class="account-label">Usuario:</span>
@@ -39,6 +46,12 @@
               <span class="account-label">Rol:</span>
               <span class="account-value">{{ auth.profile?.role === 'admin' ? 'Administrador' : 'Usuario' }}</span>
             </div>
+          </div>
+          <div v-if="editingProfile" class="edit-actions">
+            <button class="save-btn" @click="saveProfile" :disabled="savingProfile">
+              {{ savingProfile ? 'Guardando...' : 'Guardar' }}
+            </button>
+            <button class="cancel-btn" @click="cancelEditProfile">Cancelar</button>
           </div>
         </div>
 
@@ -87,6 +100,9 @@ const auth = useAuthStore()
 const toast = useToastStore()
 const fileInput = ref(null)
 const savingPayment = ref(false)
+const editingProfile = ref(false)
+const savingProfile = ref(false)
+const editName = ref('')
 
 const paymentData = reactive({
   bank: '',
@@ -101,6 +117,28 @@ onMounted(() => {
     Object.assign(paymentData, auth.paymentInfo)
   }
 })
+
+function startEditProfile() {
+  editName.value = auth.profile?.full_name || ''
+  editingProfile.value = true
+}
+
+function cancelEditProfile() {
+  editingProfile.value = false
+  editName.value = ''
+}
+
+async function saveProfile() {
+  if (!editName.value.trim()) {
+    toast.error('El nombre no puede estar vacío')
+    return
+  }
+  savingProfile.value = true
+  await auth.updateProfile({ full_name: editName.value.trim() })
+  savingProfile.value = false
+  editingProfile.value = false
+  toast.success('Perfil actualizado')
+}
 
 function triggerUpload() {
   fileInput.value.click()
@@ -163,6 +201,37 @@ async function savePaymentInfo() {
   font-weight: 600;
   color: var(--black);
   margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--gray-border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--gray-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  border-color: var(--gold);
+  color: var(--black);
 }
 
 .logo-upload {
@@ -239,6 +308,63 @@ async function savePaymentInfo() {
 .account-value {
   font-size: 0.85rem;
   font-weight: 500;
+  color: var(--black);
+}
+
+.inline-input {
+  padding: 8px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--black);
+  outline: none;
+  background: var(--white);
+  width: 200px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.save-btn {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Google Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: #4a4a4a;
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background: none;
+  border: 1px solid var(--gray-border);
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--gray-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  border-color: var(--black);
   color: var(--black);
 }
 
