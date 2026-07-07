@@ -1272,6 +1272,12 @@ function printPage() {
   font-family: 'Google Sans Code', monospace;
 }
 
+@media (max-width: 480px) {
+  .cell-input--right {
+    width: 60px !important;
+  }
+}
+
 @media print {
   .topbar,
   .btn-add-concept,
