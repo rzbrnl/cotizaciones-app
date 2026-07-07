@@ -15,10 +15,18 @@
         :key="preset.value"
         class="preset-btn"
         :class="{ active: selectedPreset === preset.value }"
+        :disabled="presetLocked"
         @click="selectPreset(preset.value)"
       >
         {{ preset.label }}
       </button>
+      <span v-if="presetLocked" class="preset-locked">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Fijo
+      </span>
     </div>
 
     <!-- Stages list -->
@@ -93,6 +101,14 @@ const stages = computed(() => {
     return props.quotation.paymentStages
   }
   return generateStages(selectedPreset.value)
+})
+
+const hasPaidStages = computed(() => {
+  return stages.value.some(s => s.status === 'paid')
+})
+
+const presetLocked = computed(() => {
+  return hasPaidStages.value || (props.quotation.paymentStages && props.quotation.paymentStages.length > 0)
 })
 
 function generateStages(preset) {
@@ -171,6 +187,7 @@ function formatDate(dateStr) {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+  align-items: center;
 }
 
 .preset-btn {
@@ -185,7 +202,7 @@ function formatDate(dateStr) {
   transition: all 0.2s;
 }
 
-.preset-btn:hover {
+.preset-btn:hover:not(:disabled) {
   border-color: var(--gold);
 }
 
@@ -193,6 +210,19 @@ function formatDate(dateStr) {
   background: var(--black);
   border-color: var(--black);
   color: var(--white);
+}
+
+.preset-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preset-locked {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: var(--gray-text);
 }
 
 .stages-list {
