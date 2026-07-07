@@ -223,6 +223,10 @@
 .dark .hero-subtitle { color: #888; }
 .dark .hero-card { background: #1a1a1a; }
 .dark .hero-card-header { background: #252525; }
+.dark .hero-card-body { background: #1a1a1a; }
+.dark .hero-card-row span:first-child { color: #e5e7eb; }
+.dark .btn-secondary { border-color: #444; color: #e5e7eb; }
+.dark .btn-secondary:hover { border-color: #e5e7eb; }
 .dark .features { background: #111; }
 .dark .feature-card { background: #1a1a1a; }
 .dark .feature-card h3 { color: #e5e7eb; }
