@@ -375,6 +375,7 @@ async function sendPaymentWhatsApp(quotation) {
   }
 
   const userName = auth.profile?.full_name || ''
+  const stages = q.paymentStages || []
 
   let message = `✨ *Cotización aprobada*\n\n`
   message += `Hola ${q.clientName || ''},\n\n`
@@ -383,6 +384,18 @@ async function sendPaymentWhatsApp(quotation) {
   message += `📍 *Venue:* ${q.venue || '—'}\n`
   message += `📆 *Fecha:* ${q.eventDate || '—'}\n`
   message += `💰 *Total:* $${total.toLocaleString('es-MX')} MXN\n\n`
+
+  // Payment stages
+  if (stages.length > 0) {
+    message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`
+    message += `📋 *Cronograma de pago:*\n\n`
+    stages.forEach((stage, index) => {
+      const status = stage.status === 'paid' ? '✓ Pagado' : '○ Pendiente'
+      message += `${index + 1}. ${stage.label} (${stage.percent}%) - $${stage.amount.toLocaleString('es-MX')} - ${status}\n`
+    })
+    message += `\n`
+  }
+
   message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`
   message += `🏦 *Datos de pago:*\n\n`
 
@@ -391,6 +404,12 @@ async function sendPaymentWhatsApp(quotation) {
   if (pi.account) message += `*Cuenta:* ${pi.account}\n`
   if (pi.holder) message += `*Titular:* ${pi.holder}\n`
   if (pi.paypal) message += `*PayPal:* ${pi.paypal}\n`
+
+  // Find first unpaid stage
+  const nextStage = stages.find(s => s.status !== 'paid')
+  if (nextStage) {
+    message += `\n📝 *Próximo pago:* ${nextStage.label} - $${nextStage.amount.toLocaleString('es-MX')}\n`
+  }
 
   message += `\nUna vez realizado el pago, por favor envíame el comprobante 🙏\n\n`
   message += `Saludos,\n${userName}`
