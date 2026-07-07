@@ -119,6 +119,9 @@ async function handleRegister() {
 
 .auth-header {
   padding: 16px 24px;
+}
+
+.header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;

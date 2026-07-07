@@ -238,6 +238,7 @@
 .dark .section-header h2 { color: #e5e7eb; }
 .dark .section-header p { color: #888; }
 .dark .auth-header { background: transparent; }
+.dark .header-content { background: transparent; }
 .dark .header-logo { color: #e5e7eb; }
 .dark .header-link { color: #888; }
 .dark .header-link:hover { color: #e5e7eb; }
