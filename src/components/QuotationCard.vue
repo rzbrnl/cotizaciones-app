@@ -18,12 +18,12 @@
       </div>
       <div class="quote-card-price">{{ formatCurrency(total) }}</div>
     </div>
-    <div v-if="paymentBadge && paymentsTotal > 0" class="quote-card-payment">
+    <div v-if="paymentBadge && totalStages > 0" class="quote-card-payment">
       <div class="payment-progress-bar">
         <div class="payment-progress-fill" :style="{ width: paymentPercent + '%' }"></div>
       </div>
       <div class="payment-progress-text">
-        {{ formatCurrency(paymentsTotal) }} de {{ formatCurrency(total) }}
+        {{ paidStages }}/{{ totalStages }} etapas · {{ formatCurrency(paymentsTotal) }} de {{ formatCurrency(total) }}
       </div>
     </div>
     <div class="quote-card-actions">
@@ -101,7 +101,19 @@ const total = computed(() => {
 })
 
 const paymentsTotal = computed(() => {
-  return (props.quotation.payments || []).reduce((sum, p) => sum + (p.amount || 0), 0)
+  const stages = props.quotation.paymentStages || []
+  return stages
+    .filter(s => s.status === 'paid')
+    .reduce((sum, s) => sum + (s.amount || 0), 0)
+})
+
+const paidStages = computed(() => {
+  const stages = props.quotation.paymentStages || []
+  return stages.filter(s => s.status === 'paid').length
+})
+
+const totalStages = computed(() => {
+  return (props.quotation.paymentStages || []).length
 })
 
 const paymentPercent = computed(() => {
