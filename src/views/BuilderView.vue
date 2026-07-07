@@ -588,17 +588,19 @@ function printPage() {
 
 .th-concept {
   width: 40%;
+  padding-right: 16px;
 }
 .th-qty {
   width: 16%;
   text-align: center;
 }
 .th-price {
-  width: 18%;
+  width: 20%;
   text-align: right;
+  padding-right: 8px;
 }
 .th-subtotal {
-  width: 18%;
+  width: 16%;
   text-align: right;
 }
 .th-actions {
@@ -644,14 +646,19 @@ function printPage() {
 
 .cell-input--right {
   text-align: right;
-  width: 90px;
+  width: 100%;
 }
 
 .cell-center {
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .cell-right {
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .cell-currency {
