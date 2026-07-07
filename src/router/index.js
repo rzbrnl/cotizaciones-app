@@ -62,7 +62,7 @@ router.beforeEach(async (to, from, next) => {
       .single()
 
     if (data?.role !== 'admin') {
-      next('/')
+      next('/dashboard')
       return
     }
   }
