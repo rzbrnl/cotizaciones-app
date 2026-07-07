@@ -65,7 +65,7 @@ async function handleLogin() {
   const result = await auth.login(email.value, password.value)
   loading.value = false
   if (result.success) {
-    router.push('/')
+    router.push('/dashboard')
   } else {
     error.value = result.error
   }

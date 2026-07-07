@@ -92,7 +92,7 @@ async function handleRegister() {
 
   if (result.success) {
     success.value = 'Cuenta creada. Revisa tu email para confirmar tu cuenta.'
-    setTimeout(() => router.push('/'), 2000)
+    setTimeout(() => router.push('/dashboard'), 2000)
   } else {
     error.value = result.error
   }
