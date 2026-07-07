@@ -108,7 +108,7 @@ const hasPaidStages = computed(() => {
 })
 
 const presetLocked = computed(() => {
-  return hasPaidStages.value || (props.quotation.paymentStages && props.quotation.paymentStages.length > 0)
+  return hasPaidStages.value
 })
 
 function generateStages(preset) {
@@ -139,8 +139,10 @@ function generateStages(preset) {
 }
 
 function selectPreset(preset) {
+  if (presetLocked.value) return
   selectedPreset.value = preset
-  emit('update:stages', generateStages(preset))
+  const newStages = generateStages(preset)
+  emit('update:stages', newStages)
 }
 
 function markAsPaid(stageId) {

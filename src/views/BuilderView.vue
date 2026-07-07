@@ -651,14 +651,9 @@ function printPage() {
 
 .cell-center {
   text-align: center;
-  display: flex;
-  justify-content: center;
 }
 .cell-right {
   text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 
 .cell-currency {
@@ -916,6 +911,11 @@ function printPage() {
 /* Mobile items */
 .items-mobile {
   display: none;
+}
+
+.items-table-desktop {
+  display: table;
+  width: 100%;
 }
 
 .item-card {
