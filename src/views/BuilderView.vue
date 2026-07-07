@@ -574,6 +574,7 @@ function printPage() {
 .items-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .items-table thead th {
@@ -622,6 +623,32 @@ function printPage() {
 .item-row td {
   padding: 10px 0;
   vertical-align: middle;
+}
+
+.item-row td:nth-child(1) {
+  width: 40%;
+  padding-right: 12px;
+}
+
+.item-row td:nth-child(2) {
+  width: 16%;
+  text-align: center;
+}
+
+.item-row td:nth-child(3) {
+  width: 20%;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.item-row td:nth-child(4) {
+  width: 16%;
+  text-align: right;
+}
+
+.item-row td:nth-child(5) {
+  width: 8%;
+  text-align: center;
 }
 
 .cell-input {
