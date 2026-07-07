@@ -248,10 +248,14 @@ function formatDate(dateStr) {
 .stage-meta {
   font-size: 0.75rem;
   color: var(--gray-text);
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .stage-paid-date {
   color: #16a34a;
+  font-weight: 500;
 }
 
 .stage-right {
@@ -268,18 +272,18 @@ function formatDate(dateStr) {
 
 .stage-mark-btn {
   padding: 6px 12px;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--gray-border);
   border-radius: 6px;
   background: none;
   font-size: 0.75rem;
   font-family: 'Google Sans', sans-serif;
-  color: var(--gold);
+  color: var(--black);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .stage-mark-btn:hover {
-  background: var(--gold);
+  background: var(--black);
   color: var(--white);
 }
 

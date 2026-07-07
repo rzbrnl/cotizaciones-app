@@ -68,25 +68,6 @@
         </div>
         <span v-else class="form-display">{{ data.eventDate || "—" }}</span>
       </div>
-    </div>
-
-    <div class="form-row form-row--two">
-      <div class="form-field">
-        <label class="form-label">Venue del evento</label>
-        <div class="input-wrap">
-          <input
-            v-if="!readonly"
-            type="text"
-            class="form-input"
-            placeholder="Lugar del evento"
-            :value="data.venue"
-            @blur="emit('update:venue', $event.target.value)"
-            @keyup.enter="$event.target.blur()"
-          />
-          <span v-else class="form-display">{{ data.venue || "—" }}</span>
-          <span class="input-icon"><HIcon name="location" :size="16" /></span>
-        </div>
-      </div>
       <div class="form-field">
         <label class="form-label">Tipo de evento</label>
         <div class="input-wrap">
@@ -106,9 +87,26 @@
             <option value="Otro">Otro</option>
           </select>
           <span v-else class="form-display">{{ data.eventType || "—" }}</span>
-          <span class="input-icon input-icon--select"
-            ><HIcon name="chevron-down" :size="14"
-          /></span>
+          <span class="input-icon input-icon--select"><HIcon name="chevron-down" :size="14" /></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label">Venue del evento</label>
+        <div class="input-wrap">
+          <input
+            v-if="!readonly"
+            type="text"
+            class="form-input"
+            placeholder="Lugar del evento"
+            :value="data.venue"
+            @blur="emit('update:venue', $event.target.value)"
+            @keyup.enter="$event.target.blur()"
+          />
+          <span v-else class="form-display">{{ data.venue || "—" }}</span>
+          <span class="input-icon"><HIcon name="location" :size="16" /></span>
         </div>
       </div>
     </div>
