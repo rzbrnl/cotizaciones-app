@@ -599,7 +599,7 @@ function printPage() {
 }
 
 .items-section {
-  padding: 0 24px;
+  padding: 0 40px;
   margin-top: 8px;
 }
 
