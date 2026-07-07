@@ -55,6 +55,7 @@
       </form>
 
       <p class="auth-footer">¿Ya tienes cuenta? <router-link to="/login">Inicia sesión</router-link></p>
+      </div>
     </div>
   </div>
 </template>
