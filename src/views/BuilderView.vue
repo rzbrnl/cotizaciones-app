@@ -584,7 +584,7 @@ function printPage() {
   color: var(--gray-text);
   font-weight: 500;
   padding: 0 0 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .th-concept {
@@ -673,7 +673,7 @@ function printPage() {
 
 .cell-input--right {
   text-align: right;
-  width: 100%;
+  width: 60%;
 }
 
 .cell-center {
@@ -706,7 +706,7 @@ function printPage() {
 
 .qty-btn {
   width: 28px;
-  height: 30px;
+  height: 33px;
   border: none;
   background: transparent;
   color: var(--gray-text);
@@ -730,7 +730,7 @@ function printPage() {
   border-left: 1px solid var(--gray-border);
   border-right: 1px solid var(--gray-border);
   outline: none;
-  padding: 4px 0;
+  padding: 8px 0;
   font-size: 0.82rem;
   font-family: "Google Sans", sans-serif;
   color: var(--black);
