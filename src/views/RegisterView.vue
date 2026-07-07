@@ -115,22 +115,10 @@ async function handleRegister() {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f0f0f0;
 }
 
 .auth-header {
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
-  z-index: 100;
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 40px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,7 +127,7 @@ async function handleRegister() {
 .header-logo {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--black);
   text-decoration: none;
 }
 
@@ -151,13 +139,13 @@ async function handleRegister() {
 
 .header-link {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--gray-text);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .header-link:hover {
-  color: #1a1a1a;
+  color: var(--black);
 }
 
 .theme-toggle-header {
