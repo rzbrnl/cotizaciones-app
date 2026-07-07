@@ -141,14 +141,30 @@ function generateStages(preset) {
     ],
   }
 
-  return (configs[preset] || configs['50-50']).map((config, index) => ({
-    id: `stage${index + 1}`,
-    label: config.label,
-    percent: config.percent,
-    amount: Math.round(props.total * config.percent / 100),
-    status: 'pending',
-    paidAt: null,
-  }))
+  const stages = (configs[preset] || configs['50-50'])
+  let sum = 0
+
+  return stages.map((config, index) => {
+    const isLast = index === stages.length - 1
+    let amount
+
+    if (isLast) {
+      // Last stage gets the remainder to avoid rounding issues
+      amount = props.total - sum
+    } else {
+      amount = Math.round(props.total * config.percent / 100)
+      sum += amount
+    }
+
+    return {
+      id: `stage${index + 1}`,
+      label: config.label,
+      percent: config.percent,
+      amount,
+      status: 'pending',
+      paidAt: null,
+    }
+  })
 }
 
 function selectPreset(preset) {
