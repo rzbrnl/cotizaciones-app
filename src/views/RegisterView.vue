@@ -1,43 +1,53 @@
 <template>
   <div class="auth-page">
-    <div class="auth-card">
-      <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
-        <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-      <h1 class="auth-title">CotizaYa by Vēlum</h1>
-      <p class="auth-subtitle">Comienza a crear cotizaciones profesionales, organiza a tus clientes y comparte propuestas en minutos.</p>
+    <header class="auth-header">
+      <div class="header-content">
+        <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
+        <nav class="header-nav">
+          <button class="theme-toggle-header" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
+            <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+          <router-link to="/login" class="header-link">Iniciar sesión</router-link>
+        </nav>
+      </div>
+    </header>
 
-      <form @submit.prevent="handleRegister" class="auth-form">
-        <div class="auth-field">
-          <label>Nombre completo</label>
-          <input v-model="fullName" type="text" placeholder="Tu nombre completo" autofocus />
-        </div>
-        <div class="auth-field">
-          <label>Correo electrónico</label>
-          <input v-model="email" type="email" placeholder="hola@mundo.com" />
-        </div>
-        <div class="auth-field">
-          <label>Contraseña</label>
-          <input v-model="password" type="password" placeholder="Tu contraseña" />
-        </div>
-        <div class="auth-field">
-          <label>Confirmar contraseña</label>
-          <input v-model="confirmPassword" type="password" placeholder="Repite tu contraseña" />
-        </div>
-        <div v-if="error" class="auth-error">{{ error }}</div>
+    <div class="auth-card">
+      <div class="auth-card-inner">
+        <h1 class="auth-title">Crear cuenta</h1>
+        <p class="auth-subtitle">Comienza a crear cotizaciones profesionales, organiza a tus clientes y comparte propuestas en minutos.</p>
+
+        <form @submit.prevent="handleRegister" class="auth-form">
+          <div class="auth-field">
+            <label>Nombre completo</label>
+            <input v-model="fullName" type="text" placeholder="Tu nombre completo" autofocus />
+          </div>
+          <div class="auth-field">
+            <label>Correo electrónico</label>
+            <input v-model="email" type="email" placeholder="hola@mundo.com" />
+          </div>
+          <div class="auth-field">
+            <label>Contraseña</label>
+            <input v-model="password" type="password" placeholder="Tu contraseña" />
+          </div>
+          <div class="auth-field">
+            <label>Confirmar contraseña</label>
+            <input v-model="confirmPassword" type="password" placeholder="Repite tu contraseña" />
+          </div>
+          <div v-if="error" class="auth-error">{{ error }}</div>
         <div v-if="success" class="auth-success">{{ success }}</div>
         <button type="submit" class="auth-submit" :disabled="loading">
           {{ loading ? 'Creando...' : 'Registrarme' }}
@@ -103,13 +113,79 @@ async function handleRegister() {
 .auth-page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  background: #f0f0f0;
+}
+
+.auth-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-link {
+  font-size: 0.85rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.header-link:hover {
+  color: #1a1a1a;
+}
+
+.theme-toggle-header {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f0f0;
-  padding: 20px;
+  transition: all 0.2s;
+}
+
+.theme-toggle-header:hover {
+  color: #666;
+  background: rgba(0,0,0,0.05);
 }
 
 .auth-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card-inner {
   background: #f7f7f7;
   border-radius: 16px;
   width: 100%;

@@ -1,41 +1,50 @@
 <template>
   <div class="auth-page">
-    <div class="auth-card">
-      <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
-        <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-      <h1 class="auth-title">CotizaYa by Vēlum</h1>
-      <p class="auth-subtitle">Inicia sesión para crear, administrar y compartir cotizaciones profesionales desde un solo lugar.</p>
-
-      <form @submit.prevent="handleLogin" class="auth-form">
-        <div class="auth-field">
-          <label>Correo electrónico</label>
-          <input v-model="email" type="email" placeholder="hola@mundo.com" autofocus />
-        </div>
-        <div class="auth-field">
-          <label>Contraseña</label>
-          <input v-model="password" type="password" placeholder="Tu contraseña" />
-        </div>
-        <div v-if="error" class="auth-error">{{ error }}</div>
-        <button type="submit" class="auth-submit" :disabled="loading">
-          {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+    <header class="auth-header">
+      <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
+      <nav class="header-nav">
+        <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
+          <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
         </button>
-      </form>
+        <router-link to="/registro" class="header-link">Crear cuenta</router-link>
+      </nav>
+    </header>
 
-      <p class="auth-footer">¿No tienes cuenta? <router-link to="/registro">Crear cuenta</router-link></p>
+    <div class="auth-card">
+      <div class="auth-card-inner">
+        <h1 class="auth-title">Iniciar sesión</h1>
+        <p class="auth-subtitle">Ingresa a tu cuenta para crear, administrar y compartir cotizaciones profesionales.</p>
+
+        <form @submit.prevent="handleLogin" class="auth-form">
+          <div class="auth-field">
+            <label>Correo electrónico</label>
+            <input v-model="email" type="email" placeholder="hola@mundo.com" autofocus />
+          </div>
+          <div class="auth-field">
+            <label>Contraseña</label>
+            <input v-model="password" type="password" placeholder="Tu contraseña" />
+          </div>
+          <div v-if="error" class="auth-error">{{ error }}</div>
+          <button type="submit" class="auth-submit" :disabled="loading">
+            {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+          </button>
+        </form>
+
+        <p class="auth-footer">¿No tienes cuenta? <router-link to="/registro">Crear cuenta</router-link></p>
+      </div>
     </div>
   </div>
 </template>
@@ -76,13 +85,61 @@ async function handleLogin() {
 .auth-page {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   background: #f0f0f0;
-  padding: 20px;
+}
+
+.auth-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.auth-header .header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-header .header-logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.auth-header .header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.auth-header .header-link {
+  font-size: 0.85rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-header .header-link:hover {
+  color: #1a1a1a;
 }
 
 .auth-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card-inner {
   background: #f7f7f7;
   border-radius: 16px;
   width: 100%;
@@ -93,9 +150,6 @@ async function handleLogin() {
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   background: none;
   border: none;
   color: #999;
