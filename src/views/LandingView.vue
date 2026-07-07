@@ -1,5 +1,16 @@
 <template>
   <div class="landing">
+    <!-- Header -->
+    <header class="landing-header">
+      <div class="header-content">
+        <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
+        <nav class="header-nav">
+          <router-link to="/login" class="header-link">Iniciar sesión</router-link>
+          <router-link to="/registro" class="header-btn">Comenzar gratis</router-link>
+        </nav>
+      </div>
+    </header>
+
     <!-- Hero -->
     <section class="hero">
       <div class="hero-content">
@@ -237,6 +248,65 @@
 .landing {
   min-height: 100vh;
   background: var(--white);
+}
+
+/* Header */
+.landing-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #f0f0f0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-link {
+  font-size: 0.9rem;
+  color: var(--gray-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.header-link:hover {
+  color: var(--black);
+}
+
+.header-btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.header-btn:hover {
+  background: #4a4a4a;
 }
 
 /* Hero */
