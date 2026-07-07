@@ -85,7 +85,13 @@ const paymentLabels = {
 
 const paymentBadge = computed(() => {
   if (props.quotation.status !== 'aprobada') return null
-  return props.quotation.paymentStatus || 'pendiente'
+  const stages = props.quotation.paymentStages || []
+  if (stages.length === 0) return props.quotation.paymentStatus || 'pendiente'
+
+  const paidCount = stages.filter(s => s.status === 'paid').length
+  if (paidCount === 0) return 'pendiente'
+  if (paidCount === stages.length) return 'pagado'
+  return 'parcial'
 })
 
 const paymentBadgeLabel = computed(() => paymentLabels[paymentBadge.value] || 'Pendiente')
