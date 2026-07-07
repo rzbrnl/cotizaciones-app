@@ -37,6 +37,25 @@
         </div>
       </div>
       <div class="form-field">
+        <label class="form-label">Email del cliente</label>
+        <div class="input-wrap">
+          <input
+            v-if="!readonly"
+            type="email"
+            class="form-input"
+            placeholder="correo@ejemplo.com"
+            :value="data.clientEmail"
+            @blur="emit('update:clientEmail', $event.target.value)"
+            @keyup.enter="$event.target.blur()"
+          />
+          <span v-else class="form-display">{{ data.clientEmail || "—" }}</span>
+          <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row form-row--two">
+      <div class="form-field">
         <label class="form-label">Fecha del evento</label>
         <div v-if="!readonly" class="input-wrap">
           <input
@@ -107,6 +126,7 @@ defineProps({
 const emit = defineEmits([
   "update:clientName",
   "update:clientPhone",
+  "update:clientEmail",
   "update:eventType",
   "update:eventDate",
   "update:venue",

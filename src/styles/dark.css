@@ -316,3 +316,20 @@
 .dark .item-card-subtotal { color: #fff !important; }
 .dark .item-remove-mobile { color: #555; }
 .dark .item-remove-mobile:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+
+/* Payment Milestones dark mode */
+.dark .milestones-section { border-top-color: #333; }
+.dark .milestones-header { color: #888; }
+.dark .preset-btn { background: #1a1a1a; border-color: #333; color: #888; }
+.dark .preset-btn:hover { border-color: var(--gold); }
+.dark .preset-btn.active { background: #e5e7eb; border-color: #e5e7eb; color: #1a1a1a; }
+.dark .stage-item { background: #252525; }
+.dark .stage-item.paid { background: #14532d; }
+.dark .stage-number { background: #333; color: #888; }
+.dark .stage-item.paid .stage-number { background: #16a34a; color: white; }
+.dark .stage-label { color: #e5e7eb; }
+.dark .stage-meta { color: #888; }
+.dark .stage-amount { color: #e5e7eb; }
+.dark .stage-mark-btn { border-color: var(--gold); color: var(--gold); }
+.dark .stage-mark-btn:hover { background: var(--gold); color: #1a1a1a; }
+.dark .progress-bar { background: #333; }

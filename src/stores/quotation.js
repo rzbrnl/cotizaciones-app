@@ -24,6 +24,7 @@ function createBlank() {
     reminderDate: '',
     reminderNote: '',
     payments: [],
+    paymentStages: [],
     createdAt: new Date().toISOString(),
     sections: [
       {
@@ -317,6 +318,10 @@ export const useQuotationStore = defineStore('quotation', () => {
     return copy
   }
 
+  function updatePaymentStages(stages) {
+    active.value.paymentStages = stages
+  }
+
   return {
     active,
     savedList,
@@ -339,5 +344,6 @@ export const useQuotationStore = defineStore('quotation', () => {
     getPaymentsTotal,
     getPaymentStatus,
     addPayment,
+    updatePaymentStages,
   }
 })

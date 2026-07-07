@@ -71,6 +71,7 @@
           :data="store.active"
           @update:clientName="(v) => (store.active.clientName = v)"
           @update:clientPhone="(v) => (store.active.clientPhone = v)"
+          @update:clientEmail="(v) => (store.active.clientEmail = v)"
           @update:eventType="(v) => (store.active.eventType = v)"
           @update:eventDate="(v) => (store.active.eventDate = v)"
           @update:venue="(v) => (store.active.venue = v)"
@@ -305,6 +306,14 @@
             </div>
           </div>
         </div>
+
+        <!-- Payment Milestones -->
+        <PaymentMilestones
+          v-if="store.active.status === 'aprobada' || store.active.status === 'enviada'"
+          :quotation="store.active"
+          :total="store.grandTotal"
+          @update:stages="store.updatePaymentStages"
+        />
       </div>
     </div>
 
@@ -343,6 +352,7 @@ import AppLayout from "../components/AppLayout.vue";
 import QuoteHeader from "../components/QuoteHeader.vue";
 import ClientInfoForm from "../components/ClientInfoForm.vue";
 import ShareModal from "../components/ShareModal.vue";
+import PaymentMilestones from "../components/PaymentMilestones.vue";
 import HIcon from "../components/HIcon.vue";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
