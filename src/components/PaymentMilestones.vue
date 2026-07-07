@@ -35,7 +35,7 @@
         v-for="(stage, index) in stages"
         :key="stage.id"
         class="stage-item"
-        :class="{ paid: stage.status === 'paid' }"
+        :class="{ paid: stage.status === 'paid', locked: stage.status !== 'paid' && index > nextUnpaidIndex }"
       >
         <div class="stage-info">
           <div class="stage-number">{{ index + 1 }}</div>
@@ -50,17 +50,18 @@
         <div class="stage-right">
           <div class="stage-amount">{{ formatCurrency(stage.amount) }}</div>
           <button
-            v-if="stage.status !== 'paid'"
+            v-if="stage.status !== 'paid' && index === nextUnpaidIndex"
             class="stage-mark-btn"
             @click="markAsPaid(stage.id)"
           >
             Marcar pagado
           </button>
-          <span v-else class="stage-check">
+          <span v-else-if="stage.status === 'paid'" class="stage-check">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </span>
+          <span v-else class="stage-pending-label">Pendiente</span>
         </div>
       </div>
     </div>
@@ -98,6 +99,11 @@ const presets = [
 
 const stages = computed(() => {
   if (props.quotation.paymentStages && props.quotation.paymentStages.length > 0) {
+    // Detect preset from existing stages
+    const percents = props.quotation.paymentStages.map(s => s.percent).join('-')
+    if (percents === '50-50') selectedPreset.value = '50-50'
+    else if (percents === '30-30-40') selectedPreset.value = '30-30-40'
+    else if (percents === '40-60') selectedPreset.value = '40-60'
     return props.quotation.paymentStages
   }
   return generateStages(selectedPreset.value)
@@ -109,6 +115,13 @@ const hasPaidStages = computed(() => {
 
 const presetLocked = computed(() => {
   return hasPaidStages.value
+})
+
+const nextUnpaidIndex = computed(() => {
+  for (let i = 0; i < stages.value.length; i++) {
+    if (stages.value[i].status !== 'paid') return i
+  }
+  return -1
 })
 
 function generateStages(preset) {
@@ -271,6 +284,10 @@ function formatDate(dateStr) {
   color: white;
 }
 
+.stage-item.locked {
+  opacity: 0.6;
+}
+
 .stage-label {
   font-size: 0.88rem;
   font-weight: 500;
@@ -321,6 +338,11 @@ function formatDate(dateStr) {
 
 .stage-check {
   color: #16a34a;
+}
+
+.stage-pending-label {
+  font-size: 0.75rem;
+  color: var(--gray-text);
 }
 
 .milestones-progress {
