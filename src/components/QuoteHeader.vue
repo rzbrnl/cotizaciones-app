@@ -8,10 +8,17 @@
       <div class="logo-img-wrap">
         <img v-if="logo" :src="logo" alt="Logo" class="logo-img" />
         <div v-else class="logo-placeholder">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
           </svg>
         </div>
       </div>
@@ -20,16 +27,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useAuthStore } from '../stores/auth'
+import { computed } from "vue";
+import { useAuthStore } from "../stores/auth";
 
 const props = defineProps({
   data: { type: Object, required: true },
   readonly: { type: Boolean, default: false },
-})
+});
 
-const auth = useAuthStore()
-const logo = computed(() => auth.userLogo)
+const auth = useAuthStore();
+const logo = computed(() => auth.userLogo);
 </script>
 
 <style scoped>
@@ -49,7 +56,7 @@ const logo = computed(() => auth.userLogo)
 }
 
 .header-title {
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   font-size: 2.4rem;
   color: var(--white);
   font-weight: 400;
@@ -58,16 +65,16 @@ const logo = computed(() => auth.userLogo)
 }
 
 .header-date {
-  font-family: 'Google Sans Code', monospace;
+  font-family: "Google Sans Code", monospace;
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 2px 6px;
 }
 
 .header-logo {
-  text-align: right;
+  text-align: left;
 }
 
 .logo-img-wrap {
@@ -88,17 +95,24 @@ const logo = computed(() => auth.userLogo)
 .logo-placeholder {
   width: 80px;
   height: 80px;
-  border: 1px dashed rgba(255,255,255,0.25);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 600px) {
-  .header-banner { padding: 24px; }
-  .header-title { font-size: 1.8rem; }
-  .logo-img-wrap { width: 60px; height: 60px; }
+  .header-banner {
+    padding: 24px;
+  }
+  .header-title {
+    font-size: 1.8rem;
+  }
+  .logo-img-wrap {
+    width: 60px;
+    height: 60px;
+  }
 }
 </style>
