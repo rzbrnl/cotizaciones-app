@@ -80,6 +80,7 @@ import {
   Copy01Icon,
   ExternalLinkIcon,
   InformationCircleIcon,
+  Login01Icon,
 } from '@hugeicons/core-free-icons'
 
 const props = defineProps({
@@ -110,6 +111,7 @@ const iconMap = {
   copy: Copy01Icon,
   external: ExternalLinkIcon,
   info: InformationCircleIcon,
+  login: Login01Icon,
 }
 
 const paths = computed(() => {
