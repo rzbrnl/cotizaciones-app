@@ -309,31 +309,34 @@
                   <span class="phone-back">‹</span>
                   <div class="phone-contact">
                     <span class="phone-contact-name">María García</span>
-                    <span class="phone-contact-status">online</span>
+                    <span class="phone-contact-status">en línea</span>
                   </div>
                 </div>
                 <div class="phone-chat-bg">
-                  <div class="phone-message-bubble">
+                  <div class="phone-message-bubble outgoing">
                     <div class="phone-msg-text">
                       <span class="phone-emoji">✨</span> <strong>Cotización aprobada</strong><br><br>
                       Hola María,<br><br>
-                      Tu cotización ha sido aprobada. A continuación los datos para realizar el depósito:<br><br>
+                      Tu cotización ha sido aprobada. Los datos para el depósito:<br><br>
                       <span class="phone-emoji">📅</span> <strong>Evento:</strong> Boda<br>
                       <span class="phone-emoji">📍</span> <strong>Venue:</strong> Salón Events<br>
-                      <span class="phone-emoji">📆</span> <strong>Fecha:</strong> 2026-08-15<br>
                       <span class="phone-emoji">💰</span> <strong>Total:</strong> $45,000 MXN<br><br>
-                      ━━━━━━━━━━━━━━━━━━━━━<br><br>
+                      ━━━━━━━━━━━━━━━<br><br>
                       <span class="phone-emoji">🏦</span> <strong>Datos de pago:</strong><br><br>
                       <strong>Banco:</strong> BBVA<br>
                       <strong>CLABE:</strong> 012345678901234567<br>
-                      <strong>Cuenta:</strong> 1234567890<br>
                       <strong>Titular:</strong> Josué Eventos<br><br>
-                      <span class="phone-emoji">📝</span> <strong>Próximo pago:</strong> Anticipo - $22,500<br><br>
-                      Una vez realizado el pago, por favor envíame el comprobante 🙏<br><br>
-                      Saludos,<br>
-                      Josué
+                      <span class="phone-emoji">📝</span> <strong>Anticipo:</strong> $22,500<br><br>
+                      Envíame el comprobante 🙏<br><br>
+                      Saludos,<br>Josué
                     </div>
                     <div class="phone-msg-time">3:49 p.m. ✓✓</div>
+                  </div>
+                  <div class="phone-message-bubble incoming">
+                    <div class="phone-msg-text">
+                      ¡Listo Josué! Ya hice el depósito del anticipo, te envío el comprobante 📸
+                    </div>
+                    <div class="phone-msg-time">4:12 p.m.</div>
                   </div>
                 </div>
               </div>
@@ -1035,19 +1038,19 @@ const faqs = [
 }
 
 .phone-screen {
-  background: #0b141a;
+  background: #efeae2;
   border-radius: 20px;
   overflow: hidden;
 }
 
 .phone-statusbar {
-  background: #1f2c33;
+  background: #f0f2f5;
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.7rem;
-  color: white;
+  color: #1a1a1a;
   font-weight: 500;
 }
 
@@ -1055,21 +1058,21 @@ const faqs = [
   display: flex;
   gap: 4px;
   align-items: center;
-  color: white;
+  color: #1a1a1a;
 }
 
 .phone-chat-header {
-  background: #1f2c33;
+  background: #f0f2f5;
   padding: 10px 12px;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid #2a3942;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .phone-back {
   font-size: 1.2rem;
-  color: white;
+  color: #1a1a1a;
   font-weight: 300;
 }
 
@@ -1080,40 +1083,54 @@ const faqs = [
 
 .phone-contact-name {
   font-size: 0.8rem;
-  color: white;
+  color: #1a1a1a;
   font-weight: 500;
 }
 
 .phone-contact-status {
   font-size: 0.65rem;
-  color: #8696a0;
+  color: #667781;
 }
 
 .phone-chat-bg {
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23231f20' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: #efeae2;
   padding: 12px;
-  min-height: 280px;
+  min-height: 320px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .phone-message-bubble {
-  background: #005c4b;
   border-radius: 8px 8px 0 8px;
   padding: 8px 10px;
-  max-width: 95%;
-  float: right;
+  max-width: 88%;
   clear: both;
+  position: relative;
+}
+
+.phone-message-bubble.outgoing {
+  background: #d9fdd3;
+  border-radius: 8px 8px 0 8px;
+  align-self: flex-end;
+}
+
+.phone-message-bubble.incoming {
+  background: #ffffff;
+  border-radius: 8px 8px 8px 0;
+  align-self: flex-start;
 }
 
 .phone-msg-text {
   font-size: 0.72rem;
   line-height: 1.45;
-  color: #e9edef;
+  color: #111b21;
   word-wrap: break-word;
 }
 
 .phone-msg-text strong {
-  color: #e9edef;
+  color: #111b21;
 }
 
 .phone-emoji {
@@ -1122,10 +1139,9 @@ const faqs = [
 
 .phone-msg-time {
   font-size: 0.6rem;
-  color: #8696a0;
+  color: #667781;
   text-align: right;
   margin-top: 4px;
-  clear: both;
 }
 
 /* FAQ */
