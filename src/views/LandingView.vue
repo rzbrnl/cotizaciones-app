@@ -5,6 +5,9 @@
       <div class="header-content">
         <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
         <nav class="header-nav">
+          <a href="#funciones" class="header-nav-link">Funciones</a>
+          <a href="#como-funciona" class="header-nav-link">Cómo funciona</a>
+          <a href="#faq" class="header-nav-link">Preguntas frecuentes</a>
           <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
             <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="12" r="5"/>
@@ -61,6 +64,20 @@
               <span class="mockup-nav-item">Calendario</span>
             </div>
             <div class="mockup-content">
+              <div class="mockup-metrics">
+                <div class="mockup-metric">
+                  <span class="mockup-metric-value">8</span>
+                  <span class="mockup-metric-label">Cotizaciones</span>
+                </div>
+                <div class="mockup-metric gold">
+                  <span class="mockup-metric-value">$125,000</span>
+                  <span class="mockup-metric-label">Ingresos</span>
+                </div>
+                <div class="mockup-metric green">
+                  <span class="mockup-metric-value">87%</span>
+                  <span class="mockup-metric-label">Aprobación</span>
+                </div>
+              </div>
               <div class="mockup-card">
                 <div class="mockup-card-header">
                   <span>Boda García López</span>
@@ -95,73 +112,43 @@
       </div>
     </section>
 
+    <!-- Problem Section -->
+    <section class="problem">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>¿Todavía haces tus cotizaciones así?</h2>
+          <p>La mayoría de proveedores de eventos aún usan herramientas que les restan tiempo y profesionalismo</p>
+        </div>
+        <div class="problem-grid">
+          <div class="problem-item" v-for="item in problems" :key="item">
+            <span class="problem-icon">✕</span>
+            <span>{{ item }}</span>
+          </div>
+        </div>
+        <div class="problem-transition">
+          <div class="transition-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <polyline points="19 12 12 19 5 12"/>
+            </svg>
+          </div>
+          <p class="transition-text">Todo eso puede centralizarse en una sola plataforma</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Features -->
-    <section class="features">
+    <section class="features" id="funciones">
       <div class="section-container">
         <div class="section-header">
           <h2>Todo lo que necesitas para vender más eventos</h2>
-          <p>Herramientas diseñadas para que te enfoques en lo que mejor haces: crear experiencias inolvidables</p>
+          <p>Herramientas diseñadas para que te enfoques en lo que mejor haces</p>
         </div>
         <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-              </svg>
-            </div>
-            <h3>Cotizaciones profesionales</h3>
-            <p>Crea propuestas con una presentación impecable que genere confianza desde el primer momento</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-              </svg>
-            </div>
-            <h3>Comparte por WhatsApp</h3>
-            <p>Envía tu cotización en segundos y evita descargar, adjuntar y volver a enviar archivos</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3>Pagos por etapas</h3>
-            <p>Define anticipos y pagos pendientes para que tus clientes siempre sepan cuánto pagar y cuándo hacerlo</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-            </div>
-            <h3>Aprobación online</h3>
-            <p>El cliente puede aceptar o rechazar la propuesta desde cualquier dispositivo</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </div>
-            <h3>Calendario</h3>
-            <p>Mantén todos tus eventos organizados y evita fechas duplicadas</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3>Seguro y privado</h3>
-            <p>Cada negocio administra únicamente su información y la de sus clientes</p>
+          <div class="feature-card" v-for="feature in features" :key="feature.title">
+            <div class="feature-icon" v-html="feature.icon"></div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.desc }}</p>
           </div>
         </div>
       </div>
@@ -172,12 +159,12 @@
       <div class="section-container">
         <div class="section-header">
           <h2>Ideal para</h2>
-          <p>Si organizas, decoras, fotografias o provees servicios para eventos, CotizaYa es para ti</p>
+          <p>Si organizas, decoras, fotografías o provees servicios para eventos, CotizaYa es para ti</p>
         </div>
         <div class="ideal-grid">
-          <div class="ideal-item" v-for="item in idealFor" :key="item">
-            <span class="ideal-icon">◆</span>
-            <span>{{ item }}</span>
+          <div class="ideal-item" v-for="item in idealFor" :key="item.name">
+            <span class="ideal-icon" v-html="item.icon"></span>
+            <span>{{ item.name }}</span>
           </div>
         </div>
       </div>
@@ -216,7 +203,7 @@
     </section>
 
     <!-- How it works -->
-    <section class="how-it-works">
+    <section class="how-it-works" id="como-funciona">
       <div class="section-container">
         <div class="section-header">
           <h2>¿Cómo funciona?</h2>
@@ -224,74 +211,91 @@
         </div>
         <div class="steps-flow">
           <div class="step">
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
             <div class="step-number">1</div>
-            <div class="step-content">
-              <h3>Crea tu cotización</h3>
-              <p>Agrega conceptos, precios y datos del cliente en segundos</p>
-            </div>
+            <h3>Crea tu cotización</h3>
+            <p>Agrega conceptos, precios y datos del cliente en segundos</p>
           </div>
           <div class="step-connector">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"/>
               <polyline points="12 5 19 12 12 19"/>
             </svg>
           </div>
           <div class="step">
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
             <div class="step-number">2</div>
-            <div class="step-content">
-              <h3>Compártela por WhatsApp</h3>
-              <p>Envía la cotización con un solo clic</p>
-            </div>
+            <h3>Compártela por WhatsApp</h3>
+            <p>Envía la cotización con un solo clic</p>
           </div>
           <div class="step-connector">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"/>
               <polyline points="12 5 19 12 12 19"/>
             </svg>
           </div>
           <div class="step">
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
             <div class="step-number">3</div>
-            <div class="step-content">
-              <h3>Tu cliente la aprueba</h3>
-              <p>Desde su celular, sin necesidad de registrarse</p>
-            </div>
+            <h3>Tu cliente la aprueba</h3>
+            <p>Desde su celular, sin necesidad de registrarse</p>
           </div>
           <div class="step-connector">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"/>
               <polyline points="12 5 19 12 12 19"/>
             </svg>
           </div>
           <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h3>Recibe el pago</h3>
-              <p>Por etapas, con recordatorios automáticos</p>
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
             </div>
+            <div class="step-number">4</div>
+            <h3>Recibe el pago</h3>
+            <p>Por etapas, con recordatorios automáticos</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Highlight -->
+    <!-- Highlight / Phone Section -->
     <section class="highlight">
       <div class="section-container">
         <div class="highlight-content">
           <div class="highlight-text">
-            <h2>Más tiempo para crear, menos tiempo para cobrar</h2>
-            <p>CotizaYa automatiza el proceso de cotización y cobro para que te enfoques en lo que mejor haces: crear experiencias memorables para tus clientes.</p>
-            <div class="highlight-stats">
-              <div class="highlight-stat">
-                <span class="highlight-stat-value">3 min</span>
-                <span class="highlight-stat-label">Para crear una cotización</span>
+            <h2>Tus clientes reciben una experiencia profesional</h2>
+            <p>Cuando reciben tu cotización, pueden revisar cada concepto, aprobar la propuesta y conocer el estado de sus pagos desde cualquier dispositivo.</p>
+            <div class="highlight-features">
+              <div class="highlight-feature">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Aprobación con un clic</span>
               </div>
-              <div class="highlight-stat">
-                <span class="highlight-stat-value">1 clic</span>
-                <span class="highlight-stat-label">Para compartirla</span>
+              <div class="highlight-feature">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <span>Pagos por etapas</span>
               </div>
-              <div class="highlight-stat">
-                <span class="highlight-stat-value">24h</span>
-                <span class="highlight-stat-label">Tiempo promedio de respuesta</span>
+              <div class="highlight-feature">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>100% seguro</span>
               </div>
             </div>
           </div>
@@ -346,8 +350,26 @@
       </div>
     </section>
 
+    <!-- Trust Section -->
+    <section class="trust">
+      <div class="section-container">
+        <div class="trust-content">
+          <div class="trust-badge">Diseñado para la industria de eventos</div>
+          <h2>No es un software genérico de cotizaciones</h2>
+          <p>CotizaYa fue creado pensando en wedding planners, fotógrafos, decoradores, floristas y proveedores de eventos que necesitan cotizar rápido, verse profesionales y brindar una mejor experiencia a sus clientes.</p>
+          <div class="trust-tags">
+            <span class="trust-tag">Wedding Planners</span>
+            <span class="trust-tag">Fotógrafos</span>
+            <span class="trust-tag">Decoradores</span>
+            <span class="trust-tag">Floristas</span>
+            <span class="trust-tag">Proveedores de eventos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ -->
-    <section class="faq">
+    <section class="faq" id="faq">
       <div class="section-container">
         <div class="section-header">
           <h2>Preguntas frecuentes</h2>
@@ -365,6 +387,11 @@
     <section class="cta">
       <div class="section-container">
         <div class="cta-content">
+          <div class="cta-indicators">
+            <span class="cta-indicator">✓ Registro gratuito</span>
+            <span class="cta-indicator">✓ Sin complicaciones</span>
+            <span class="cta-indicator">✓ Configuración en minutos</span>
+          </div>
           <h2>Empieza hoy mismo</h2>
           <p>Haz tu primera cotización en menos de cinco minutos y descubre una forma más profesional de vender tus servicios.</p>
           <router-link to="/registro" class="btn-primary btn-large">Crear mi cuenta gratis</router-link>
@@ -397,19 +424,35 @@ import HIcon from '../components/HIcon.vue'
 
 const themeStore = useThemeStore()
 
+const problems = [
+  'Word y Excel desordenados',
+  'PDFs enviados por correo',
+  'Cambiar precios manualmente',
+  'Buscar conversaciones en WhatsApp',
+  'Seguimiento sin organiz',
+]
+
+const features = [
+  { title: 'Cotizaciones profesionales', desc: 'Crea propuestas con una presentación impecable que genere confianza desde el primer momento', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' },
+  { title: 'Comparte por WhatsApp', desc: 'Envía tu cotización en segundos y evita descargar, adjuntar y volver a enviar archivos', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' },
+  { title: 'Pagos por etapas', desc: 'Define anticipos y pagos pendientes para que tus clientes siempre sepan cuánto pagar y cuándo hacerlo', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+  { title: 'Aprobación online', desc: 'El cliente puede aceptar o rechazar la propuesta desde cualquier dispositivo', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
+  { title: 'Calendario', desc: 'Mantén todos tus eventos organizados y evita fechas duplicadas', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+  { title: 'Seguro y privado', desc: 'Cada negocio administra únicamente su información y la de sus clientes', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' },
+]
+
 const idealFor = [
-  'Wedding Planners',
-  'Decoradores',
-  'Floristas',
-  'Banquetes',
-  'Fotógrafos',
-  'Videógrafos',
-  'DJs',
-  'Coordinadores de eventos',
-  'Salones de eventos',
-  'Rentas de mobiliario',
-  'Pastelerías',
-  'Invitaciones digitales',
+  { name: 'Wedding Planners', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+  { name: 'Decoradores', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' },
+  { name: 'Floristas', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-4-4-8-7.5-8-12a8 8 0 0 1 16 0c0 4.5-4 8-8 12z"/><circle cx="12" cy="10" r="3"/></svg>' },
+  { name: 'Banquetes', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>' },
+  { name: 'Fotógrafos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>' },
+  { name: 'Videógrafos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
+  { name: 'DJs', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>' },
+  { name: 'Coordinadores', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+  { name: 'Salones', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>' },
+  { name: 'Pastelerías', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
+  { name: 'Invitaciones', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>' },
 ]
 
 const faqs = [
@@ -443,7 +486,7 @@ const faqs = [
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 40px;
+  padding: 14px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -459,7 +502,18 @@ const faqs = [
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
+}
+
+.header-nav-link {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.header-nav-link:hover {
+  color: var(--black);
 }
 
 .header-link-icon {
@@ -530,8 +584,8 @@ const faqs = [
 }
 
 .hero-content {
-  flex: 1;
-  max-width: 560px;
+  flex: 0.9;
+  max-width: 520px;
 }
 
 .hero-badge {
@@ -612,16 +666,22 @@ const faqs = [
 
 /* Hero Mockup */
 .hero-visual {
-  flex: 1;
-  max-width: 500px;
+  flex: 1.1;
+  max-width: 560px;
 }
 
 .hero-mockup {
   background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.12), 0 4px 20px rgba(0,0,0,0.06);
   overflow: hidden;
   border: 1px solid #e5e7eb;
+  transform: perspective(1000px) rotateY(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.hero-mockup:hover {
+  transform: perspective(1000px) rotateY(0deg);
 }
 
 .mockup-header {
@@ -683,6 +743,36 @@ const faqs = [
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.mockup-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mockup-metric {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.mockup-metric-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+  display: block;
+}
+
+.mockup-metric.gold .mockup-metric-value { color: var(--gold); }
+.mockup-metric.green .mockup-metric-value { color: #16a34a; }
+
+.mockup-metric-label {
+  font-size: 0.6rem;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .mockup-card {
@@ -750,10 +840,63 @@ const faqs = [
   color: #16a34a;
 }
 
+/* Problem Section */
+.problem {
+  padding: 100px 0;
+  background: #f9fafb;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.problem-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px;
+  background: var(--white);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  border: 1px solid #e5e7eb;
+}
+
+.problem-icon {
+  width: 36px;
+  height: 36px;
+  background: #fef2f2;
+  color: #ef4444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.problem-transition {
+  text-align: center;
+}
+
+.transition-arrow {
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.transition-text {
+  font-size: 1rem;
+  color: var(--black);
+  font-weight: 500;
+}
+
 /* Features */
 .features {
   padding: 100px 0;
-  background: #f9fafb;
 }
 
 .section-header {
@@ -781,22 +924,23 @@ const faqs = [
 
 .feature-card {
   background: var(--white);
-  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-color: rgba(201, 168, 106, 0.3);
+  box-shadow: 0 8px 30px rgba(201, 168, 106, 0.08);
   transform: translateY(-4px);
 }
 
 .feature-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(201, 168, 106, 0.1);
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  background: rgba(201, 168, 106, 0.08);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -808,52 +952,61 @@ const faqs = [
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--black);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .feature-card p {
   font-size: 0.9rem;
   color: var(--gray-text);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* Ideal For */
 .ideal-for {
   padding: 100px 0;
+  background: #f9fafb;
 }
 
 .ideal-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .ideal-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
-  background: #f9fafb;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   font-size: 0.9rem;
   color: var(--black);
   transition: all 0.2s;
 }
 
 .ideal-item:hover {
-  background: rgba(201, 168, 106, 0.1);
+  border-color: var(--gold);
+  background: rgba(201, 168, 106, 0.04);
   transform: translateY(-2px);
 }
 
 .ideal-icon {
   color: var(--gold);
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(201, 168, 106, 0.08);
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 /* Comparison */
 .comparison {
   padding: 100px 0;
-  background: #f9fafb;
 }
 
 .comparison-grid {
@@ -864,9 +1017,9 @@ const faqs = [
 
 .comparison-card {
   background: var(--white);
-  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .comparison-label {
@@ -874,8 +1027,8 @@ const faqs = [
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 600;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
   border-bottom: 2px solid;
 }
 
@@ -899,7 +1052,7 @@ const faqs = [
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 0;
+  padding: 12px 0;
   font-size: 0.9rem;
   color: var(--black);
   border-bottom: 1px solid #f0f0f0;
@@ -925,63 +1078,71 @@ const faqs = [
 /* How it works */
 .how-it-works {
   padding: 100px 0;
+  background: #f9fafb;
 }
 
 .steps-flow {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .step {
   flex: 1;
-  max-width: 220px;
+  max-width: 240px;
   text-align: center;
 }
 
-.step-number {
+.step-icon {
   width: 56px;
   height: 56px;
-  background: var(--gold);
-  color: var(--white);
-  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
-  font-weight: 700;
+  color: var(--gold);
   margin: 0 auto 16px;
 }
 
-.step-content h3 {
+.step-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.step h3 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--black);
   margin-bottom: 6px;
 }
 
-.step-content p {
+.step p {
   font-size: 0.85rem;
   color: var(--gray-text);
 }
 
 .step-connector {
   color: #d1d5db;
-  margin-top: 20px;
+  margin-top: 28px;
   flex-shrink: 0;
 }
 
 /* Highlight */
 .highlight {
   padding: 100px 0;
-  background: #f9fafb;
 }
 
 .highlight-content {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 80px;
 }
 
 .highlight-text {
@@ -989,38 +1150,37 @@ const faqs = [
 }
 
 .highlight-text h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--black);
   margin-bottom: 16px;
+  line-height: 1.2;
 }
 
-.highlight-text p {
-  font-size: 1rem;
+.highlight-text > p {
+  font-size: 1.05rem;
   color: var(--gray-text);
   line-height: 1.6;
   margin-bottom: 32px;
 }
 
-.highlight-stats {
-  display: flex;
-  gap: 40px;
-}
-
-.highlight-stat {
+.highlight-features {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.highlight-stat-value {
-  font-size: 1.8rem;
-  font-weight: 700;
+.highlight-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--black);
+}
+
+.highlight-feature svg {
   color: var(--gold);
-}
-
-.highlight-stat-label {
-  font-size: 0.8rem;
-  color: var(--gray-text);
+  flex-shrink: 0;
 }
 
 .highlight-visual {
@@ -1034,7 +1194,7 @@ const faqs = [
   background: #1a1a1a;
   border-radius: 28px;
   padding: 10px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.2);
 }
 
 .phone-screen {
@@ -1103,10 +1263,9 @@ const faqs = [
 }
 
 .phone-message-bubble {
-  border-radius: 8px 8px 0 8px;
+  border-radius: 8px;
   padding: 8px 10px;
   max-width: 88%;
-  clear: both;
   position: relative;
 }
 
@@ -1144,6 +1303,59 @@ const faqs = [
   margin-top: 4px;
 }
 
+/* Trust */
+.trust {
+  padding: 100px 0;
+  background: #f9fafb;
+}
+
+.trust-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.trust-badge {
+  display: inline-block;
+  background: rgba(201, 168, 106, 0.1);
+  color: var(--gold);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.trust-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.trust-content > p {
+  font-size: 1rem;
+  color: var(--gray-text);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.trust-tags {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.trust-tag {
+  padding: 8px 16px;
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--black);
+}
+
 /* FAQ */
 .faq {
   padding: 100px 0;
@@ -1152,13 +1364,14 @@ const faqs = [
 .faq-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 .faq-item {
   padding: 24px;
   background: #f9fafb;
   border-radius: 12px;
+  border: 1px solid #f0f0f0;
 }
 
 .faq-item h3 {
@@ -1186,6 +1399,18 @@ const faqs = [
   margin: 0 auto;
 }
 
+.cta-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.cta-indicator {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+}
+
 .cta h2 {
   font-size: 2rem;
   font-weight: 700;
@@ -1195,7 +1420,7 @@ const faqs = [
 
 .cta p {
   font-size: 1rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 32px;
   line-height: 1.6;
 }
@@ -1253,6 +1478,20 @@ const faqs = [
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .hero {
+    gap: 40px;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-mockup {
+    transform: none;
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     flex-direction: column;
@@ -1274,6 +1513,10 @@ const faqs = [
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .problem-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .ideal-grid {
@@ -1298,8 +1541,8 @@ const faqs = [
     text-align: center;
   }
 
-  .highlight-stats {
-    justify-content: center;
+  .highlight-features {
+    align-items: center;
   }
 
   .faq-grid {
@@ -1316,6 +1559,10 @@ const faqs = [
 
   .cta h2 {
     font-size: 1.5rem;
+  }
+
+  .header-nav-link {
+    display: none;
   }
 }
 
@@ -1338,8 +1585,17 @@ const faqs = [
     font-size: 0.75rem;
   }
 
+  .problem-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .ideal-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cta-indicators {
+    flex-direction: column;
+    gap: 8px;
   }
 }
 </style>
