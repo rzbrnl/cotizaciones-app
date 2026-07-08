@@ -61,10 +61,9 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-bg">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
         <div class="grid-pattern"></div>
       </div>
       <div class="hero-content">
@@ -864,7 +863,6 @@ const faqs = [
   padding: 80px 40px;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 .hero-bg {
@@ -872,72 +870,63 @@ const faqs = [
   inset: 0;
   overflow: hidden;
   z-index: 0;
+  pointer-events: none;
 }
 
-.hero-bg .dot {
+.hero-bg .orb {
   position: absolute;
   border-radius: 50%;
-  background: rgba(201, 168, 106, 0.15);
-  animation: float 20s ease-in-out infinite;
+  filter: blur(60px);
+  animation: drift 25s ease-in-out infinite;
 }
 
-.hero-bg .dot:nth-child(1) {
-  width: 300px;
-  height: 300px;
-  top: -100px;
-  right: -50px;
+.hero-bg .orb-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(201, 168, 106, 0.12);
+  top: -150px;
+  right: -100px;
   animation-delay: 0s;
 }
 
-.hero-bg .dot:nth-child(2) {
-  width: 200px;
-  height: 200px;
-  bottom: -50px;
-  left: 10%;
-  animation-delay: -5s;
-}
-
-.hero-bg .dot:nth-child(3) {
-  width: 150px;
-  height: 150px;
-  top: 30%;
+.hero-bg .orb-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(201, 168, 106, 0.08);
+  bottom: -100px;
   left: -50px;
-  animation-delay: -10s;
+  animation-delay: -8s;
 }
 
-.hero-bg .dot:nth-child(4) {
-  width: 100px;
-  height: 100px;
-  bottom: 20%;
-  right: 30%;
-  animation-delay: -15s;
+.hero-bg .orb-3 {
+  width: 300px;
+  height: 300px;
+  background: rgba(201, 168, 106, 0.06);
+  top: 40%;
+  left: 30%;
+  animation-delay: -16s;
 }
 
 .hero-bg .grid-pattern {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 168, 106, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 106, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(rgba(201, 168, 106, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 106, 0.06) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
 }
 
-@keyframes float {
+@keyframes drift {
   0%, 100% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.15;
   }
-  25% {
-    transform: translate(30px, -30px) scale(1.05);
-    opacity: 0.2;
+  33% {
+    transform: translate(40px, -30px) scale(1.1);
   }
-  50% {
-    transform: translate(-20px, 20px) scale(0.95);
-    opacity: 0.1;
-  }
-  75% {
-    transform: translate(20px, 10px) scale(1.02);
-    opacity: 0.18;
+  66% {
+    transform: translate(-30px, 20px) scale(0.9);
   }
 }
 
