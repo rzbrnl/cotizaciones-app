@@ -225,6 +225,8 @@
 .dark .theme-toggle:hover { color: #e5e7eb; background: rgba(255,255,255,0.05); }
 .dark .hero h1 { color: #e5e7eb; }
 .dark .hero-subtitle { color: #888; }
+.dark .hero::before { background: radial-gradient(circle, rgba(201, 168, 106, 0.08) 0%, transparent 70%); }
+.dark .hero::after { background: radial-gradient(circle, rgba(201, 168, 106, 0.05) 0%, transparent 70%); }
 .dark .hero-card { background: #1a1a1a; }
 .dark .hero-card-header { background: #252525; }
 .dark .hero-card-body { background: #1a1a1a; }
