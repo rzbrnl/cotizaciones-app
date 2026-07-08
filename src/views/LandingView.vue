@@ -803,13 +803,14 @@ const faqs = [
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 168, 106, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 106, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(201, 168, 106, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 106, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 @keyframes drift {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 1;
   }
