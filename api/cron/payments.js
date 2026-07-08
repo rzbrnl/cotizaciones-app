@@ -91,7 +91,11 @@ export default async function handler(req, res) {
           const clientEmail = data.clientEmail
           if (!clientEmail) continue
 
-          await fetch(`${process.env.VERCEL_URL || 'https://cotizador.velum.events'}/api/send-email`, {
+          const baseUrl = process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : 'https://cotizador.velum.events'
+
+          await fetch(`${baseUrl}/api/send-email`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
