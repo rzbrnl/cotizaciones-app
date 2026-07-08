@@ -1,11 +1,8 @@
 {
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "rewrites": [
+  "crons": [
     {
-      "source": "/((?!assets/).*)",
-      "destination": "/index.html"
+      "path": "/api/cron/payments",
+      "schedule": "0 9 * * *"
     }
   ]
 }
