@@ -20,9 +20,7 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
-          <router-link to="/registro" class="header-link-icon" title="Crear cuenta">
-            <HIcon name="user" :size="18" />
-          </router-link>
+          <router-link to="/registro" class="header-btn">Crear cuenta</router-link>
         </nav>
       </div>
     </header>
@@ -127,19 +125,20 @@ async function handleLogin() {
   color: var(--black);
 }
 
-.header-link-icon {
-  color: var(--gray-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 6px;
+.header-btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
   transition: all 0.2s;
 }
 
-.header-link-icon:hover {
-  color: var(--black);
-  background: rgba(0,0,0,0.05);
+.header-btn:hover {
+  background: #4a4a4a;
 }
 
 .auth-card {
