@@ -85,10 +85,13 @@ export default async function handler(req, res) {
 
       const dueDates = getPaymentDueDates(data.paymentStages, data.eventDate)
 
+      console.log('Quotation:', quotation.id, 'clientEmail:', data.clientEmail, 'eventDate:', data.eventDate, 'stages:', data.paymentStages?.length)
+
       for (const due of dueDates) {
         if (isDueSoon(due.dueDate, 3)) {
           // Send reminder email
           const clientEmail = data.clientEmail
+          console.log('Client email for reminder:', clientEmail)
           if (!clientEmail) continue
 
           const baseUrl = process.env.VERCEL_URL
