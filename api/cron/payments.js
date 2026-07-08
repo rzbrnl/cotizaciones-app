@@ -94,9 +94,7 @@ export default async function handler(req, res) {
           console.log('Client email for reminder:', clientEmail)
           if (!clientEmail) continue
 
-          const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : 'https://cotizador.velum.events'
+          const baseUrl = 'https://cotizador.velum.events'
 
           await fetch(`${baseUrl}/api/send-email`, {
             method: 'POST',
