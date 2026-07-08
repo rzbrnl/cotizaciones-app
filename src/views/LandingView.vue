@@ -2,10 +2,7 @@
   <div class="landing">
     <!-- Background -->
     <div class="landing-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-      <div class="grid-pattern"></div>
+      <div class="dots-pattern"></div>
     </div>
 
     <!-- Header -->
@@ -765,47 +762,11 @@ const faqs = [
   pointer-events: none;
 }
 
-.landing-bg .orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: drift 30s ease-in-out infinite;
-}
-
-.landing-bg .orb-1 {
-  width: 600px;
-  height: 600px;
-  background: rgba(201, 168, 106, 0.1);
-  top: -200px;
-  right: -150px;
-  animation-delay: 0s;
-}
-
-.landing-bg .orb-2 {
-  width: 500px;
-  height: 500px;
-  background: rgba(201, 168, 106, 0.07);
-  bottom: 10%;
-  left: -100px;
-  animation-delay: -10s;
-}
-
-.landing-bg .orb-3 {
-  width: 400px;
-  height: 400px;
-  background: rgba(201, 168, 106, 0.05);
-  top: 50%;
-  right: 20%;
-  animation-delay: -20s;
-}
-
-.landing-bg .grid-pattern {
+.landing-bg .dots-pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(201, 168, 106, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 106, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(circle, rgba(201, 168, 106, 0.12) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
 }
 
 @keyframes drift {
