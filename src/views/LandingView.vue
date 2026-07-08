@@ -41,7 +41,9 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <router-link to="/login" class="header-link">Iniciar sesión</router-link>
+          <router-link to="/login" class="header-link"
+            >Iniciar sesión</router-link
+          >
           <router-link to="/registro" class="header-btn"
             >Comenzar gratis</router-link
           >
@@ -451,7 +453,7 @@ const themeStore = useThemeStore();
 
 .header-link-icon:hover {
   color: var(--black);
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .header-btn {
@@ -961,7 +963,7 @@ const themeStore = useThemeStore();
 
 @media (max-width: 480px) {
   .header-content {
-    padding: 12px 16px;
+    padding: 4px 10px;
     gap: 8px;
   }
 
