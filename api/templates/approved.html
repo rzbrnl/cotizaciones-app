@@ -1,19 +1,59 @@
-<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;">
-  <div style="background:#353535;padding:24px;text-align:center;border-radius:8px 8px 0 0;">
-    <h1 style="color:white;font-size:20px;margin:0;">CotizaYa by Vēlum</h1>
+<div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:520px;margin:0 auto;padding:20px;">
+  <!-- Header -->
+  <div style="text-align:center;padding:32px 0 24px;">
+    <div style="font-size:24px;font-weight:700;color:#1a1a1a;letter-spacing:-0.5px;">CotizaYa</div>
+    <div style="font-size:12px;color:#9ca3af;margin-top:4px;">Plataforma de cotizaciones para organizadores de eventos</div>
   </div>
-  <div style="padding:24px;background:#f9fafb;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
-    <h2 style="color:#1a1a1a;font-size:18px;margin-top:0;">Cotización aprobada</h2>
-    <p style="color:#666;font-size:14px;line-height:1.6;">
-      El cliente <strong>{{clientName}}</strong> aprobó la cotización para el evento en <strong>{{venue}}</strong> ({{eventDate}}).
-    </p>
-    <div style="text-align:center;margin:24px 0;">
-      <span style="display:inline-block;padding:10px 24px;border-radius:8px;font-weight:600;font-size:14px;color:white;background:#16a34a;">
-        Aprobada
-      </span>
+
+  <!-- Card -->
+  <div style="background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;margin-bottom:24px;">
+    <!-- Status Badge -->
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="display:inline-block;background:#dcfce7;color:#16a34a;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:0.5px;">
+        ✓ APROBADA
+      </div>
     </div>
-    <p style="color:#999;font-size:12px;margin-top:24px;border-top:1px solid #e5e7eb;padding-top:16px;">
-      CotizaYa by Vēlum
+
+    <!-- Title -->
+    <h1 style="font-size:22px;font-weight:700;color:#1a1a1a;text-align:center;margin:0 0 8px;">¡Excelente noticia!</h1>
+    <p style="font-size:15px;color:#6b7280;text-align:center;margin:0 0 28px;line-height:1.5;">
+      Tu cliente <strong style="color:#1a1a1a;">{{clientName}}</strong> acaba de aprobar la cotización.
     </p>
+
+    <!-- Details Card -->
+    <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:20px;margin-bottom:24px;">
+      <table style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="padding:8px 0;font-size:13px;color:#9ca3af;">Cliente</td>
+          <td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">{{clientName}}</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;font-size:13px;color:#9ca3af;">Evento</td>
+          <td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">{{venue}}</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;font-size:13px;color:#9ca3af;">Fecha</td>
+          <td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">{{eventDate}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- CTA Button -->
+    <div style="text-align:center;">
+      <a href="https://cotizador.velum.events/dashboard" style="display:inline-block;background:#1a1a1a;color:#ffffff;padding:14px 32px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.3px;">
+        Ver cotización
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:0 0 20px;">
+    <p style="font-size:12px;color:#9ca3af;margin:0 0 8px;">
+      Este correo fue enviado automáticamente por CotizaYa by Vēlum
+    </p>
+    <p style="font-size:12px;color:#9ca3af;margin:0;">
+      <a href="https://cotizador.velum.events" style="color:#C9A86A;text-decoration:none;">Ingresar a la plataforma</a>
+    </p>
+    <p style="font-size:11px;color:#d1d5db;margin:16px 0 0;">© 2026 CotizaYa. Todos los derechos reservados.</p>
   </div>
 </div>
