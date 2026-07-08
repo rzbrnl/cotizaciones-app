@@ -41,9 +41,9 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <router-link to="/login" class="header-link"
-            >Iniciar sesión</router-link
-          >
+          <router-link to="/login" class="header-link-icon" title="Iniciar sesión">
+            <HIcon name="login" :size="18" />
+          </router-link>
           <router-link to="/registro" class="header-btn"
             >Comenzar gratis</router-link
           >
@@ -387,6 +387,7 @@
 
 <script setup>
 import { useThemeStore } from "../stores/theme";
+import HIcon from "../components/HIcon.vue";
 
 const themeStore = useThemeStore();
 </script>
@@ -438,6 +439,21 @@ const themeStore = useThemeStore();
 
 .header-link:hover {
   color: var(--black);
+}
+
+.header-link-icon {
+  color: var(--gray-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.header-link-icon:hover {
+  color: var(--black);
+  background: rgba(0,0,0,0.05);
 }
 
 .header-btn {
