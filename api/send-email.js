@@ -10,7 +10,9 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "RESEND_API_KEY not configured" });
   }
 
-  const toEmail = ownerEmail || "hi@josue.work";
+  const toEmail = action === "payment_reminder"
+    ? (clientEmail || ownerEmail || "hi@josue.work")
+    : (ownerEmail || "hi@josue.work");
   const actionText = action === "aprobada" ? "aprobó" : "rechazó";
   const actionColor = action === "aprobada" ? "#16a34a" : "#dc2626";
   const actionLabel = action === "aprobada" ? "Aprobada" : "Rechazada";
