@@ -8,26 +8,52 @@
           <a href="#funciones" class="header-nav-link">Funciones</a>
           <a href="#como-funciona" class="header-nav-link">Cómo funciona</a>
           <a href="#faq" class="header-nav-link">Preguntas frecuentes</a>
-          <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
-            <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <button
+            class="theme-toggle"
+            @click="themeStore.toggle"
+            :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'"
+          >
+            <svg
+              v-if="themeStore.isDark"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
             </svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            <svg
+              v-else
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <router-link to="/login" class="header-link-icon" title="Iniciar sesión">
+          <router-link
+            to="/login"
+            class="header-link-icon"
+            title="Iniciar sesión"
+          >
             <HIcon name="login" :size="20" />
           </router-link>
-          <router-link to="/registro" class="header-btn">Comenzar gratis</router-link>
+          <router-link to="/registro" class="header-btn"
+            >Comenzar gratis</router-link
+          >
         </nav>
       </div>
     </header>
@@ -38,11 +64,17 @@
         <div class="hero-badge">✨ Diseñado para organizadores de eventos</div>
         <h1>La forma más rápida de cotizar eventos y cerrar más clientes</h1>
         <p class="hero-subtitle">
-          Crea cotizaciones profesionales, compártelas por WhatsApp, recibe aprobaciones y administra los pagos de cada evento desde un solo lugar.
+          Crea cotizaciones profesionales, compártelas por WhatsApp, recibe
+          aprobaciones y administra los pagos de cada evento desde un solo
+          lugar.
         </p>
         <div class="hero-actions">
-          <router-link to="/registro" class="btn-primary">Comenzar gratis</router-link>
-          <router-link to="/login" class="btn-secondary">Ya tengo cuenta</router-link>
+          <router-link to="/registro" class="btn-primary"
+            >Comenzar gratis</router-link
+          >
+          <router-link to="/login" class="btn-secondary"
+            >Ya tengo cuenta</router-link
+          >
         </div>
         <div class="hero-benefits">
           <span class="hero-benefit">✓ Comparte por WhatsApp</span>
@@ -117,7 +149,10 @@
       <div class="section-container">
         <div class="section-header">
           <h2>¿Todavía haces tus cotizaciones así?</h2>
-          <p>La mayoría de proveedores de eventos aún usan herramientas que les restan tiempo y profesionalismo</p>
+          <p>
+            La mayoría de proveedores de eventos aún usan herramientas que les
+            restan tiempo y profesionalismo
+          </p>
         </div>
         <div class="problem-grid">
           <div class="problem-item" v-for="item in problems" :key="item">
@@ -127,12 +162,21 @@
         </div>
         <div class="problem-transition">
           <div class="transition-arrow">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <polyline points="19 12 12 19 5 12"/>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <polyline points="19 12 12 19 5 12" />
             </svg>
           </div>
-          <p class="transition-text">Todo eso puede centralizarse en una sola plataforma</p>
+          <p class="transition-text">
+            Todo eso puede centralizarse en una sola plataforma
+          </p>
         </div>
       </div>
     </section>
@@ -142,10 +186,16 @@
       <div class="section-container">
         <div class="section-header">
           <h2>Todo lo que necesitas para vender más eventos</h2>
-          <p>Herramientas diseñadas para que te enfoques en lo que mejor haces</p>
+          <p>
+            Herramientas diseñadas para que te enfoques en lo que mejor haces
+          </p>
         </div>
         <div class="features-grid">
-          <div class="feature-card" v-for="feature in features" :key="feature.title">
+          <div
+            class="feature-card"
+            v-for="feature in features"
+            :key="feature.title"
+          >
             <div class="feature-icon" v-html="feature.icon"></div>
             <h3>{{ feature.title }}</h3>
             <p>{{ feature.desc }}</p>
@@ -159,7 +209,10 @@
       <div class="section-container">
         <div class="section-header">
           <h2>Ideal para</h2>
-          <p>Si organizas, decoras, fotografías o provees servicios para eventos, CotizaYa es para ti</p>
+          <p>
+            Si organizas, decoras, fotografías o provees servicios para eventos,
+            CotizaYa es para ti
+          </p>
         </div>
         <div class="ideal-grid">
           <div class="ideal-item" v-for="item in idealFor" :key="item.name">
@@ -182,8 +235,13 @@
             <div class="comparison-label">Antes</div>
             <ul class="comparison-list">
               <li><span class="comparison-icon">✕</span> Word y Excel</li>
-              <li><span class="comparison-icon">✕</span> PDFs enviados por correo</li>
-              <li><span class="comparison-icon">✕</span> Confirmaciones por llamada</li>
+              <li>
+                <span class="comparison-icon">✕</span> PDFs enviados por correo
+              </li>
+              <li>
+                <span class="comparison-icon">✕</span> Confirmaciones por
+                llamada
+              </li>
               <li><span class="comparison-icon">✕</span> Seguimiento manual</li>
               <li><span class="comparison-icon">✕</span> Cálculos a mano</li>
             </ul>
@@ -191,11 +249,22 @@
           <div class="comparison-card after">
             <div class="comparison-label">Con CotizaYa</div>
             <ul class="comparison-list">
-              <li><span class="comparison-icon">✓</span> Cotizaciones profesionales</li>
-              <li><span class="comparison-icon">✓</span> Comparte por WhatsApp</li>
-              <li><span class="comparison-icon">✓</span> Aprobación en línea</li>
-              <li><span class="comparison-icon">✓</span> Seguimiento organizado</li>
-              <li><span class="comparison-icon">✓</span> Cálculos automáticos</li>
+              <li>
+                <span class="comparison-icon">✓</span> Cotizaciones
+                profesionales
+              </li>
+              <li>
+                <span class="comparison-icon">✓</span> Comparte por WhatsApp
+              </li>
+              <li>
+                <span class="comparison-icon">✓</span> Aprobación en línea
+              </li>
+              <li>
+                <span class="comparison-icon">✓</span> Seguimiento organizado
+              </li>
+              <li>
+                <span class="comparison-icon">✓</span> Cálculos automáticos
+              </li>
             </ul>
           </div>
         </div>
@@ -212,11 +281,20 @@
         <div class="steps-flow">
           <div class="step">
             <div class="step-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
               </svg>
             </div>
             <div class="step-number">1</div>
@@ -224,15 +302,31 @@
             <p>Agrega conceptos, precios y datos del cliente en segundos</p>
           </div>
           <div class="step-connector">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
             </svg>
           </div>
           <div class="step">
             <div class="step-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                />
               </svg>
             </div>
             <div class="step-number">2</div>
@@ -240,16 +334,30 @@
             <p>Envía la cotización con un solo clic</p>
           </div>
           <div class="step-connector">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
             </svg>
           </div>
           <div class="step">
             <div class="step-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
             </div>
             <div class="step-number">3</div>
@@ -257,16 +365,30 @@
             <p>Desde su celular, sin necesidad de registrarse</p>
           </div>
           <div class="step-connector">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
             </svg>
           </div>
           <div class="step">
             <div class="step-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                <line x1="1" y1="10" x2="23" y2="10"/>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
               </svg>
             </div>
             <div class="step-number">4</div>
@@ -283,18 +405,51 @@
         <div class="highlight-content">
           <div class="highlight-text">
             <h2>Tus clientes reciben una experiencia profesional</h2>
-            <p>Cuando reciben tu cotización, pueden revisar cada concepto, aprobar la propuesta y conocer el estado de sus pagos desde cualquier dispositivo.</p>
+            <p>
+              Cuando reciben tu cotización, pueden revisar cada concepto,
+              aprobar la propuesta y conocer el estado de sus pagos desde
+              cualquier dispositivo.
+            </p>
             <div class="highlight-features">
               <div class="highlight-feature">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
                 <span>Aprobación con un clic</span>
               </div>
               <div class="highlight-feature">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
                 <span>Pagos por etapas</span>
               </div>
               <div class="highlight-feature">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
                 <span>100% seguro</span>
               </div>
             </div>
@@ -305,8 +460,26 @@
                 <div class="phone-statusbar">
                   <span>11:19</span>
                   <span class="phone-icons">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"
+                      />
+                    </svg>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"
+                      />
+                    </svg>
                   </span>
                 </div>
                 <div class="phone-chat-header">
@@ -319,26 +492,34 @@
                 <div class="phone-chat-bg">
                   <div class="phone-message-bubble outgoing">
                     <div class="phone-msg-text">
-                      <span class="phone-emoji">✨</span> <strong>Cotización aprobada</strong><br><br>
-                      Hola María,<br><br>
-                      Tu cotización ha sido aprobada. Los datos para el depósito:<br><br>
-                      <span class="phone-emoji">📅</span> <strong>Evento:</strong> Boda<br>
-                      <span class="phone-emoji">📍</span> <strong>Venue:</strong> Salón Events<br>
-                      <span class="phone-emoji">💰</span> <strong>Total:</strong> $45,000 MXN<br><br>
-                      ━━━━━━━━━━━━━━━<br><br>
-                      <span class="phone-emoji">🏦</span> <strong>Datos de pago:</strong><br><br>
-                      <strong>Banco:</strong> BBVA<br>
-                      <strong>CLABE:</strong> 012345678901234567<br>
-                      <strong>Titular:</strong> Josué Eventos<br><br>
-                      <span class="phone-emoji">📝</span> <strong>Anticipo:</strong> $22,500<br><br>
-                      Envíame el comprobante 🙏<br><br>
-                      Saludos,<br>Josué
+                      <span class="phone-emoji">✨</span>
+                      <strong>Cotización aprobada</strong><br /><br />
+                      Hola María,<br /><br />
+                      Tu cotización ha sido aprobada. Los datos para el
+                      depósito:<br /><br />
+                      <span class="phone-emoji">📅</span>
+                      <strong>Evento:</strong> Boda<br />
+                      <span class="phone-emoji">📍</span>
+                      <strong>Venue:</strong> Salón Events<br />
+                      <span class="phone-emoji">💰</span>
+                      <strong>Total:</strong> $45,000 MXN<br /><br />
+                      ━━━━━━━━━━━━━━━<br /><br />
+                      <span class="phone-emoji">🏦</span>
+                      <strong>Datos de pago:</strong><br /><br />
+                      <strong>Banco:</strong> BBVA<br />
+                      <strong>CLABE:</strong> 012345678901234567<br />
+                      <strong>Titular:</strong> Josué Eventos<br /><br />
+                      <span class="phone-emoji">📝</span>
+                      <strong>Anticipo:</strong> $22,500<br /><br />
+                      Envíame el comprobante 🙏<br /><br />
+                      Saludos,<br />Josué
                     </div>
                     <div class="phone-msg-time">3:49 p.m. ✓✓</div>
                   </div>
                   <div class="phone-message-bubble incoming">
                     <div class="phone-msg-text">
-                      ¡Listo Josué! Ya hice el depósito del anticipo, te envío el comprobante 📸
+                      ¡Listo Josué! Ya hice el depósito del anticipo, te envío
+                      el comprobante 📸
                     </div>
                     <div class="phone-msg-time">4:12 p.m.</div>
                   </div>
@@ -356,7 +537,12 @@
         <div class="trust-content">
           <div class="trust-badge">Diseñado para la industria de eventos</div>
           <h2>No es un software genérico de cotizaciones</h2>
-          <p>CotizaYa fue creado pensando en wedding planners, fotógrafos, decoradores, floristas y proveedores de eventos que necesitan cotizar rápido, verse profesionales y brindar una mejor experiencia a sus clientes.</p>
+          <p>
+            CotizaYa fue creado pensando en wedding planners, fotógrafos,
+            decoradores, floristas y proveedores de eventos que necesitan
+            cotizar rápido, verse profesionales y brindar una mejor experiencia
+            a sus clientes.
+          </p>
           <div class="trust-tags">
             <span class="trust-tag">Wedding Planners</span>
             <span class="trust-tag">Fotógrafos</span>
@@ -393,8 +579,13 @@
             <span class="cta-indicator">✓ Configuración en minutos</span>
           </div>
           <h2>Empieza hoy mismo</h2>
-          <p>Haz tu primera cotización en menos de cinco minutos y descubre una forma más profesional de vender tus servicios.</p>
-          <router-link to="/registro" class="btn-primary btn-large">Crear mi cuenta gratis</router-link>
+          <p>
+            Haz tu primera cotización en menos de cinco minutos y descubre una
+            forma más profesional de vender tus servicios.
+          </p>
+          <router-link to="/registro" class="btn-primary btn-large"
+            >Crear mi cuenta gratis</router-link
+          >
         </div>
       </div>
     </section>
@@ -404,7 +595,9 @@
       <div class="footer-content">
         <div class="footer-brand">
           <span class="footer-logo">CotizaYa by Vēlum</span>
-          <p class="footer-tagline">Cotizaciones profesionales para organizadores de eventos</p>
+          <p class="footer-tagline">
+            Cotizaciones profesionales para organizadores de eventos
+          </p>
         </div>
         <div class="footer-links">
           <router-link to="/login">Iniciar sesión</router-link>
@@ -419,52 +612,133 @@
 </template>
 
 <script setup>
-import { useThemeStore } from '../stores/theme'
-import HIcon from '../components/HIcon.vue'
+import { useThemeStore } from "../stores/theme";
+import HIcon from "../components/HIcon.vue";
 
-const themeStore = useThemeStore()
+const themeStore = useThemeStore();
 
 const problems = [
-  'Word y Excel desordenados',
-  'PDFs enviados por correo',
-  'Cambiar precios manualmente',
-  'Buscar conversaciones en WhatsApp',
-  'Seguimiento sin organiz',
-]
+  "Word y Excel desordenados",
+  "PDFs enviados por correo",
+  "Cambiar precios manualmente",
+  "Buscar conversaciones en WhatsApp",
+  "Seguimiento sin organización",
+];
 
 const features = [
-  { title: 'Cotizaciones profesionales', desc: 'Crea propuestas con una presentación impecable que genere confianza desde el primer momento', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' },
-  { title: 'Comparte por WhatsApp', desc: 'Envía tu cotización en segundos y evita descargar, adjuntar y volver a enviar archivos', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' },
-  { title: 'Pagos por etapas', desc: 'Define anticipos y pagos pendientes para que tus clientes siempre sepan cuánto pagar y cuándo hacerlo', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
-  { title: 'Aprobación online', desc: 'El cliente puede aceptar o rechazar la propuesta desde cualquier dispositivo', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
-  { title: 'Calendario', desc: 'Mantén todos tus eventos organizados y evita fechas duplicadas', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
-  { title: 'Seguro y privado', desc: 'Cada negocio administra únicamente su información y la de sus clientes', icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' },
-]
+  {
+    title: "Cotizaciones profesionales",
+    desc: "Crea propuestas con una presentación impecable que genere confianza desde el primer momento",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  },
+  {
+    title: "Comparte por WhatsApp",
+    desc: "Envía tu cotización en segundos y evita descargar, adjuntar y volver a enviar archivos",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  },
+  {
+    title: "Pagos por etapas",
+    desc: "Define anticipos y pagos pendientes para que tus clientes siempre sepan cuánto pagar y cuándo hacerlo",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  },
+  {
+    title: "Aprobación online",
+    desc: "El cliente puede aceptar o rechazar la propuesta desde cualquier dispositivo",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  },
+  {
+    title: "Calendario",
+    desc: "Mantén todos tus eventos organizados y evita fechas duplicadas",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  },
+  {
+    title: "Seguro y privado",
+    desc: "Cada negocio administra únicamente su información y la de sus clientes",
+    icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  },
+];
 
 const idealFor = [
-  { name: 'Wedding Planners', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
-  { name: 'Decoradores', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' },
-  { name: 'Floristas', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-4-4-8-7.5-8-12a8 8 0 0 1 16 0c0 4.5-4 8-8 12z"/><circle cx="12" cy="10" r="3"/></svg>' },
-  { name: 'Banquetes', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>' },
-  { name: 'Fotógrafos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>' },
-  { name: 'Videógrafos', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
-  { name: 'DJs', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>' },
-  { name: 'Coordinadores', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
-  { name: 'Salones', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>' },
-  { name: 'Pastelerías', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
-  { name: 'Invitaciones', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>' },
-]
+  {
+    name: "Wedding Planners",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  },
+  {
+    name: "Decoradores",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+  },
+  {
+    name: "Floristas",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-4-4-8-7.5-8-12a8 8 0 0 1 16 0c0 4.5-4 8-8 12z"/><circle cx="12" cy="10" r="3"/></svg>',
+  },
+  {
+    name: "Banquetes",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>',
+  },
+  {
+    name: "Fotógrafos",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  },
+  {
+    name: "Videógrafos",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+  },
+  {
+    name: "DJs",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>',
+  },
+  {
+    name: "Coordinadores",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  },
+  {
+    name: "Salones",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>',
+  },
+  {
+    name: "Pastelerías",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  },
+  {
+    name: "Invitaciones",
+    icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  },
+];
 
 const faqs = [
-  { q: '¿Tiene costo?', a: 'No, puedes crear tu cuenta y empezar a cotizar gratis. No hay límite de cotizaciones.' },
-  { q: '¿Puedo usar mi logo?', a: 'Sí, sube tu logo desde tu perfil y aparecerá en todas tus cotizaciones.' },
-  { q: '¿Mi cliente necesita registrarse?', a: 'No, tu cliente recibe un enlace y puede aprobar o rechazar la cotización sin crear cuenta.' },
-  { q: '¿Cómo recibe la cotización?', a: 'Le envías el enlace por WhatsApp con un solo clic, o puedes copiarlo y enviarlo por cualquier medio.' },
-  { q: '¿Puedo modificar una cotización enviada?', a: 'Sí, puedes editar cualquier cotización en cualquier momento desde tu dashboard.' },
-  { q: '¿Puedo cobrar anticipos?', a: 'Sí, define etapas de pago (anticipo, parcial, final) y el sistema lleva el control automáticamente.' },
-  { q: '¿Funciona desde el celular?', a: 'Sí, CotizaYa está optimizado para funcionar desde cualquier dispositivo, incluido el celular.' },
-  { q: '¿Hay límite de cotizaciones?', a: 'No, puedes crear todas las cotizaciones que necesites sin ningún límite.' },
-]
+  {
+    q: "¿Tiene costo?",
+    a: "No, puedes crear tu cuenta y empezar a cotizar gratis. No hay límite de cotizaciones.",
+  },
+  {
+    q: "¿Puedo usar mi logo?",
+    a: "Sí, sube tu logo desde tu perfil y aparecerá en todas tus cotizaciones.",
+  },
+  {
+    q: "¿Mi cliente necesita registrarse?",
+    a: "No, tu cliente recibe un enlace y puede aprobar o rechazar la cotización sin crear cuenta.",
+  },
+  {
+    q: "¿Cómo recibe la cotización?",
+    a: "Le envías el enlace por WhatsApp con un solo clic, o puedes copiarlo y enviarlo por cualquier medio.",
+  },
+  {
+    q: "¿Puedo modificar una cotización enviada?",
+    a: "Sí, puedes editar cualquier cotización en cualquier momento desde tu dashboard.",
+  },
+  {
+    q: "¿Puedo cobrar anticipos?",
+    a: "Sí, define etapas de pago (anticipo, parcial, final) y el sistema lleva el control automáticamente.",
+  },
+  {
+    q: "¿Funciona desde el celular?",
+    a: "Sí, CotizaYa está optimizado para funcionar desde cualquier dispositivo, incluido el celular.",
+  },
+  {
+    q: "¿Hay límite de cotizaciones?",
+    a: "No, puedes crear todas las cotizaciones que necesites sin ningún límite.",
+  },
+];
 </script>
 
 <style scoped>
@@ -528,7 +802,7 @@ const faqs = [
 
 .header-link-icon:hover {
   color: var(--black);
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .header-btn {
@@ -562,7 +836,7 @@ const faqs = [
 
 .theme-toggle:hover {
   color: var(--black);
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* Section Container */
@@ -673,7 +947,9 @@ const faqs = [
 .hero-mockup {
   background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.12), 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   border: 1px solid #e5e7eb;
   transform: perspective(1000px) rotateY(-2deg);
@@ -705,9 +981,15 @@ const faqs = [
   background: #e5e7eb;
 }
 
-.mockup-dots span:first-child { background: #ef4444; }
-.mockup-dots span:nth-child(2) { background: #f59e0b; }
-.mockup-dots span:last-child { background: #10b981; }
+.mockup-dots span:first-child {
+  background: #ef4444;
+}
+.mockup-dots span:nth-child(2) {
+  background: #f59e0b;
+}
+.mockup-dots span:last-child {
+  background: #10b981;
+}
 
 .mockup-title {
   font-size: 0.75rem;
@@ -765,8 +1047,12 @@ const faqs = [
   display: block;
 }
 
-.mockup-metric.gold .mockup-metric-value { color: var(--gold); }
-.mockup-metric.green .mockup-metric-value { color: #16a34a; }
+.mockup-metric.gold .mockup-metric-value {
+  color: var(--gold);
+}
+.mockup-metric.green .mockup-metric-value {
+  color: #16a34a;
+}
 
 .mockup-metric-label {
   font-size: 0.6rem;
@@ -1194,7 +1480,7 @@ const faqs = [
   background: #1a1a1a;
   border-radius: 28px;
   padding: 10px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
 }
 
 .phone-screen {
@@ -1408,7 +1694,7 @@ const faqs = [
 
 .cta-indicator {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .cta h2 {
@@ -1420,7 +1706,7 @@ const faqs = [
 
 .cta p {
   font-size: 1rem;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 32px;
   line-height: 1.6;
 }
@@ -1450,7 +1736,7 @@ const faqs = [
 
 .footer-tagline {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 8px;
 }
 
@@ -1462,7 +1748,7 @@ const faqs = [
 }
 
 .footer-links a {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
@@ -1474,7 +1760,7 @@ const faqs = [
 
 .footer-copyright {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive */
