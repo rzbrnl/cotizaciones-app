@@ -340,19 +340,15 @@
   }
 
   .auth-header .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
 
   .header-logo {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .auth-header .header-nav {
-    gap: 12px;
-    width: 100%;
-    justify-content: flex-end;
+    gap: 8px;
   }
 
   .auth-card {
@@ -379,24 +375,20 @@
   }
 
   .landing-header .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
 
   .landing-header .header-logo {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .landing-header .header-nav {
-    gap: 12px;
-    width: 100%;
-    justify-content: flex-end;
+    gap: 8px;
   }
 
   .landing-header .header-btn {
-    padding: 8px 16px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
 
   /* Share Modal */
