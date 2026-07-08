@@ -5,24 +5,48 @@
       <div class="header-content">
         <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
         <nav class="header-nav">
-          <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
-            <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <button
+            class="theme-toggle"
+            @click="themeStore.toggle"
+            :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'"
+          >
+            <svg
+              v-if="themeStore.isDark"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
             </svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            <svg
+              v-else
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <router-link to="/login" class="header-link">Iniciar sesión</router-link>
-          <router-link to="/registro" class="header-btn">Comenzar gratis</router-link>
+          <router-link to="/login" class="header-link"
+            >Iniciar sesión</router-link
+          >
+          <router-link to="/registro" class="header-btn"
+            >Comenzar gratis</router-link
+          >
         </nav>
       </div>
     </header>
@@ -33,12 +57,16 @@
         <div class="hero-badge">Para organizadores de eventos</div>
         <h1>Crea cotizaciones profesionales en minutos</h1>
         <p class="hero-subtitle">
-          Simplifica el proceso de cotizar, comparte con tus clientes y recibe pagos más rápido.
-          Todo desde un solo lugar.
+          Simplifica el proceso de cotizar, comparte con tus clientes y recibe
+          pagos más rápido. Todo desde un solo lugar.
         </p>
         <div class="hero-actions">
-          <router-link to="/registro" class="btn-primary">Comenzar gratis</router-link>
-          <router-link to="/login" class="btn-secondary">Ya tengo cuenta</router-link>
+          <router-link to="/registro" class="btn-primary"
+            >Comenzar gratis</router-link
+          >
+          <router-link to="/login" class="btn-secondary"
+            >Ya tengo cuenta</router-link
+          >
         </div>
         <div class="hero-stats">
           <div class="stat">
@@ -79,72 +107,138 @@
     <section class="features">
       <div class="section-header">
         <h2>Todo lo que necesitas para cotizar</h2>
-        <p>Herramientas diseñadas para organizadores de eventos profesionales</p>
+        <p>
+          Herramientas diseñadas para organizadores de eventos profesionales
+        </p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
             </svg>
           </div>
           <h3>Cotizaciones profesionales</h3>
-          <p>Crea cotizaciones elegantes con tu logo, datos del cliente y desglose de conceptos</p>
+          <p>
+            Crea cotizaciones elegantes con tu logo, datos del cliente y
+            desglose de conceptos
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+              />
             </svg>
           </div>
           <h3>Comparte por WhatsApp</h3>
-          <p>Envía cotizaciones directamente por WhatsApp con un clic. Sin copiar ni pegar</p>
+          <p>
+            Envía cotizaciones directamente por WhatsApp con un clic. Sin copiar
+            ni pegar
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
             </svg>
           </div>
           <h3>Pagos por etapas</h3>
-          <p>Divide los pagos en anticipos y restantes. Envía recordatorios automáticos</p>
+          <p>
+            Divide los pagos en anticipos y restantes. Envía recordatorios
+            automáticos
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
           </div>
           <h3>Aprobación del cliente</h3>
-          <p>Tu cliente puede aprobar o rechazar la cotización desde una página pública</p>
+          <p>
+            Tu cliente puede aprobar o rechazar la cotización desde una página
+            pública
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
           </div>
           <h3>Calendario de eventos</h3>
-          <p>Visualiza todos tus eventos en un calendario. Nunca pierdas una fecha importante</p>
+          <p>
+            Visualiza todos tus eventos en un calendario. Nunca pierdas una
+            fecha importante
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
           <h3>Seguro y privado</h3>
-          <p>Tus datos están protegidos. Cada usuario solo ve sus propias cotizaciones</p>
+          <p>
+            Tus datos están protegidos. Cada usuario solo ve sus propias
+            cotizaciones
+          </p>
         </div>
       </div>
     </section>
@@ -159,29 +253,50 @@
         <div class="step">
           <div class="step-number">1</div>
           <h3>Crea tu cotización</h3>
-          <p>Agrega los conceptos, precios y datos de tu cliente en el builder intuitivo</p>
+          <p>
+            Agrega los conceptos, precios y datos de tu cliente en el builder
+            intuitivo
+          </p>
         </div>
         <div class="step-arrow">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
           </svg>
         </div>
         <div class="step">
           <div class="step-number">2</div>
           <h3>Comparte con tu cliente</h3>
-          <p>Envía por WhatsApp o comparte el enlace público para que apruebe</p>
+          <p>
+            Envía por WhatsApp o comparte el enlace público para que apruebe
+          </p>
         </div>
         <div class="step-arrow">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
           </svg>
         </div>
         <div class="step">
           <div class="step-number">3</div>
           <h3>Recibe el pago</h3>
-          <p>El cliente paga por etapas y tú recibes notificaciones automáticas</p>
+          <p>
+            El cliente paga por etapas y tú recibes notificaciones automáticas
+          </p>
         </div>
       </div>
     </section>
@@ -195,7 +310,10 @@
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Antes tardaba 2 horas en hacer cada cotización. Ahora lo hago en 15 minutos y mis clientes aprueban más rápido"</p>
+          <p class="testimonial-text">
+            "Antes tardaba 2 horas en hacer cada cotización. Ahora lo hago en 15
+            minutos y mis clientes aprueban más rápido"
+          </p>
           <div class="testimonial-author">
             <div class="author-avatar">ML</div>
             <div class="author-info">
@@ -206,7 +324,10 @@
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"El sistema de pagos por etapas me ayudó a cobrar más rápido. Mis clientes entienden mejor cuándo pagar"</p>
+          <p class="testimonial-text">
+            "El sistema de pagos por etapas me ayudó a cobrar más rápido. Mis
+            clientes entienden mejor cuándo pagar"
+          </p>
           <div class="testimonial-author">
             <div class="author-avatar">CR</div>
             <div class="author-info">
@@ -217,7 +338,10 @@
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Lo mejor es poder compartir por WhatsApp. Mis clientes responden más rápido y cierro más ventas"</p>
+          <p class="testimonial-text">
+            "Lo mejor es poder compartir por WhatsApp. Mis clientes responden
+            más rápido y cierro más ventas"
+          </p>
           <div class="testimonial-author">
             <div class="author-avatar">AS</div>
             <div class="author-info">
@@ -234,7 +358,9 @@
       <div class="cta-content">
         <h2>¿Listo para empezar a cotizar?</h2>
         <p>Crea tu primera cotización gratis en menos de 5 minutos</p>
-        <router-link to="/registro" class="btn-primary btn-large">Comenzar gratis</router-link>
+        <router-link to="/registro" class="btn-primary btn-large"
+          >Comenzar gratis</router-link
+        >
       </div>
     </section>
 
@@ -243,7 +369,9 @@
       <div class="footer-content">
         <div class="footer-brand">
           <span class="footer-logo">CotizaYa by Vēlum</span>
-          <p class="footer-tagline">Cotizaciones profesionales para organizadores de eventos</p>
+          <p class="footer-tagline">
+            Cotizaciones profesionales para organizadores de eventos
+          </p>
         </div>
         <div class="footer-links">
           <router-link to="/login">Iniciar sesión</router-link>
@@ -258,9 +386,9 @@
 </template>
 
 <script setup>
-import { useThemeStore } from '../stores/theme'
+import { useThemeStore } from "../stores/theme";
 
-const themeStore = useThemeStore()
+const themeStore = useThemeStore();
 </script>
 
 <style scoped>
@@ -273,7 +401,7 @@ const themeStore = useThemeStore()
 .landing-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #f0f0f0;
   z-index: 100;
@@ -343,7 +471,7 @@ const themeStore = useThemeStore()
 
 .theme-toggle:hover {
   color: var(--black);
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* Hero */
@@ -456,7 +584,7 @@ const themeStore = useThemeStore()
 .hero-card {
   background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
 
@@ -473,7 +601,7 @@ const themeStore = useThemeStore()
 
 .hero-card-date {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .hero-card-body {
@@ -543,12 +671,12 @@ const themeStore = useThemeStore()
   background: var(--white);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.3s;
 }
 
 .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-4px);
 }
 
@@ -647,7 +775,7 @@ const themeStore = useThemeStore()
   background: var(--white);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .testimonial-stars {
@@ -715,7 +843,7 @@ const themeStore = useThemeStore()
 
 .cta p {
   font-size: 1rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 32px;
 }
 
@@ -744,7 +872,7 @@ const themeStore = useThemeStore()
 
 .footer-tagline {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 8px;
 }
 
@@ -756,7 +884,7 @@ const themeStore = useThemeStore()
 }
 
 .footer-links a {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
@@ -768,7 +896,7 @@ const themeStore = useThemeStore()
 
 .footer-copyright {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive */
