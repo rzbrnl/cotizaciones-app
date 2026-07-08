@@ -765,7 +765,11 @@ const faqs = [
 .landing-bg .dots-pattern {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(201, 168, 106, 0.12) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(
+    circle,
+    rgba(201, 168, 106, 0.12) 1.5px,
+    transparent 1.5px
+  );
   background-size: 32px 32px;
 }
 
@@ -797,7 +801,7 @@ const faqs = [
 .landing-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.69);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #f0f0f0;
   z-index: 100;
@@ -1183,7 +1187,7 @@ const faqs = [
 /* Problem Section */
 .problem {
   padding: 100px 0;
-  background: #f9fafb;
+  background: transparent;
 }
 
 .problem-grid {
@@ -1304,7 +1308,7 @@ const faqs = [
 /* Ideal For */
 .ideal-for {
   padding: 100px 0;
-  background: #f9fafb;
+  background: transparent;
 }
 
 .ideal-grid {
@@ -1418,7 +1422,7 @@ const faqs = [
 /* How it works */
 .how-it-works {
   padding: 100px 0;
-  background: #f9fafb;
+  background: transparent;
 }
 
 .steps-flow {
@@ -1646,7 +1650,7 @@ const faqs = [
 /* Trust */
 .trust {
   padding: 100px 0;
-  background: #f9fafb;
+  background: transparent;
 }
 
 .trust-content {
@@ -1730,7 +1734,7 @@ const faqs = [
 /* CTA */
 .cta {
   padding: 100px 0;
-  background: var(--black);
+  background: #111;
 }
 
 .cta-content {
