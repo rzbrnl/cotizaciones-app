@@ -944,4 +944,24 @@ const themeStore = useThemeStore();
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .header-logo {
+    font-size: 0.85rem;
+  }
+
+  .header-nav {
+    gap: 8px;
+  }
+
+  .header-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
 </style>

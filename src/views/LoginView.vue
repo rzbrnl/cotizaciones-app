@@ -260,4 +260,22 @@ async function handleLogin() {
 .auth-footer a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+  .auth-header {
+    padding: 12px 16px;
+  }
+
+  .header-content {
+    gap: 8px;
+  }
+
+  .header-logo {
+    font-size: 0.85rem;
+  }
+
+  .header-nav {
+    gap: 8px;
+  }
+}
 </style>
