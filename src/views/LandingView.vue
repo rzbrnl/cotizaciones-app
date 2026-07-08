@@ -5,48 +5,26 @@
       <div class="header-content">
         <router-link to="/" class="header-logo">CotizaYa by Vēlum</router-link>
         <nav class="header-nav">
-          <button
-            class="theme-toggle"
-            @click="themeStore.toggle"
-            :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'"
-          >
-            <svg
-              v-if="themeStore.isDark"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <circle cx="12" cy="12" r="5" />
-              <line x1="12" y1="1" x2="12" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="23" />
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-              <line x1="1" y1="12" x2="3" y2="12" />
-              <line x1="21" y1="12" x2="23" y2="12" />
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          <button class="theme-toggle" @click="themeStore.toggle" :title="themeStore.isDark ? 'Modo claro' : 'Modo oscuro'">
+            <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
             </svg>
-            <svg
-              v-else
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
           <router-link to="/login" class="header-link-icon" title="Iniciar sesión">
             <HIcon name="login" :size="20" />
           </router-link>
-          <router-link to="/registro" class="header-btn"
-            >Comenzar gratis</router-link
-          >
+          <router-link to="/registro" class="header-btn">Comenzar gratis</router-link>
         </nav>
       </div>
     </header>
@@ -54,49 +32,63 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-badge">Para organizadores de eventos</div>
-        <h1>Crea cotizaciones profesionales en minutos</h1>
+        <div class="hero-badge">✨ Diseñado para organizadores de eventos</div>
+        <h1>La forma más rápida de cotizar eventos y cerrar más clientes</h1>
         <p class="hero-subtitle">
-          Simplifica el proceso de cotizar, comparte con tus clientes y recibe
-          pagos más rápido. Todo desde un solo lugar.
+          Crea cotizaciones profesionales, compártelas por WhatsApp, recibe aprobaciones y administra los pagos de cada evento desde un solo lugar.
         </p>
         <div class="hero-actions">
-          <router-link to="/registro" class="btn-primary"
-            >Comenzar gratis</router-link
-          >
-          <router-link to="/login" class="btn-secondary"
-            >Ya tengo cuenta</router-link
-          >
+          <router-link to="/registro" class="btn-primary">Comenzar gratis</router-link>
+          <router-link to="/login" class="btn-secondary">Ya tengo cuenta</router-link>
         </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-value">500+</span>
-            <span class="stat-label">Cotizaciones creadas</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">98%</span>
-            <span class="stat-label">Satisfacción</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">24h</span>
-            <span class="stat-label">Respuesta promedio</span>
-          </div>
+        <div class="hero-benefits">
+          <span class="hero-benefit">✓ Comparte por WhatsApp</span>
+          <span class="hero-benefit">✓ Aprobación online</span>
+          <span class="hero-benefit">✓ Pagos por etapas</span>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <span>Cotización</span>
-            <span class="hero-card-date">3 julio 2026</span>
-          </div>
-          <div class="hero-card-body">
-            <div class="hero-card-row">
-              <span>Boda García López</span>
-              <span class="hero-card-price">$45,000</span>
+        <div class="hero-mockup">
+          <div class="mockup-header">
+            <div class="mockup-dots">
+              <span></span><span></span><span></span>
             </div>
-            <div class="hero-card-status">
-              <span class="status-dot approved"></span>
-              Aprobada
+            <span class="mockup-title">CotizaYa by Vēlum</span>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-nav">
+              <span class="mockup-nav-item active">Dashboard</span>
+              <span class="mockup-nav-item">Calendario</span>
+            </div>
+            <div class="mockup-content">
+              <div class="mockup-card">
+                <div class="mockup-card-header">
+                  <span>Boda García López</span>
+                  <span class="mockup-badge approved">Aprobada</span>
+                </div>
+                <div class="mockup-card-body">
+                  <div class="mockup-row">
+                    <span>Venue: Salón Events</span>
+                    <span class="mockup-price">$45,000</span>
+                  </div>
+                  <div class="mockup-progress">
+                    <div class="mockup-progress-bar" style="width: 60%"></div>
+                  </div>
+                  <span class="mockup-progress-text">2/3 etapas pagadas</span>
+                </div>
+              </div>
+              <div class="mockup-card">
+                <div class="mockup-card-header">
+                  <span>XV Años María</span>
+                  <span class="mockup-badge pending">Pendiente</span>
+                </div>
+                <div class="mockup-card-body">
+                  <div class="mockup-row">
+                    <span>Venue: Jardín Elegance</span>
+                    <span class="mockup-price">$28,000</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -105,249 +97,236 @@
 
     <!-- Features -->
     <section class="features">
-      <div class="section-header">
-        <h2>Todo lo que necesitas para cotizar</h2>
-        <p>
-          Herramientas diseñadas para organizadores de eventos profesionales
-        </p>
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Todo lo que necesitas para vender más eventos</h2>
+          <p>Herramientas diseñadas para que te enfoques en lo que mejor haces: crear experiencias inolvidables</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+            </div>
+            <h3>Cotizaciones profesionales</h3>
+            <p>Crea propuestas con una presentación impecable que genere confianza desde el primer momento</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <h3>Comparte por WhatsApp</h3>
+            <p>Envía tu cotización en segundos y evita descargar, adjuntar y volver a enviar archivos</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h3>Pagos por etapas</h3>
+            <p>Define anticipos y pagos pendientes para que tus clientes siempre sepan cuánto pagar y cuándo hacerlo</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3>Aprobación online</h3>
+            <p>El cliente puede aceptar o rechazar la propuesta desde cualquier dispositivo</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h3>Calendario</h3>
+            <p>Mantén todos tus eventos organizados y evita fechas duplicadas</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Seguro y privado</h3>
+            <p>Cada negocio administra únicamente su información y la de sus clientes</p>
+          </div>
+        </div>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path
-                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-              />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
-          </div>
-          <h3>Cotizaciones profesionales</h3>
-          <p>
-            Crea cotizaciones elegantes con tu logo, datos del cliente y
-            desglose de conceptos
-          </p>
+    </section>
+
+    <!-- Ideal para -->
+    <section class="ideal-for">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Ideal para</h2>
+          <p>Si organizas, decoras, fotografias o provees servicios para eventos, CotizaYa es para ti</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path
-                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-              />
-            </svg>
+        <div class="ideal-grid">
+          <div class="ideal-item" v-for="item in idealFor" :key="item">
+            <span class="ideal-icon">◆</span>
+            <span>{{ item }}</span>
           </div>
-          <h3>Comparte por WhatsApp</h3>
-          <p>
-            Envía cotizaciones directamente por WhatsApp con un clic. Sin copiar
-            ni pegar
-          </p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <h3>Pagos por etapas</h3>
-          <p>
-            Divide los pagos en anticipos y restantes. Envía recordatorios
-            automáticos
-          </p>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Deja atrás las cotizaciones complicadas</h2>
+          <p>Compara el proceso tradicional con CotizaYa</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+        <div class="comparison-grid">
+          <div class="comparison-card before">
+            <div class="comparison-label">Antes</div>
+            <ul class="comparison-list">
+              <li><span class="comparison-icon">✕</span> Word y Excel</li>
+              <li><span class="comparison-icon">✕</span> PDFs enviados por correo</li>
+              <li><span class="comparison-icon">✕</span> Confirmaciones por llamada</li>
+              <li><span class="comparison-icon">✕</span> Seguimiento manual</li>
+              <li><span class="comparison-icon">✕</span> Cálculos a mano</li>
+            </ul>
           </div>
-          <h3>Aprobación del cliente</h3>
-          <p>
-            Tu cliente puede aprobar o rechazar la cotización desde una página
-            pública
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
+          <div class="comparison-card after">
+            <div class="comparison-label">Con CotizaYa</div>
+            <ul class="comparison-list">
+              <li><span class="comparison-icon">✓</span> Cotizaciones profesionales</li>
+              <li><span class="comparison-icon">✓</span> Comparte por WhatsApp</li>
+              <li><span class="comparison-icon">✓</span> Aprobación en línea</li>
+              <li><span class="comparison-icon">✓</span> Seguimiento organizado</li>
+              <li><span class="comparison-icon">✓</span> Cálculos automáticos</li>
+            </ul>
           </div>
-          <h3>Calendario de eventos</h3>
-          <p>
-            Visualiza todos tus eventos en un calendario. Nunca pierdas una
-            fecha importante
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-          </div>
-          <h3>Seguro y privado</h3>
-          <p>
-            Tus datos están protegidos. Cada usuario solo ve sus propias
-            cotizaciones
-          </p>
         </div>
       </div>
     </section>
 
     <!-- How it works -->
     <section class="how-it-works">
-      <div class="section-header">
-        <h2>¿Cómo funciona?</h2>
-        <p>Tres pasos simples para empezar a cotizar</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Crea tu cotización</h3>
-          <p>
-            Agrega los conceptos, precios y datos de tu cliente en el builder
-            intuitivo
-          </p>
+      <div class="section-container">
+        <div class="section-header">
+          <h2>¿Cómo funciona?</h2>
+          <p>De cotización a cobro en cuatro pasos simples</p>
         </div>
-        <div class="step-arrow">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Comparte con tu cliente</h3>
-          <p>
-            Envía por WhatsApp o comparte el enlace público para que apruebe
-          </p>
-        </div>
-        <div class="step-arrow">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Recibe el pago</h3>
-          <p>
-            El cliente paga por etapas y tú recibes notificaciones automáticas
-          </p>
+        <div class="steps-flow">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Crea tu cotización</h3>
+              <p>Agrega conceptos, precios y datos del cliente en segundos</p>
+            </div>
+          </div>
+          <div class="step-connector">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Compártela por WhatsApp</h3>
+              <p>Envía la cotización con un solo clic</p>
+            </div>
+          </div>
+          <div class="step-connector">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Tu cliente la aprueba</h3>
+              <p>Desde su celular, sin necesidad de registrarse</p>
+            </div>
+          </div>
+          <div class="step-connector">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Recibe el pago</h3>
+              <p>Por etapas, con recordatorios automáticos</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
-      <div class="section-header">
-        <h2>Lo que dicen nuestros usuarios</h2>
-        <p>Organizadores de eventos que ya confían en CotizaYa</p>
+    <!-- Highlight -->
+    <section class="highlight">
+      <div class="section-container">
+        <div class="highlight-content">
+          <div class="highlight-text">
+            <h2>Más tiempo para crear, menos tiempo para cobrar</h2>
+            <p>CotizaYa automatiza el proceso de cotización y cobro para que te enfoques en lo que mejor haces: crear experiencias memorables para tus clientes.</p>
+            <div class="highlight-stats">
+              <div class="highlight-stat">
+                <span class="highlight-stat-value">3 min</span>
+                <span class="highlight-stat-label">Para crear una cotización</span>
+              </div>
+              <div class="highlight-stat">
+                <span class="highlight-stat-value">1 clic</span>
+                <span class="highlight-stat-label">Para compartirla</span>
+              </div>
+              <div class="highlight-stat">
+                <span class="highlight-stat-value">24h</span>
+                <span class="highlight-stat-label">Tiempo promedio de respuesta</span>
+              </div>
+            </div>
+          </div>
+          <div class="highlight-visual">
+            <div class="highlight-phone">
+              <div class="phone-screen">
+                <div class="phone-header">
+                  <span class="phone-time">9:41</span>
+                  <span class="phone-signal">●●●●</span>
+                </div>
+                <div class="phone-content">
+                  <div class="phone-message">
+                    <p>✨ <strong>Cotización aprobada</strong></p>
+                    <p>Hola María, tu cotización para el evento ha sido aprobada.</p>
+                    <p>📅 Evento: Boda</p>
+                    <p>💰 Total: $45,000 MXN</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">
-            "Antes tardaba 2 horas en hacer cada cotización. Ahora lo hago en 15
-            minutos y mis clientes aprueban más rápido"
-          </p>
-          <div class="testimonial-author">
-            <div class="author-avatar">ML</div>
-            <div class="author-info">
-              <span class="author-name">María López</span>
-              <span class="author-role">Organizadora de bodas</span>
-            </div>
-          </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Preguntas frecuentes</h2>
         </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">
-            "El sistema de pagos por etapas me ayudó a cobrar más rápido. Mis
-            clientes entienden mejor cuándo pagar"
-          </p>
-          <div class="testimonial-author">
-            <div class="author-avatar">CR</div>
-            <div class="author-info">
-              <span class="author-name">Carlos Ramírez</span>
-              <span class="author-role">Decorador de eventos</span>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">
-            "Lo mejor es poder compartir por WhatsApp. Mis clientes responden
-            más rápido y cierro más ventas"
-          </p>
-          <div class="testimonial-author">
-            <div class="author-avatar">AS</div>
-            <div class="author-info">
-              <span class="author-name">Ana Sánchez</span>
-              <span class="author-role">Florista profesional</span>
-            </div>
+        <div class="faq-grid">
+          <div class="faq-item" v-for="faq in faqs" :key="faq.q">
+            <h3>{{ faq.q }}</h3>
+            <p>{{ faq.a }}</p>
           </div>
         </div>
       </div>
@@ -355,12 +334,12 @@
 
     <!-- CTA -->
     <section class="cta">
-      <div class="cta-content">
-        <h2>¿Listo para empezar a cotizar?</h2>
-        <p>Crea tu primera cotización gratis en menos de 5 minutos</p>
-        <router-link to="/registro" class="btn-primary btn-large"
-          >Comenzar gratis</router-link
-        >
+      <div class="section-container">
+        <div class="cta-content">
+          <h2>Empieza hoy mismo</h2>
+          <p>Haz tu primera cotización en menos de cinco minutos y descubre una forma más profesional de vender tus servicios.</p>
+          <router-link to="/registro" class="btn-primary btn-large">Crear mi cuenta gratis</router-link>
+        </div>
       </div>
     </section>
 
@@ -369,9 +348,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <span class="footer-logo">CotizaYa by Vēlum</span>
-          <p class="footer-tagline">
-            Cotizaciones profesionales para organizadores de eventos
-          </p>
+          <p class="footer-tagline">Cotizaciones profesionales para organizadores de eventos</p>
         </div>
         <div class="footer-links">
           <router-link to="/login">Iniciar sesión</router-link>
@@ -386,10 +363,36 @@
 </template>
 
 <script setup>
-import { useThemeStore } from "../stores/theme";
-import HIcon from "../components/HIcon.vue";
+import { useThemeStore } from '../stores/theme'
+import HIcon from '../components/HIcon.vue'
 
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
+
+const idealFor = [
+  'Wedding Planners',
+  'Decoradores',
+  'Floristas',
+  'Banquetes',
+  'Fotógrafos',
+  'Videógrafos',
+  'DJs',
+  'Coordinadores de eventos',
+  'Salones de eventos',
+  'Rentas de mobiliario',
+  'Pastelerías',
+  'Invitaciones digitales',
+]
+
+const faqs = [
+  { q: '¿Tiene costo?', a: 'No, puedes crear tu cuenta y empezar a cotizar gratis. No hay límite de cotizaciones.' },
+  { q: '¿Puedo usar mi logo?', a: 'Sí, sube tu logo desde tu perfil y aparecerá en todas tus cotizaciones.' },
+  { q: '¿Mi cliente necesita registrarse?', a: 'No, tu cliente recibe un enlace y puede aprobar o rechazar la cotización sin crear cuenta.' },
+  { q: '¿Cómo recibe la cotización?', a: 'Le envías el enlace por WhatsApp con un solo clic, o puedes copiarlo y enviarlo por cualquier medio.' },
+  { q: '¿Puedo modificar una cotización enviada?', a: 'Sí, puedes editar cualquier cotización en cualquier momento desde tu dashboard.' },
+  { q: '¿Puedo cobrar anticipos?', a: 'Sí, define etapas de pago (anticipo, parcial, final) y el sistema lleva el control automáticamente.' },
+  { q: '¿Funciona desde el celular?', a: 'Sí, CotizaYa está optimizado para funcionar desde cualquier dispositivo, incluido el celular.' },
+  { q: '¿Hay límite de cotizaciones?', a: 'No, puedes crear todas las cotizaciones que necesites sin ningún límite.' },
+]
 </script>
 
 <style scoped>
@@ -402,7 +405,7 @@ const themeStore = useThemeStore();
 .landing-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #f0f0f0;
   z-index: 100;
@@ -430,17 +433,6 @@ const themeStore = useThemeStore();
   gap: 24px;
 }
 
-.header-link {
-  font-size: 0.9rem;
-  color: var(--gray-text);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.header-link:hover {
-  color: var(--black);
-}
-
 .header-link-icon {
   color: var(--gray-text);
   display: flex;
@@ -453,7 +445,7 @@ const themeStore = useThemeStore();
 
 .header-link-icon:hover {
   color: var(--black);
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0,0,0,0.05);
 }
 
 .header-btn {
@@ -487,7 +479,14 @@ const themeStore = useThemeStore();
 
 .theme-toggle:hover {
   color: var(--black);
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0,0,0,0.05);
+}
+
+/* Section Container */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
 /* Hero */
@@ -510,9 +509,9 @@ const themeStore = useThemeStore();
   display: inline-block;
   background: rgba(201, 168, 106, 0.1);
   color: var(--gold);
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 24px;
 }
@@ -521,7 +520,7 @@ const themeStore = useThemeStore();
   font-size: 2.8rem;
   font-weight: 700;
   color: var(--black);
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 20px;
 }
 
@@ -535,7 +534,7 @@ const themeStore = useThemeStore();
 .hero-actions {
   display: flex;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .btn-primary {
@@ -571,91 +570,161 @@ const themeStore = useThemeStore();
   border-color: var(--black);
 }
 
-.hero-stats {
+.hero-benefits {
   display: flex;
-  gap: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.stat {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.stat-label {
-  font-size: 0.8rem;
+.hero-benefit {
+  font-size: 0.85rem;
   color: var(--gray-text);
 }
 
+/* Hero Mockup */
 .hero-visual {
   flex: 1;
-  max-width: 400px;
+  max-width: 500px;
 }
 
-.hero-card {
+.hero-mockup {
   background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
   overflow: hidden;
+  border: 1px solid #e5e7eb;
 }
 
-.hero-card-header {
-  background: var(--black);
-  padding: 24px;
-  color: var(--white);
+.mockup-header {
+  background: #f9fafb;
+  padding: 12px 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
+  gap: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mockup-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.mockup-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e5e7eb;
+}
+
+.mockup-dots span:first-child { background: #ef4444; }
+.mockup-dots span:nth-child(2) { background: #f59e0b; }
+.mockup-dots span:last-child { background: #10b981; }
+
+.mockup-title {
+  font-size: 0.75rem;
+  color: var(--gray-text);
   font-weight: 500;
 }
 
-.hero-card-date {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+.mockup-body {
+  padding: 16px;
 }
 
-.hero-card-body {
-  padding: 24px;
+.mockup-nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.hero-card-row {
+.mockup-nav-item {
+  font-size: 0.75rem;
+  color: var(--gray-text);
+  font-weight: 500;
+}
+
+.mockup-nav-item.active {
+  color: var(--black);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+.mockup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mockup-card {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.mockup-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-}
-
-.hero-card-price {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.hero-card-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin-bottom: 8px;
   font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.mockup-badge {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.mockup-badge.approved {
+  background: #dcfce7;
   color: #16a34a;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+.mockup-badge.pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.mockup-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--gray-text);
+  margin-bottom: 8px;
+}
+
+.mockup-price {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.mockup-progress {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.mockup-progress-bar {
+  height: 100%;
   background: #16a34a;
+  border-radius: 2px;
+}
+
+.mockup-progress-text {
+  font-size: 0.7rem;
+  color: #16a34a;
 }
 
 /* Features */
 .features {
+  padding: 100px 0;
   background: #f9fafb;
-  padding: 100px 40px;
 }
 
 .section-header {
@@ -679,20 +748,18 @@ const themeStore = useThemeStore();
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .feature-card {
   background: var(--white);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   transition: all 0.3s;
 }
 
 .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   transform: translateY(-4px);
 }
 
@@ -721,131 +788,301 @@ const themeStore = useThemeStore();
   line-height: 1.5;
 }
 
-/* How it works */
-.how-it-works {
-  padding: 100px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+/* Ideal For */
+.ideal-for {
+  padding: 100px 0;
 }
 
-.steps {
+.ideal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.ideal-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: #f9fafb;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--black);
+  transition: all 0.2s;
+}
+
+.ideal-item:hover {
+  background: rgba(201, 168, 106, 0.1);
+  transform: translateY(-2px);
+}
+
+.ideal-icon {
+  color: var(--gold);
+  font-size: 0.8rem;
+}
+
+/* Comparison */
+.comparison {
+  padding: 100px 0;
+  background: #f9fafb;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+
+.comparison-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.comparison-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid;
+}
+
+.comparison-card.before .comparison-label {
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}
+
+.comparison-card.after .comparison-label {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.comparison-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  color: var(--black);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.comparison-list li:last-child {
+  border-bottom: none;
+}
+
+.comparison-icon {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.comparison-card.before .comparison-icon {
+  color: #9ca3af;
+}
+
+.comparison-card.after .comparison-icon {
+  color: #16a34a;
+}
+
+/* How it works */
+.how-it-works {
+  padding: 100px 0;
+}
+
+.steps-flow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
 }
 
 .step {
   flex: 1;
-  max-width: 280px;
+  max-width: 220px;
   text-align: center;
-  padding: 32px 24px;
 }
 
 .step-number {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   background: var(--gold);
   color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
 }
 
-.step h3 {
-  font-size: 1.1rem;
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+.step-content p {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+}
+
+.step-connector {
+  color: #d1d5db;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+/* Highlight */
+.highlight {
+  padding: 100px 0;
+  background: #f9fafb;
+}
+
+.highlight-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.highlight-text {
+  flex: 1;
+}
+
+.highlight-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.highlight-text p {
+  font-size: 1rem;
+  color: var(--gray-text);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.highlight-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.highlight-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.highlight-stat-label {
+  font-size: 0.8rem;
+  color: var(--gray-text);
+}
+
+.highlight-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.highlight-phone {
+  width: 260px;
+  background: #1a1a1a;
+  border-radius: 24px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.phone-screen {
+  background: #f5f5f5;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.phone-header {
+  background: #1a1a1a;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.phone-content {
+  padding: 16px;
+}
+
+.phone-message {
+  background: white;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.phone-message p {
+  margin: 0 0 6px;
+}
+
+.phone-message p:last-child {
+  margin-bottom: 0;
+}
+
+/* FAQ */
+.faq {
+  padding: 100px 0;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.faq-item {
+  padding: 24px;
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+.faq-item h3 {
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--black);
   margin-bottom: 8px;
 }
 
-.step p {
-  font-size: 0.9rem;
+.faq-item p {
+  font-size: 0.88rem;
   color: var(--gray-text);
-}
-
-.step-arrow {
-  color: #ccc;
-  flex-shrink: 0;
-}
-
-/* Testimonials */
-.testimonials {
-  background: #f9fafb;
-  padding: 100px 40px;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.testimonial-card {
-  background: var(--white);
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.testimonial-stars {
-  color: var(--gold);
-  font-size: 1.2rem;
-  margin-bottom: 16px;
-}
-
-.testimonial-text {
-  font-size: 0.95rem;
-  color: var(--black);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.author-avatar {
-  width: 44px;
-  height: 44px;
-  background: var(--gold);
-  color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.author-name {
-  display: block;
-  font-weight: 600;
-  color: var(--black);
-  font-size: 0.9rem;
-}
-
-.author-role {
-  font-size: 0.8rem;
-  color: var(--gray-text);
+  line-height: 1.5;
 }
 
 /* CTA */
 .cta {
+  padding: 100px 0;
   background: var(--black);
-  padding: 100px 40px;
-  text-align: center;
 }
 
 .cta-content {
+  text-align: center;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -859,8 +1096,9 @@ const themeStore = useThemeStore();
 
 .cta p {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255,255,255,0.7);
   margin-bottom: 32px;
+  line-height: 1.6;
 }
 
 .btn-large {
@@ -888,7 +1126,7 @@ const themeStore = useThemeStore();
 
 .footer-tagline {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255,255,255,0.5);
   margin-top: 8px;
 }
 
@@ -900,7 +1138,7 @@ const themeStore = useThemeStore();
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255,255,255,0.7);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
@@ -912,7 +1150,7 @@ const themeStore = useThemeStore();
 
 .footer-copyright {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255,255,255,0.4);
 }
 
 /* Responsive */
@@ -927,7 +1165,7 @@ const themeStore = useThemeStore();
     justify-content: center;
   }
 
-  .hero-stats {
+  .hero-benefits {
     justify-content: center;
   }
 
@@ -935,17 +1173,38 @@ const themeStore = useThemeStore();
     max-width: 100%;
   }
 
-  .features-grid,
-  .testimonials-grid {
+  .features-grid {
     grid-template-columns: 1fr;
   }
 
-  .steps {
-    flex-direction: column;
+  .ideal-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .step-arrow {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps-flow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-connector {
     transform: rotate(90deg);
+  }
+
+  .highlight-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .highlight-stats {
+    justify-content: center;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
   }
 
   .hero h1 {
@@ -963,7 +1222,7 @@ const themeStore = useThemeStore();
 
 @media (max-width: 480px) {
   .header-content {
-    padding: 4px 10px;
+    padding: 12px 16px;
     gap: 8px;
   }
 
@@ -976,8 +1235,12 @@ const themeStore = useThemeStore();
   }
 
   .header-btn {
-    padding: 6px 12px;
+    padding: 8px 16px;
     font-size: 0.75rem;
+  }
+
+  .ideal-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
