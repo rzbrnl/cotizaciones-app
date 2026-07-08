@@ -298,16 +298,42 @@
           <div class="highlight-visual">
             <div class="highlight-phone">
               <div class="phone-screen">
-                <div class="phone-header">
-                  <span class="phone-time">9:41</span>
-                  <span class="phone-signal">●●●●</span>
+                <div class="phone-statusbar">
+                  <span>11:19</span>
+                  <span class="phone-icons">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+                  </span>
                 </div>
-                <div class="phone-content">
-                  <div class="phone-message">
-                    <p>✨ <strong>Cotización aprobada</strong></p>
-                    <p>Hola María, tu cotización para el evento ha sido aprobada.</p>
-                    <p>📅 Evento: Boda</p>
-                    <p>💰 Total: $45,000 MXN</p>
+                <div class="phone-chat-header">
+                  <span class="phone-back">‹</span>
+                  <div class="phone-contact">
+                    <span class="phone-contact-name">María García</span>
+                    <span class="phone-contact-status">online</span>
+                  </div>
+                </div>
+                <div class="phone-chat-bg">
+                  <div class="phone-message-bubble">
+                    <div class="phone-msg-text">
+                      <span class="phone-emoji">✨</span> <strong>Cotización aprobada</strong><br><br>
+                      Hola María,<br><br>
+                      Tu cotización ha sido aprobada. A continuación los datos para realizar el depósito:<br><br>
+                      <span class="phone-emoji">📅</span> <strong>Evento:</strong> Boda<br>
+                      <span class="phone-emoji">📍</span> <strong>Venue:</strong> Salón Events<br>
+                      <span class="phone-emoji">📆</span> <strong>Fecha:</strong> 2026-08-15<br>
+                      <span class="phone-emoji">💰</span> <strong>Total:</strong> $45,000 MXN<br><br>
+                      ━━━━━━━━━━━━━━━━━━━━━<br><br>
+                      <span class="phone-emoji">🏦</span> <strong>Datos de pago:</strong><br><br>
+                      <strong>Banco:</strong> BBVA<br>
+                      <strong>CLABE:</strong> 012345678901234567<br>
+                      <strong>Cuenta:</strong> 1234567890<br>
+                      <strong>Titular:</strong> Josué Eventos<br><br>
+                      <span class="phone-emoji">📝</span> <strong>Próximo pago:</strong> Anticipo - $22,500<br><br>
+                      Una vez realizado el pago, por favor envíame el comprobante 🙏<br><br>
+                      Saludos,<br>
+                      Josué
+                    </div>
+                    <div class="phone-msg-time">3:49 p.m. ✓✓</div>
                   </div>
                 </div>
               </div>
@@ -1001,48 +1027,105 @@ const faqs = [
 }
 
 .highlight-phone {
-  width: 260px;
+  width: 300px;
   background: #1a1a1a;
-  border-radius: 24px;
-  padding: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  border-radius: 28px;
+  padding: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
 }
 
 .phone-screen {
-  background: #f5f5f5;
-  border-radius: 16px;
+  background: #0b141a;
+  border-radius: 20px;
   overflow: hidden;
-  min-height: 320px;
 }
 
-.phone-header {
-  background: #1a1a1a;
+.phone-statusbar {
+  background: #1f2c33;
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.7rem;
+  color: white;
+  font-weight: 500;
+}
+
+.phone-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
   color: white;
 }
 
-.phone-content {
-  padding: 16px;
+.phone-chat-header {
+  background: #1f2c33;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #2a3942;
 }
 
-.phone-message {
-  background: white;
-  border-radius: 12px;
-  padding: 14px;
+.phone-back {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 300;
+}
+
+.phone-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-contact-name {
   font-size: 0.8rem;
-  line-height: 1.5;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  color: white;
+  font-weight: 500;
 }
 
-.phone-message p {
-  margin: 0 0 6px;
+.phone-contact-status {
+  font-size: 0.65rem;
+  color: #8696a0;
 }
 
-.phone-message p:last-child {
-  margin-bottom: 0;
+.phone-chat-bg {
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23231f20' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  padding: 12px;
+  min-height: 280px;
+  overflow-y: auto;
+}
+
+.phone-message-bubble {
+  background: #005c4b;
+  border-radius: 8px 8px 0 8px;
+  padding: 8px 10px;
+  max-width: 95%;
+  float: right;
+  clear: both;
+}
+
+.phone-msg-text {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #e9edef;
+  word-wrap: break-word;
+}
+
+.phone-msg-text strong {
+  color: #e9edef;
+}
+
+.phone-emoji {
+  font-size: 0.8rem;
+}
+
+.phone-msg-time {
+  font-size: 0.6rem;
+  color: #8696a0;
+  text-align: right;
+  margin-top: 4px;
+  clear: both;
 }
 
 /* FAQ */
