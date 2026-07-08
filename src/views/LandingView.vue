@@ -41,9 +41,9 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <router-link to="/login" class="header-link"
-            >Iniciar sesión</router-link
-          >
+          <router-link to="/login" class="header-link-icon" title="Iniciar sesión">
+            <HIcon name="login" :size="20" />
+          </router-link>
           <router-link to="/registro" class="header-btn"
             >Comenzar gratis</router-link
           >

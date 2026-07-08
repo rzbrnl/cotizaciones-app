@@ -20,7 +20,9 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
-          <router-link to="/registro" class="header-btn">Crear cuenta</router-link>
+          <router-link to="/registro" class="header-link-icon" title="Crear cuenta">
+            <HIcon name="login" :size="20" />
+          </router-link>
         </nav>
       </div>
     </header>
