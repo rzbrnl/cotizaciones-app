@@ -88,6 +88,10 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
+    console.log('Resend response:', JSON.stringify(data));
+    console.log('To email:', toEmail);
+    console.log('Subject:', subject);
+
     if (!response.ok) {
       return res.status(response.status).json({ error: data });
     }
