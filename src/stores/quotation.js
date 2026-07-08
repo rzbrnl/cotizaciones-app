@@ -322,10 +322,79 @@ export const useQuotationStore = defineStore('quotation', () => {
     active.value.paymentStages = stages
   }
 
+  // Templates
+  const templates = ref([])
+
+  async function loadTemplates() {
+    const auth = useAuthStore()
+    if (!auth.currentUser) return
+
+    const { data } = await supabase
+      .from('quotation_templates')
+      .select('*')
+      .eq('user_id', auth.currentUser.id)
+      .order('created_at', { ascending: false })
+
+    templates.value = data || []
+  }
+
+  async function saveTemplate(name) {
+    const auth = useAuthStore()
+    if (!auth.currentUser) return
+
+    const templateData = {
+      name,
+      eventType: active.value.eventType,
+      venue: active.value.venue,
+      sections: active.value.sections,
+      notes: active.value.notes,
+      paymentStages: active.value.paymentStages,
+    }
+
+    const { data, error } = await supabase
+      .from('quotation_templates')
+      .insert({
+        user_id: auth.currentUser.id,
+        name,
+        data: templateData,
+      })
+      .select()
+      .single()
+
+    if (!error) {
+      templates.value.unshift(data)
+    }
+  }
+
+  async function loadTemplate(templateId) {
+    const template = templates.value.find(t => t.id === templateId)
+    if (!template) return
+
+    active.value.eventType = template.data.eventType || ''
+    active.value.venue = template.data.venue || ''
+    active.value.sections = template.data.sections || [{ id: generateId(), name: 'Sección', items: [{ id: generateId(), name: '', qty: 1, unitPrice: 0 }] }]
+    active.value.notes = template.data.notes || ''
+    active.value.paymentStages = template.data.paymentStages || []
+  }
+
+  async function deleteTemplate(templateId) {
+    const auth = useAuthStore()
+    if (!auth.currentUser) return
+
+    await supabase
+      .from('quotation_templates')
+      .delete()
+      .eq('id', templateId)
+      .eq('user_id', auth.currentUser.id)
+
+    templates.value = templates.value.filter(t => t.id !== templateId)
+  }
+
   return {
     active,
     savedList,
     saving,
+    templates,
     grandTotal,
     pendingReminders,
     metrics,
@@ -345,5 +414,9 @@ export const useQuotationStore = defineStore('quotation', () => {
     getPaymentStatus,
     addPayment,
     updatePaymentStages,
+    loadTemplates,
+    saveTemplate,
+    loadTemplate,
+    deleteTemplate,
   }
 })

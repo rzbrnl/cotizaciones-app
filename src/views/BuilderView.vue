@@ -45,8 +45,11 @@
           </button>
         </div>
       </div>
+      <button class="topbar-icon-btn" @click="templateOpen = true" title="Plantillas">
+        <HIcon name="document" :size="22" :stroke-width="1.5" />
+      </button>
       <button class="topbar-icon-btn" @click="handleSave" title="Guardar">
-        <HIcon name="save" :size="20" :stroke-width="1.5" />
+        <HIcon name="save" :size="22" :stroke-width="1.5" />
       </button>
       <button class="topbar-icon-btn" @click="handleShare" title="Compartir">
         <HIcon name="share" :size="20" :stroke-width="1.5" />
@@ -265,6 +268,12 @@
       @export-pdf="exportPdf"
     />
 
+    <TemplateModal
+      :open="templateOpen"
+      @close="templateOpen = false"
+      @load="onTemplateLoad"
+    />
+
     <!-- Keyboard shortcuts help -->
     <div class="shortcuts-help" @click="showShortcuts = !showShortcuts">
       <svg
@@ -302,6 +311,7 @@ import QuoteHeader from "../components/QuoteHeader.vue";
 import ClientInfoForm from "../components/ClientInfoForm.vue";
 import ShareModal from "../components/ShareModal.vue";
 import PaymentMilestones from "../components/PaymentMilestones.vue";
+import TemplateModal from "../components/TemplateModal.vue";
 import HIcon from "../components/HIcon.vue";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -313,6 +323,7 @@ const route = useRoute();
 const router = useRouter();
 
 const shareOpen = ref(false);
+const templateOpen = ref(false);
 const statusOpen = ref(false);
 const statusDropdownRef = ref(null);
 const isDirty = ref(false);
@@ -398,6 +409,7 @@ const allItems = computed(() => {
 });
 
 onMounted(async () => {
+  await store.loadTemplates();
   if (route.params.id) {
     await store.loadAll();
     const found = await store.loadById(route.params.id);
@@ -408,6 +420,10 @@ onMounted(async () => {
     store.createNew();
   }
 });
+
+function onTemplateLoad() {
+  isDirty.value = true;
+}
 
 function addItem() {
   const sections = store.active.sections;
