@@ -803,23 +803,31 @@ const faqs = [
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 168, 106, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 106, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
+    linear-gradient(rgba(201, 168, 106, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 106, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 @keyframes drift {
   0%, 100% {
     transform: translate(0, 0) scale(1);
+    opacity: 1;
   }
-  25% {
-    transform: translate(50px, -40px) scale(1.1);
+  20% {
+    transform: translate(80px, -60px) scale(1.15);
+    opacity: 0.8;
   }
-  50% {
-    transform: translate(-40px, 30px) scale(0.9);
+  40% {
+    transform: translate(-60px, 40px) scale(0.85);
+    opacity: 1;
   }
-  75% {
-    transform: translate(30px, 20px) scale(1.05);
+  60% {
+    transform: translate(50px, 30px) scale(1.1);
+    opacity: 0.7;
+  }
+  80% {
+    transform: translate(-40px, -20px) scale(0.95);
+    opacity: 1;
   }
 }
 
