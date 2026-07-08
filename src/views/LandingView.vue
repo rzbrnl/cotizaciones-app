@@ -60,6 +60,13 @@
 
     <!-- Hero -->
     <section class="hero">
+      <div class="hero-bg">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="grid-pattern"></div>
+      </div>
       <div class="hero-content">
         <div class="hero-badge">✨ Diseñado para organizadores de eventos</div>
         <h1>La forma más rápida de cotizar eventos y cerrar más clientes</h1>
@@ -860,30 +867,78 @@ const faqs = [
   overflow: hidden;
 }
 
-.hero::before {
-  content: '';
+.hero-bg {
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(201, 168, 106, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+  inset: 0;
+  overflow: hidden;
   z-index: 0;
 }
 
-.hero::after {
-  content: '';
+.hero-bg .dot {
   position: absolute;
-  bottom: -30%;
-  left: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(201, 168, 106, 0.04) 0%, transparent 70%);
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+  background: rgba(201, 168, 106, 0.15);
+  animation: float 20s ease-in-out infinite;
+}
+
+.hero-bg .dot:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.hero-bg .dot:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  left: 10%;
+  animation-delay: -5s;
+}
+
+.hero-bg .dot:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  left: -50px;
+  animation-delay: -10s;
+}
+
+.hero-bg .dot:nth-child(4) {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  right: 30%;
+  animation-delay: -15s;
+}
+
+.hero-bg .grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 168, 106, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 106, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.05);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.1;
+  }
+  75% {
+    transform: translate(20px, 10px) scale(1.02);
+    opacity: 0.18;
+  }
 }
 
 .hero-content,
