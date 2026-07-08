@@ -155,7 +155,7 @@
     align-items: flex-start;
   }
 
-  .header-logo {
+  .header-banner .header-logo {
     position: absolute;
     top: 20px;
     right: 20px;
