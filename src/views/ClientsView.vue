@@ -170,6 +170,7 @@ import { useRouter } from 'vue-router'
 import { useClientsStore } from '../stores/clients'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
+import { useConfirmStore } from '../stores/confirm'
 import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 
@@ -177,6 +178,7 @@ const router = useRouter()
 const clientsStore = useClientsStore()
 const quotationStore = useQuotationStore()
 const toast = useToastStore()
+const confirmStore = useConfirmStore()
 
 const search = ref('')
 const showAddModal = ref(false)
@@ -243,9 +245,20 @@ async function saveClient() {
 }
 
 async function deleteClient(client) {
-  if (confirm(`¿Eliminar a ${client.name}?`)) {
-    await clientsStore.deleteClient(client.id)
-    toast.success('Cliente eliminado')
+  const answer = await confirmStore.show({
+    title: 'Eliminar cliente',
+    message: `¿Estás seguro de que quieres eliminar a ${client.name}? Esta acción no se puede deshacer.`,
+    confirmText: 'Eliminar',
+    cancelText: 'Cancelar',
+    type: 'danger',
+  })
+  if (answer) {
+    const success = await clientsStore.deleteClient(client.id)
+    if (success) {
+      toast.success('Cliente eliminado')
+    } else {
+      toast.error('No se pudo eliminar el cliente')
+    }
   }
 }
 

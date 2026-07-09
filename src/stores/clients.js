@@ -45,7 +45,7 @@ export const useClientsStore = defineStore('clients', () => {
 
   async function updateClient(clientId, clientData) {
     const auth = useAuthStore()
-    if (!auth.currentUser) return
+    if (!auth.currentUser) return false
 
     const { error } = await supabase
       .from('clients')
@@ -53,25 +53,35 @@ export const useClientsStore = defineStore('clients', () => {
       .eq('id', clientId)
       .eq('user_id', auth.currentUser.id)
 
-    if (!error) {
-      const index = clients.value.findIndex(c => c.id === clientId)
-      if (index !== -1) {
-        clients.value[index] = { ...clients.value[index], ...clientData }
-      }
+    if (error) {
+      console.error('Error updating client:', error)
+      return false
     }
+
+    const index = clients.value.findIndex(c => c.id === clientId)
+    if (index !== -1) {
+      clients.value[index] = { ...clients.value[index], ...clientData }
+    }
+    return true
   }
 
   async function deleteClient(clientId) {
     const auth = useAuthStore()
-    if (!auth.currentUser) return
+    if (!auth.currentUser) return false
 
-    await supabase
+    const { error } = await supabase
       .from('clients')
       .delete()
       .eq('id', clientId)
       .eq('user_id', auth.currentUser.id)
 
+    if (error) {
+      console.error('Error deleting client:', error)
+      return false
+    }
+
     clients.value = clients.value.filter(c => c.id !== clientId)
+    return true
   }
 
   async function getClientQuotations(clientId) {
