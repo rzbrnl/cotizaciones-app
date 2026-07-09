@@ -26,7 +26,7 @@ export const useClientsStore = defineStore('clients', () => {
     const auth = useAuthStore()
     if (!auth.currentUser) return null
 
-    // Check for duplicate email
+    // Check for duplicate email (only if email is provided)
     if (clientData.email && clientData.email.trim()) {
       const { data: existing } = await supabase
         .from('clients')
@@ -38,18 +38,6 @@ export const useClientsStore = defineStore('clients', () => {
       if (existing) {
         return { error: `Ya existe un cliente con el email ${clientData.email} (${existing.name})` }
       }
-    }
-
-    // Check for duplicate name
-    const { data: nameExists } = await supabase
-      .from('clients')
-      .select('id')
-      .eq('user_id', auth.currentUser.id)
-      .eq('name', clientData.name)
-      .single()
-
-    if (nameExists) {
-      return { error: `Ya existe un cliente con el nombre "${clientData.name}"` }
     }
 
     const { data, error } = await supabase

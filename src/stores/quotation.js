@@ -140,19 +140,8 @@ export const useQuotationStore = defineStore('quotation', () => {
         existingClient = data
       }
 
-      // If not found by email, check by name
+      // Only create if no existing client found by email
       if (!existingClient) {
-        const { data } = await supabase
-          .from('clients')
-          .select('id')
-          .eq('user_id', auth.currentUser.id)
-          .eq('name', active.value.clientName)
-          .single()
-        existingClient = data
-      }
-
-      if (!existingClient) {
-        // Create new client
         await supabase.from('clients').insert({
           user_id: auth.currentUser.id,
           name: active.value.clientName,
