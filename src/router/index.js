@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import LandingView from '../views/LandingView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import CalendarioView from '../views/CalendarioView.vue'
+import ClientsView from '../views/ClientsView.vue'
 import BuilderView from '../views/BuilderView.vue'
 import ShareView from '../views/ShareView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -17,6 +18,7 @@ const routes = [
   { path: '/login', name: 'login', component: LoginView, meta: { guest: true } },
   { path: '/registro', name: 'register', component: RegisterView, meta: { guest: true } },
   { path: '/dashboard', name: 'dashboard', component: DashboardView, meta: { auth: true } },
+  { path: '/clientes', name: 'clients', component: ClientsView, meta: { auth: true } },
   { path: '/calendario', name: 'calendario', component: CalendarioView, meta: { auth: true } },
   { path: '/nueva', name: 'new', component: BuilderView, meta: { auth: true } },
   { path: '/editar/:id', name: 'edit', component: BuilderView, meta: { auth: true } },
