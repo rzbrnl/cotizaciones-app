@@ -499,6 +499,27 @@
   color: #e5e7eb;
 }
 
+/* Profile tabs */
+.dark .profile-tabs { background: #1a1a1a; }
+.dark .tab-btn { color: #888; border-color: #333; }
+.dark .tab-btn:hover { color: #e5e7eb; }
+.dark .tab-btn.active { background: #333; color: #e5e7eb; border-color: #333; }
+.dark .tab-content { background: #1a1a1a; }
+.dark .panel-header h2 { color: #e5e7eb; }
+.dark .panel-hint { color: #888; }
+.dark .form-field label { color: #888; }
+.dark .form-field input { background: #252525; border-color: #3a3a3a; color: #e5e7eb; }
+.dark .form-field input::placeholder { color: #555; }
+.dark .info-row { border-bottom-color: #333; }
+.dark .info-label { color: #888; }
+.dark .info-value { color: #e5e7eb; }
+.dark .btn-primary { background: #e5e7eb; color: #1a1a1a; }
+.dark .btn-primary:hover { background: #ccc; }
+.dark .btn-secondary { border-color: #333; color: #888; }
+.dark .btn-secondary:hover { border-color: #e5e7eb; color: #e5e7eb; }
+.dark .edit-btn { border-color: #333; color: #888; }
+.dark .edit-btn:hover { border-color: var(--gold); color: #e5e7eb; }
+
 /* Auth */
 .dark .auth-page {
   background: #0f0f0f;
