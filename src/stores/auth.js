@@ -102,6 +102,14 @@ export const useAuthStore = defineStore('auth', () => {
     profile.value = { ...profile.value, payment_info: info }
   }
 
+  async function resetPassword(email) {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/login`,
+    })
+    if (error) return { success: false, error: error.message }
+    return { success: true }
+  }
+
   async function updateProfile(data) {
     if (!currentUser.value) return
 
@@ -152,6 +160,7 @@ export const useAuthStore = defineStore('auth', () => {
     updatePaymentInfo,
     updateProfile,
     changePassword,
+    resetPassword,
     logout,
     getAllUsers,
   }

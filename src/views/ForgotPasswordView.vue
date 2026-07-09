@@ -20,35 +20,28 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </button>
-          <router-link to="/registro" class="header-link-icon" title="Crear cuenta">
-            <HIcon name="login" :size="20" />
-          </router-link>
         </nav>
       </div>
     </header>
 
     <div class="auth-card">
       <div class="auth-card-inner">
-        <h1 class="auth-title">Iniciar sesión</h1>
-        <p class="auth-subtitle">Ingresa a tu cuenta para crear, administrar y compartir cotizaciones profesionales.</p>
+        <h1 class="auth-title">¿Olvidaste tu contraseña?</h1>
+        <p class="auth-subtitle">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
 
-        <form @submit.prevent="handleLogin" class="auth-form">
+        <form @submit.prevent="handleReset" class="auth-form">
           <div class="auth-field">
             <label>Correo electrónico</label>
             <input v-model="email" type="email" placeholder="hola@mundo.com" autofocus />
           </div>
-          <div class="auth-field">
-            <label>Contraseña</label>
-            <input v-model="password" type="password" placeholder="Tu contraseña" />
-          </div>
           <div v-if="error" class="auth-error">{{ error }}</div>
+          <div v-if="success" class="auth-success">{{ success }}</div>
           <button type="submit" class="auth-submit" :disabled="loading">
-            {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+            {{ loading ? 'Enviando...' : 'Enviar enlace' }}
           </button>
         </form>
 
-        <p class="auth-forgot"><router-link to="/olvide-contrasena">¿Olvidaste tu contraseña?</router-link></p>
-        <p class="auth-footer">¿No tienes cuenta? <router-link to="/registro">Crear cuenta</router-link></p>
+        <p class="auth-footer"><router-link to="/login">Volver al inicio de sesión</router-link></p>
       </div>
     </div>
   </div>
@@ -56,39 +49,34 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { useThemeStore } from '../stores/theme'
-import HIcon from '../components/HIcon.vue'
 
 const auth = useAuthStore()
-const router = useRouter()
 const themeStore = useThemeStore()
 
 const email = ref('')
-const password = ref('')
 const error = ref('')
+const success = ref('')
 const loading = ref(false)
 
-async function handleLogin() {
+async function handleReset() {
   error.value = ''
-  if (!email.value || !password.value) {
-    error.value = 'Completa todos los campos'
+  success.value = ''
+
+  if (!email.value) {
+    error.value = 'Ingresa tu correo electrónico'
     return
   }
+
   loading.value = true
-  const result = await auth.login(email.value, password.value)
+  const result = await auth.resetPassword(email.value)
   loading.value = false
+
   if (result.success) {
-    router.push('/dashboard')
+    success.value = 'Te enviamos un correo con las instrucciones para restablecer tu contraseña.'
   } else {
-    if (result.error.includes('Invalid login credentials')) {
-      error.value = 'Correo o contraseña incorrectos'
-    } else if (result.error.includes('Email not confirmed')) {
-      error.value = 'Tu cuenta aún no ha sido confirmada. Revisa tu correo.'
-    } else {
-      error.value = 'Ocurrió un error. Intenta de nuevo.'
-    }
+    error.value = 'Ocurrió un error. Verifica tu correo e intenta de nuevo.'
   }
 }
 </script>
@@ -123,31 +111,22 @@ async function handleLogin() {
   gap: 20px;
 }
 
-.header-link {
-  font-size: 0.85rem;
+.theme-toggle {
+  background: none;
+  border: none;
   color: var(--gray-text);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.header-link:hover {
-  color: var(--black);
-}
-
-.header-btn {
-  display: inline-block;
-  background: var(--black);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
 }
 
-.header-btn:hover {
-  background: #4a4a4a;
+.theme-toggle:hover {
+  color: var(--black);
+  background: rgba(0,0,0,0.05);
 }
 
 .auth-card {
@@ -168,26 +147,8 @@ async function handleLogin() {
   position: relative;
 }
 
-.theme-toggle {
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.theme-toggle:hover {
-  color: #666;
-  background: rgba(0,0,0,0.05);
-}
-
 .auth-title {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--black);
   text-align: center;
@@ -199,7 +160,7 @@ async function handleLogin() {
   color: var(--gray-text);
   text-align: center;
   line-height: 1.5;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .auth-form {
@@ -241,7 +202,16 @@ async function handleLogin() {
 
 .auth-error {
   background: #fef2f2;
-  color: var(--danger);
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.auth-success {
+  background: #f0fdf4;
+  color: #16a34a;
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.82rem;
@@ -258,7 +228,6 @@ async function handleLogin() {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 4px;
 }
 
 .auth-submit:hover:not(:disabled) {
@@ -270,25 +239,9 @@ async function handleLogin() {
   cursor: not-allowed;
 }
 
-.auth-forgot {
-  text-align: center;
-  margin-top: 16px;
-  margin-bottom: 8px;
-}
-
-.auth-forgot a {
-  font-size: 0.82rem;
-  color: var(--gold);
-  text-decoration: none;
-}
-
-.auth-forgot a:hover {
-  text-decoration: underline;
-}
-
 .auth-footer {
   text-align: center;
-  margin-top: 12px;
+  margin-top: 24px;
   font-size: 0.85rem;
   color: var(--gray-text);
 }
@@ -301,23 +254,5 @@ async function handleLogin() {
 
 .auth-footer a:hover {
   text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .auth-header {
-    padding: 12px 16px;
-  }
-
-  .header-content {
-    gap: 8px;
-  }
-
-  .header-logo {
-    font-size: 0.85rem;
-  }
-
-  .header-nav {
-    gap: 8px;
-  }
 }
 </style>
