@@ -128,14 +128,31 @@ export const useQuotationStore = defineStore('quotation', () => {
 
     // Auto-save client if clientName exists
     if (active.value.clientName && active.value.clientName.trim()) {
-      const { data: existingClients } = await supabase
-        .from('clients')
-        .select('id')
-        .eq('user_id', auth.currentUser.id)
-        .eq('name', active.value.clientName)
-        .single()
+      // Check if client exists by email first
+      let existingClient = null
+      if (active.value.clientEmail && active.value.clientEmail.trim()) {
+        const { data } = await supabase
+          .from('clients')
+          .select('id')
+          .eq('user_id', auth.currentUser.id)
+          .eq('email', active.value.clientEmail)
+          .single()
+        existingClient = data
+      }
 
-      if (!existingClients) {
+      // If not found by email, check by name
+      if (!existingClient) {
+        const { data } = await supabase
+          .from('clients')
+          .select('id')
+          .eq('user_id', auth.currentUser.id)
+          .eq('name', active.value.clientName)
+          .single()
+        existingClient = data
+      }
+
+      if (!existingClient) {
+        // Create new client
         await supabase.from('clients').insert({
           user_id: auth.currentUser.id,
           name: active.value.clientName,
