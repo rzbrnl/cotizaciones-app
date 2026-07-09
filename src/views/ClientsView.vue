@@ -38,7 +38,7 @@
           :key="client.id"
           class="client-card"
         >
-          <div class="client-card-header">
+          <div class="client-card-header" @click="showClientQuotations(client)">
             <div class="client-avatar">{{ client.name?.charAt(0) || '?' }}</div>
             <div class="client-info">
               <div class="client-name">{{ client.name }}</div>
@@ -79,6 +79,47 @@
         <span>Agrega tu primer cliente para comenzar</span>
       </div>
     </div>
+
+    <!-- Client Quotations Modal -->
+    <Teleport to="body">
+      <div v-if="showQuotationsModal" class="modal-overlay" @click.self="showQuotationsModal = false">
+        <div class="client-modal">
+          <div class="modal-header">
+            <h3>Cotizaciones de {{ selectedClientName }}</h3>
+            <button class="modal-close" @click="showQuotationsModal = false">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div v-if="selectedClientQuotations.length > 0" class="quotations-list">
+              <div
+                v-for="q in selectedClientQuotations"
+                :key="q.id"
+                class="quotation-item"
+                @click="editQuotation(q)"
+              >
+                <div class="quotation-info">
+                  <div class="quotation-event">{{ q.eventType || 'Sin tipo' }}</div>
+                  <div class="quotation-venue">{{ q.venue || 'Sin venue' }} · {{ q.eventDate || 'Sin fecha' }}</div>
+                </div>
+                <div class="quotation-right">
+                  <span class="status-badge" :class="q.status || 'borrador'">
+                    {{ statusLabels[q.status] || 'Borrador' }}
+                  </span>
+                  <div class="quotation-price">{{ formatCurrency(getTotal(q)) }}</div>
+                </div>
+              </div>
+            </div>
+            <div v-else class="quotations-empty">
+              Este cliente no tiene cotizaciones
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
 
     <!-- Add/Edit Modal -->
     <Teleport to="body">
@@ -129,6 +170,7 @@ import { useRouter } from 'vue-router'
 import { useClientsStore } from '../stores/clients'
 import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
+import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 
 const router = useRouter()
@@ -140,6 +182,26 @@ const search = ref('')
 const showAddModal = ref(false)
 const editingClient = ref(null)
 const clientForm = ref({ name: '', email: '', phone: '', notes: '' })
+const showQuotationsModal = ref(false)
+const selectedClientQuotations = ref([])
+const selectedClientName = ref('')
+
+const statusLabels = {
+  borrador: 'Borrador',
+  enviada: 'Enviada',
+  aprobada: 'Aprobada',
+  rechazada: 'Rechazada',
+}
+
+function getTotal(q) {
+  let total = 0
+  for (const section of q.sections || []) {
+    for (const item of section.items || []) {
+      total += (item.qty || 0) * (item.unitPrice || 0)
+    }
+  }
+  return total
+}
 
 const filteredClients = computed(() => {
   return clientsStore.searchClients(search.value)
@@ -191,6 +253,17 @@ function closeModal() {
   showAddModal.value = false
   editingClient.value = null
   clientForm.value = { name: '', email: '', phone: '', notes: '' }
+}
+
+async function showClientQuotations(client) {
+  selectedClientName.value = client.name
+  selectedClientQuotations.value = await clientsStore.getClientQuotations(client.id)
+  showQuotationsModal.value = true
+}
+
+function editQuotation(quotation) {
+  showQuotationsModal.value = false
+  router.push(`/editar/${quotation.id || quotation._dbId}`)
 }
 </script>
 
@@ -501,6 +574,88 @@ function closeModal() {
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Quotations Modal */
+.quotations-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.quotation-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--gray-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+}
+
+.quotation-item:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 106, 0.04);
+}
+
+.quotation-event {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+
+.quotation-venue {
+  font-size: 0.78rem;
+  color: var(--gray-text);
+}
+
+.quotation-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.quotation-price {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.quotations-empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--gray-text);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.borrador {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.status-badge.enviada {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.aprobada {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge.rechazada {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 @media (max-width: 600px) {
