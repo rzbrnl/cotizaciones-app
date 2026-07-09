@@ -81,7 +81,13 @@ async function handleLogin() {
   if (result.success) {
     router.push('/dashboard')
   } else {
-    error.value = result.error
+    if (result.error.includes('Invalid login credentials')) {
+      error.value = 'Correo o contraseña incorrectos'
+    } else if (result.error.includes('Email not confirmed')) {
+      error.value = 'Tu cuenta aún no ha sido confirmada. Revisa tu correo.'
+    } else {
+      error.value = 'Ocurrió un error. Intenta de nuevo.'
+    }
   }
 }
 </script>
