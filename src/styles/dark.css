@@ -1120,3 +1120,38 @@
 .dark .progress-bar {
   background: #333;
 }
+
+/* Clients page */
+.dark .clients-header h1 { color: #e5e7eb; }
+.dark .new-client-btn { background: #e5e7eb; color: #1a1a1a; }
+.dark .new-client-btn:hover { background: #ccc; }
+.dark .search-box { background: #1a1a1a; border-color: #333; }
+.dark .search-input { color: #e5e7eb; background: transparent; }
+.dark .search-input::placeholder { color: #555; }
+.dark .search-box svg { color: #555; }
+.dark .client-card { background: #1a1a1a; }
+.dark .client-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.dark .client-name { color: #e5e7eb; }
+.dark .client-contact { color: #888; }
+.dark .client-action { color: #888; }
+.dark .client-action:hover { color: #e5e7eb; background: rgba(255,255,255,0.05); }
+.dark .client-action.delete:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+.dark .clients-empty p { color: #e5e7eb; }
+.dark .clients-empty span { color: #888; }
+.dark .client-modal { background: #1a1a1a; }
+.dark .modal-header { border-bottom-color: #333; }
+.dark .modal-header h3 { color: #e5e7eb; }
+.dark .modal-body .form-field label { color: #888; }
+.dark .modal-body .form-field input,
+.dark .modal-body .form-field textarea { background: #252525; border-color: #3a3a3a; color: #e5e7eb; }
+.dark .modal-body .form-field input::placeholder,
+.dark .modal-body .form-field textarea::placeholder { color: #555; }
+.dark .quotation-item { border-color: #333; }
+.dark .quotation-item:hover { border-color: var(--gold); }
+.dark .quotation-event { color: #e5e7eb; }
+.dark .quotation-venue { color: #888; }
+.dark .quotations-empty { color: #888; }
+.dark .status-badge.borrador { background: #333; color: #999; }
+.dark .status-badge.enviada { background: #1e3a5f; color: #60a5fa; }
+.dark .status-badge.aprobada { background: #14532d; color: #4ade80; }
+.dark .status-badge.rechazada { background: #450a0a; color: #f87171; }
