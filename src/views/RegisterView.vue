@@ -43,11 +43,20 @@
           </div>
           <div class="auth-field">
             <label>Contraseña</label>
-            <input v-model="password" type="password" placeholder="Tu contraseña" />
+            <input v-model="password" type="password" placeholder="Tu contraseña" @input="checkPasswordStrength" />
+            <div v-if="password" class="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" :style="{ width: strengthPercent + '%', background: strengthColor }"></div>
+              </div>
+              <span class="strength-text" :style="{ color: strengthColor }">{{ strengthLabel }}</span>
+            </div>
           </div>
           <div class="auth-field">
             <label>Confirmar contraseña</label>
             <input v-model="confirmPassword" type="password" placeholder="Repite tu contraseña" />
+            <div v-if="confirmPassword && password !== confirmPassword" class="password-mismatch">
+              Las contraseñas no coinciden
+            </div>
           </div>
           <div v-if="error" class="auth-error">{{ error }}</div>
         <div v-if="success" class="auth-success">{{ success }}</div>
@@ -80,6 +89,43 @@ const confirmPassword = ref('')
 const error = ref('')
 const success = ref('')
 const loading = ref(false)
+
+const strengthPercent = ref(0)
+const strengthLabel = ref('')
+const strengthColor = ref('#ccc')
+
+function checkPasswordStrength() {
+  const pwd = password.value
+  let score = 0
+
+  if (pwd.length >= 6) score++
+  if (pwd.length >= 10) score++
+  if (/[A-Z]/.test(pwd)) score++
+  if (/[0-9]/.test(pwd)) score++
+  if (/[^A-Za-z0-9]/.test(pwd)) score++
+
+  if (score <= 1) {
+    strengthPercent.value = 20
+    strengthLabel.value = 'Débil'
+    strengthColor.value = '#ef4444'
+  } else if (score <= 2) {
+    strengthPercent.value = 40
+    strengthLabel.value = 'Regular'
+    strengthColor.value = '#f59e0b'
+  } else if (score <= 3) {
+    strengthPercent.value = 60
+    strengthLabel.value = 'Buena'
+    strengthColor.value = '#f59e0b'
+  } else if (score <= 4) {
+    strengthPercent.value = 80
+    strengthLabel.value = 'Fuerte'
+    strengthColor.value = '#22c55e'
+  } else {
+    strengthPercent.value = 100
+    strengthLabel.value = 'Muy fuerte'
+    strengthColor.value = '#22c55e'
+  }
+}
 
 async function handleRegister() {
   error.value = ''
@@ -278,6 +324,35 @@ async function handleRegister() {
 
 .auth-field input::placeholder {
   color: #bbb;
+}
+
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.password-mismatch {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 4px;
 }
 
 .auth-error {
