@@ -233,6 +233,7 @@ const clientQuotationCount = computed(() => {
 
 onMounted(async () => {
   await clientsStore.loadClients()
+  await quotationStore.loadAll()
 })
 
 function startNewQuotation(client) {
