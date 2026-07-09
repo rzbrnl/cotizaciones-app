@@ -44,8 +44,8 @@
               <div class="client-name">{{ client.name }}</div>
               <div class="client-contact">{{ client.email || client.phone || 'Sin contacto' }}</div>
             </div>
-            <span v-if="clientQuotationCount[client.id]" class="client-count">
-              {{ clientQuotationCount[client.id] }} cotización{{ clientQuotationCount[client.id] !== 1 ? 'es' : '' }}
+            <span v-if="quotationCounts[client.name]" class="client-count">
+              {{ quotationCounts[client.name] }} cotización{{ quotationCounts[client.name] !== 1 ? 'es' : '' }}
             </span>
           </div>
           <div class="client-actions">
@@ -221,7 +221,8 @@ const filteredClients = computed(() => {
 // Count quotations per client
 const clientQuotationCount = computed(() => {
   const counts = {}
-  const quotations = quotationStore.savedList || []
+  const quotations = quotationStore.savedList
+  if (!quotations) return counts
   for (const q of quotations) {
     const name = q.clientName
     if (name) {
@@ -231,10 +232,31 @@ const clientQuotationCount = computed(() => {
   return counts
 })
 
+const quotationCounts = ref({})
+
 onMounted(async () => {
   await clientsStore.loadClients()
   await quotationStore.loadAll()
+  updateQuotationCounts()
 })
+
+// Update counts when savedList changes
+watch(() => quotationStore.savedList, () => {
+  updateQuotationCounts()
+}, { deep: true })
+
+function updateQuotationCounts() {
+  const counts = {}
+  const quotations = quotationStore.savedList
+  if (!quotations) return
+  for (const q of quotations) {
+    const name = q.clientName
+    if (name) {
+      counts[name] = (counts[name] || 0) + 1
+    }
+  }
+  quotationCounts.value = counts
+}
 
 function startNewQuotation(client) {
   quotationStore.createNew()
