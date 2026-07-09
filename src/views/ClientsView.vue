@@ -438,6 +438,10 @@ function editQuotation(quotation) {
   margin-bottom: 12px;
 }
 
+.client-card-header .client-info {
+  flex: 1;
+}
+
 .client-avatar {
   width: 40px;
   height: 40px;
@@ -471,6 +475,7 @@ function editQuotation(quotation) {
   border-radius: 12px;
   font-weight: 600;
   white-space: nowrap;
+  margin-left: auto;
 }
 
 .client-actions {
@@ -480,7 +485,7 @@ function editQuotation(quotation) {
 
 .client-action {
   background: none;
-  border: 1px solid var(--gray-border);
+  border: none;
   padding: 6px;
   border-radius: 6px;
   color: var(--gray-text);
@@ -489,13 +494,13 @@ function editQuotation(quotation) {
 }
 
 .client-action:hover {
-  border-color: var(--gold);
   color: var(--black);
+  background: rgba(0,0,0,0.05);
 }
 
 .client-action.delete:hover {
-  border-color: #e74c3c;
   color: #e74c3c;
+  background: rgba(231,76,60,0.05);
 }
 
 .clients-empty {
