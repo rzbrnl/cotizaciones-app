@@ -125,6 +125,26 @@ export const useQuotationStore = defineStore('quotation', () => {
     active.value.ownerEmail = auth.currentUser.email
     active.value.ownerLogo = auth.userLogo
     active.value.ownerId = auth.currentUser.id
+
+    // Auto-save client if clientName exists
+    if (active.value.clientName && active.value.clientName.trim()) {
+      const { data: existingClients } = await supabase
+        .from('clients')
+        .select('id')
+        .eq('user_id', auth.currentUser.id)
+        .eq('name', active.value.clientName)
+        .single()
+
+      if (!existingClients) {
+        await supabase.from('clients').insert({
+          user_id: auth.currentUser.id,
+          name: active.value.clientName,
+          email: active.value.clientEmail || '',
+          phone: active.value.clientPhone || '',
+        })
+      }
+    }
+
     const copy = JSON.parse(JSON.stringify(active.value))
 
     const existing = savedList.value.find(q => q.id === copy.id)
