@@ -174,7 +174,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useClientsStore } from '../stores/clients'
 import { useQuotationStore } from '../stores/quotation'
