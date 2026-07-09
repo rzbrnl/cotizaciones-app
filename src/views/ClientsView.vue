@@ -44,12 +44,21 @@
               <div class="client-name">{{ client.name }}</div>
               <div class="client-contact">{{ client.email || client.phone || 'Sin contacto' }}</div>
             </div>
+            <span v-if="clientQuotationCount[client.id]" class="client-count">
+              {{ clientQuotationCount[client.id] }} cotización{{ clientQuotationCount[client.id] !== 1 ? 'es' : '' }}
+            </span>
           </div>
           <div class="client-actions">
             <button class="client-action" @click="startNewQuotation(client)" title="Nueva cotización">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="12" y1="5" x2="12" y2="19"/>
                 <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <button class="client-action" @click="showClientQuotations(client)" title="Ver cotizaciones">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
               </svg>
             </button>
             <button class="client-action" @click="editClient(client)" title="Editar">
@@ -207,6 +216,19 @@ function getTotal(q) {
 
 const filteredClients = computed(() => {
   return clientsStore.searchClients(search.value)
+})
+
+// Count quotations per client
+const clientQuotationCount = computed(() => {
+  const counts = {}
+  const quotations = quotationStore.savedList || []
+  for (const q of quotations) {
+    const name = q.clientName
+    if (name) {
+      counts[name] = (counts[name] || 0) + 1
+    }
+  }
+  return counts
 })
 
 onMounted(async () => {
@@ -416,6 +438,16 @@ function editQuotation(quotation) {
 .client-contact {
   font-size: 0.78rem;
   color: var(--gray-text);
+}
+
+.client-count {
+  font-size: 0.7rem;
+  background: rgba(201, 168, 106, 0.1);
+  color: var(--gold);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .client-actions {
