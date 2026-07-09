@@ -24,7 +24,33 @@ export const useClientsStore = defineStore('clients', () => {
 
   async function addClient(clientData) {
     const auth = useAuthStore()
-    if (!auth.currentUser) return
+    if (!auth.currentUser) return null
+
+    // Check for duplicate email
+    if (clientData.email && clientData.email.trim()) {
+      const { data: existing } = await supabase
+        .from('clients')
+        .select('id, name')
+        .eq('user_id', auth.currentUser.id)
+        .eq('email', clientData.email)
+        .single()
+
+      if (existing) {
+        return { error: `Ya existe un cliente con el email ${clientData.email} (${existing.name})` }
+      }
+    }
+
+    // Check for duplicate name
+    const { data: nameExists } = await supabase
+      .from('clients')
+      .select('id')
+      .eq('user_id', auth.currentUser.id)
+      .eq('name', clientData.name)
+      .single()
+
+    if (nameExists) {
+      return { error: `Ya existe un cliente con el nombre "${clientData.name}"` }
+    }
 
     const { data, error } = await supabase
       .from('clients')
@@ -40,7 +66,9 @@ export const useClientsStore = defineStore('clients', () => {
 
     if (!error) {
       clients.value.unshift(data)
+      return { success: true }
     }
+    return { error: error.message }
   }
 
   async function updateClient(clientId, clientData) {

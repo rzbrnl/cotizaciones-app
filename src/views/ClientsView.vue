@@ -235,13 +235,22 @@ async function saveClient() {
   if (!clientForm.value.name.trim()) return
 
   if (editingClient.value) {
-    await clientsStore.updateClient(editingClient.value.id, clientForm.value)
-    toast.success('Cliente actualizado')
+    const success = await clientsStore.updateClient(editingClient.value.id, clientForm.value)
+    if (success) {
+      toast.success('Cliente actualizado')
+      closeModal()
+    } else {
+      toast.error('No se pudo actualizar el cliente')
+    }
   } else {
-    await clientsStore.addClient(clientForm.value)
-    toast.success('Cliente creado')
+    const result = await clientsStore.addClient(clientForm.value)
+    if (result?.error) {
+      toast.error(result.error)
+    } else {
+      toast.success('Cliente creado')
+      closeModal()
+    }
   }
-  closeModal()
 }
 
 async function deleteClient(client) {
