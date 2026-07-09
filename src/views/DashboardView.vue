@@ -297,16 +297,16 @@ const filtered = computed(() => {
 
   // Sort
   list.sort((a, b) => {
-    const dateA = a.eventDate || a.date || ''
-    const dateB = b.eventDate || b.date || ''
+    const createdA = a.createdAt || ''
+    const createdB = b.createdAt || ''
     const totalA = (a.sections || []).reduce((sum, s) => sum + (s.items || []).reduce((sum2, i) => sum2 + (i.qty || 0) * (i.unitPrice || 0), 0), 0)
     const totalB = (b.sections || []).reduce((sum, s) => sum + (s.items || []).reduce((sum2, i) => sum2 + (i.qty || 0) * (i.unitPrice || 0), 0), 0)
 
     switch (sortBy.value) {
-      case 'oldest': return dateA.localeCompare(dateB)
+      case 'oldest': return createdA.localeCompare(createdB)
       case 'highest': return totalB - totalA
       case 'lowest': return totalA - totalB
-      default: return dateB.localeCompare(dateA) // newest
+      default: return createdB.localeCompare(createdA) // newest
     }
   })
 
