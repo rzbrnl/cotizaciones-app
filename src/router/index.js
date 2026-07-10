@@ -9,6 +9,7 @@ import ShareView from '../views/ShareView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import ForgotPasswordView from '../views/ForgotPasswordView.vue'
+import ResetPasswordView from '../views/ResetPasswordView.vue'
 import UsersAdminView from '../views/UsersAdminView.vue'
 import ProfileView from '../views/ProfileView.vue'
 
@@ -19,6 +20,7 @@ const routes = [
   { path: '/login', name: 'login', component: LoginView, meta: { guest: true } },
   { path: '/registro', name: 'register', component: RegisterView, meta: { guest: true } },
   { path: '/olvide-contrasena', name: 'forgot-password', component: ForgotPasswordView, meta: { guest: true } },
+  { path: '/reset-password', name: 'reset-password', component: ResetPasswordView },
   { path: '/dashboard', name: 'dashboard', component: DashboardView, meta: { auth: true } },
   { path: '/clientes', name: 'clients', component: ClientsView, meta: { auth: true } },
   { path: '/calendario', name: 'calendario', component: CalendarioView, meta: { auth: true } },
