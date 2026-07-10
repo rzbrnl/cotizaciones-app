@@ -522,6 +522,129 @@ async function handleChangePassword() {
   color: var(--black);
 }
 
+.panel-hint {
+  font-size: 0.8rem;
+  color: var(--gray-text);
+  margin-bottom: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+}
+
+.info-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.info-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-badge.admin {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.info-badge.user {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-text);
+  font-weight: 500;
+}
+
+.form-field input {
+  padding: 12px 14px;
+  border: 1px solid var(--gray-border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--black);
+  outline: none;
+  transition: all 0.2s;
+  background: #fafafa;
+}
+
+.form-field input:focus {
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.form-field input::placeholder {
+  color: #bbb;
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Google Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #4a4a4a;
+}
+
+.btn-secondary {
+  background: none;
+  border: 1px solid var(--gray-border);
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'Google Sans', sans-serif;
+  color: var(--gray-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--black);
+  color: var(--black);
+}
+
 .edit-btn {
   display: flex;
   align-items: center;
