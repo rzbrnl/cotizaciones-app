@@ -570,6 +570,14 @@ async function handleChangePassword() {
   color: #6b7280;
 }
 
+.panel-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
