@@ -66,12 +66,12 @@ const templates = {
     <p style="font-size:15px;color:#6b7280;text-align:center;margin:0 0 28px;line-height:1.5;">Hola <strong style="color:#1a1a1a;">{{clientName}}</strong>, tienes un pago pendiente por tu evento.</p>
     <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:20px;text-align:center;margin-bottom:24px;">
       <p style="font-size:12px;color:#92400e;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.5px;">Monto pendiente</p>
-      <p style="font-size:28px;font-weight:700;color:#92400e;margin:0;">${{paymentAmount}}</p>
+      <p style="font-size:28px;font-weight:700;color:#92400e;margin:0;">{{paymentAmount}}</p>
     </div>
     <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:20px;margin-bottom:24px;">
       <table style="width:100%;border-collapse:collapse;">
         <tr><td style="padding:8px 0;font-size:13px;color:#9ca3af;">Etapa</td><td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">{{paymentStage}}</td></tr>
-        <tr><td style="padding:8px 0;font-size:13px;color:#9ca3af;">Total cotización</td><td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">${{paymentTotal}}</td></tr>
+        <tr><td style="padding:8px 0;font-size:13px;color:#9ca3af;">Total cotización</td><td style="padding:8px 0;font-size:14px;color:#1a1a1a;font-weight:500;text-align:right;">{{paymentTotal}}</td></tr>
       </table>
     </div>
     <p style="font-size:14px;color:#6b7280;text-align:center;margin:0 0 24px;line-height:1.6;">Gracias por confiar en nosotros. Este recordatorio tiene como objetivo ayudarte a mantener al día los pagos de tu evento.</p>
