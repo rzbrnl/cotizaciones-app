@@ -194,7 +194,14 @@
                 v-model="newPassword"
                 type="password"
                 placeholder="Mínimo 6 caracteres"
+                @input="checkPasswordStrength"
               />
+              <div v-if="newPassword" class="password-strength">
+                <div class="strength-bar">
+                  <div class="strength-fill" :style="{ width: strengthPercent + '%', background: strengthColor }"></div>
+                </div>
+                <span class="strength-text" :style="{ color: strengthColor }">{{ strengthLabel }}</span>
+              </div>
             </div>
             <div class="form-field">
               <label>Confirmar contraseña</label>
@@ -264,6 +271,26 @@ const paymentData = reactive({
   holder: "",
   paypal: "",
 });
+
+const strengthPercent = ref(0);
+const strengthLabel = ref('');
+const strengthColor = ref('#ccc');
+
+function checkPasswordStrength() {
+  const pwd = newPassword.value;
+  let score = 0;
+  if (pwd.length >= 6) score++;
+  if (pwd.length >= 10) score++;
+  if (/[A-Z]/.test(pwd)) score++;
+  if (/[0-9]/.test(pwd)) score++;
+  if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+  if (score <= 1) { strengthPercent.value = 20; strengthLabel.value = 'Débil'; strengthColor.value = '#ef4444'; }
+  else if (score <= 2) { strengthPercent.value = 40; strengthLabel.value = 'Regular'; strengthColor.value = '#f59e0b'; }
+  else if (score <= 3) { strengthPercent.value = 60; strengthLabel.value = 'Buena'; strengthColor.value = '#f59e0b'; }
+  else if (score <= 4) { strengthPercent.value = 80; strengthLabel.value = 'Fuerte'; strengthColor.value = '#22c55e'; }
+  else { strengthPercent.value = 100; strengthLabel.value = 'Muy fuerte'; strengthColor.value = '#22c55e'; }
+}
 
 onMounted(() => {
   if (auth.paymentInfo) {
@@ -512,179 +539,29 @@ async function handleChangePassword() {
 
 .edit-btn:hover {
   border-color: var(--gold);
-  color: var(--black);
+  color: #e5e7eb;
 }
 
-.panel-hint {
-  font-size: 0.8rem;
-  color: var(--gray-text);
-  margin-bottom: 20px;
-  margin-top: -12px;
+.password-strength {
+  margin-top: 8px;
 }
 
-.info-list {
-  display: flex;
-  flex-direction: column;
+.strength-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
 }
 
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
 }
 
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-size: 0.85rem;
-  color: var(--gray-text);
-}
-
-.info-value {
-  font-size: 0.85rem;
+.strength-text {
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--black);
-}
-
-.info-badge {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.info-badge.admin {
-  background: #dcfce7;
-  color: #16a34a;
-}
-
-.info-badge.user {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-field.full {
-  grid-column: 1 / -1;
-}
-
-.form-field label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--gray-text);
-  font-weight: 500;
-}
-
-.form-field input {
-  padding: 12px 14px;
-  border: 1px solid var(--gray-border);
-  border-radius: 8px;
-  font-size: 0.88rem;
-  font-family: "Google Sans", sans-serif;
-  color: var(--black);
-  outline: none;
-  transition: all 0.2s;
-  background: #fafafa;
-}
-
-.form-field input:focus {
-  border-color: var(--gold);
-  background: var(--white);
-}
-
-.form-field input::placeholder {
-  color: #bbb;
-}
-
-.mono-input {
-  font-family: "Google Sans Code", monospace !important;
-  letter-spacing: 0.5px;
-}
-
-.inline-input {
-  padding: 6px 12px;
-  border: 1px solid var(--gold);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-family: "Google Sans", sans-serif;
-  color: var(--black);
-  outline: none;
-  background: var(--white);
-  width: 180px;
-}
-
-.panel-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-  padding-top: 20px;
-}
-
-.btn-primary {
-  background: var(--black);
-  color: var(--white);
-  border: none;
-  padding: 11px 24px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-family: "Google Sans", sans-serif;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: #4a4a4a;
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background: none;
-  border: 1px solid var(--gray-border);
-  padding: 11px 24px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-family: "Google Sans", sans-serif;
-  color: var(--gray-text);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-secondary:hover {
-  border-color: var(--black);
-  color: var(--black);
-}
-
-@media (max-width: 600px) {
-  .tab-btn {
-    font-size: 0.75rem;
-    padding: 10px 8px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

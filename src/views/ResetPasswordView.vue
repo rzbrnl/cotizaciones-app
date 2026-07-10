@@ -35,7 +35,13 @@
         <form v-if="!success" @submit.prevent="handleReset" class="auth-form">
           <div class="auth-field">
             <label>Nueva contraseña</label>
-            <input v-model="newPassword" type="password" placeholder="Mínimo 6 caracteres" />
+            <input v-model="newPassword" type="password" placeholder="Mínimo 6 caracteres" @input="checkPasswordStrength" />
+            <div v-if="newPassword" class="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" :style="{ width: strengthPercent + '%', background: strengthColor }"></div>
+              </div>
+              <span class="strength-text" :style="{ color: strengthColor }">{{ strengthLabel }}</span>
+            </div>
           </div>
           <div class="auth-field">
             <label>Confirmar contraseña</label>
@@ -66,6 +72,26 @@ const confirmPassword = ref('')
 const error = ref('')
 const success = ref('')
 const loading = ref(false)
+
+const strengthPercent = ref(0)
+const strengthLabel = ref('')
+const strengthColor = ref('#ccc')
+
+function checkPasswordStrength() {
+  const pwd = newPassword.value
+  let score = 0
+  if (pwd.length >= 6) score++
+  if (pwd.length >= 10) score++
+  if (/[A-Z]/.test(pwd)) score++
+  if (/[0-9]/.test(pwd)) score++
+  if (/[^A-Za-z0-9]/.test(pwd)) score++
+
+  if (score <= 1) { strengthPercent.value = 20; strengthLabel.value = 'Débil'; strengthColor.value = '#ef4444' }
+  else if (score <= 2) { strengthPercent.value = 40; strengthLabel.value = 'Regular'; strengthColor.value = '#f59e0b' }
+  else if (score <= 3) { strengthPercent.value = 60; strengthLabel.value = 'Buena'; strengthColor.value = '#f59e0b' }
+  else if (score <= 4) { strengthPercent.value = 80; strengthLabel.value = 'Fuerte'; strengthColor.value = '#22c55e' }
+  else { strengthPercent.value = 100; strengthLabel.value = 'Muy fuerte'; strengthColor.value = '#22c55e' }
+}
 
 onMounted(async () => {
   // Supabase handles the token automatically when user clicks the reset link
@@ -277,5 +303,28 @@ async function handleReset() {
 
 .auth-footer a:hover {
   text-decoration: underline;
+}
+
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 </style>
