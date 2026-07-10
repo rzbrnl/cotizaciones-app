@@ -95,7 +95,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { action, clientName, clientEmail, venue, eventDate, ownerEmail, paymentStage, paymentAmount, paymentTotal } = req.body;
+  const { action, clientName, clientEmail, venue, eventDate, ownerEmail, paymentStage, paymentAmount = '', paymentTotal = '' } = req.body;
 
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
