@@ -29,11 +29,10 @@
         <h1 class="auth-title">Nueva contraseña</h1>
         <p class="auth-subtitle">Ingresa tu nueva contraseña para tu cuenta.</p>
 
-        <div v-if="!hasToken" class="auth-error">
-          Enlace inválido o expirado. Solicita uno nuevo.
-        </div>
+        <div v-if="error" class="auth-error">{{ error }}</div>
+        <div v-if="success" class="auth-success">{{ success }}</div>
 
-        <form v-else @submit.prevent="handleReset" class="auth-form">
+        <form v-if="!success" @submit.prevent="handleReset" class="auth-form">
           <div class="auth-field">
             <label>Nueva contraseña</label>
             <input v-model="newPassword" type="password" placeholder="Mínimo 6 caracteres" />
@@ -42,8 +41,6 @@
             <label>Confirmar contraseña</label>
             <input v-model="confirmPassword" type="password" placeholder="Repite la contraseña" />
           </div>
-          <div v-if="error" class="auth-error">{{ error }}</div>
-          <div v-if="success" class="auth-success">{{ success }}</div>
           <button type="submit" class="auth-submit" :disabled="loading">
             {{ loading ? 'Guardando...' : 'Guardar contraseña' }}
           </button>
@@ -56,15 +53,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useThemeStore } from '../stores/theme'
 import { supabase } from '../lib/supabase'
 
-const route = useRoute()
 const router = useRouter()
-const auth = useAuthStore()
 const themeStore = useThemeStore()
 
 const newPassword = ref('')
@@ -73,17 +67,12 @@ const error = ref('')
 const success = ref('')
 const loading = ref(false)
 
-const hasToken = computed(() => !!route.query.access_token)
-
 onMounted(async () => {
-  if (route.query.access_token) {
-    const { error: sessionError } = await supabase.auth.setSession({
-      access_token: route.query.access_token,
-      refresh_token: route.query.refresh_token,
-    })
-    if (sessionError) {
-      error.value = 'Enlace inválido o expirado'
-    }
+  // Supabase handles the token automatically when user clicks the reset link
+  // We just need to check if there's an active session
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) {
+    error.value = 'Sesión no válida. Solicita un nuevo enlace de recuperación.'
   }
 })
 
