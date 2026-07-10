@@ -198,9 +198,17 @@
               />
               <div v-if="newPassword" class="password-strength">
                 <div class="strength-bar">
-                  <div class="strength-fill" :style="{ width: strengthPercent + '%', background: strengthColor }"></div>
+                  <div
+                    class="strength-fill"
+                    :style="{
+                      width: strengthPercent + '%',
+                      background: strengthColor,
+                    }"
+                  ></div>
                 </div>
-                <span class="strength-text" :style="{ color: strengthColor }">{{ strengthLabel }}</span>
+                <span class="strength-text" :style="{ color: strengthColor }">{{
+                  strengthLabel
+                }}</span>
               </div>
             </div>
             <div class="form-field">
@@ -273,8 +281,8 @@ const paymentData = reactive({
 });
 
 const strengthPercent = ref(0);
-const strengthLabel = ref('');
-const strengthColor = ref('#ccc');
+const strengthLabel = ref("");
+const strengthColor = ref("#ccc");
 
 function checkPasswordStrength() {
   const pwd = newPassword.value;
@@ -285,11 +293,27 @@ function checkPasswordStrength() {
   if (/[0-9]/.test(pwd)) score++;
   if (/[^A-Za-z0-9]/.test(pwd)) score++;
 
-  if (score <= 1) { strengthPercent.value = 20; strengthLabel.value = 'Débil'; strengthColor.value = '#ef4444'; }
-  else if (score <= 2) { strengthPercent.value = 40; strengthLabel.value = 'Regular'; strengthColor.value = '#f59e0b'; }
-  else if (score <= 3) { strengthPercent.value = 60; strengthLabel.value = 'Buena'; strengthColor.value = '#f59e0b'; }
-  else if (score <= 4) { strengthPercent.value = 80; strengthLabel.value = 'Fuerte'; strengthColor.value = '#22c55e'; }
-  else { strengthPercent.value = 100; strengthLabel.value = 'Muy fuerte'; strengthColor.value = '#22c55e'; }
+  if (score <= 1) {
+    strengthPercent.value = 20;
+    strengthLabel.value = "Débil";
+    strengthColor.value = "#ef4444";
+  } else if (score <= 2) {
+    strengthPercent.value = 40;
+    strengthLabel.value = "Regular";
+    strengthColor.value = "#f59e0b";
+  } else if (score <= 3) {
+    strengthPercent.value = 60;
+    strengthLabel.value = "Buena";
+    strengthColor.value = "#f59e0b";
+  } else if (score <= 4) {
+    strengthPercent.value = 80;
+    strengthLabel.value = "Fuerte";
+    strengthColor.value = "#22c55e";
+  } else {
+    strengthPercent.value = 100;
+    strengthLabel.value = "Muy fuerte";
+    strengthColor.value = "#22c55e";
+  }
 }
 
 onMounted(() => {
@@ -575,7 +599,6 @@ async function handleChangePassword() {
   gap: 10px;
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid #f0f0f0;
 }
 
 .form-grid {
@@ -603,7 +626,7 @@ async function handleChangePassword() {
   border: 1px solid var(--gray-border);
   border-radius: 8px;
   font-size: 0.88rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--black);
   outline: none;
   transition: all 0.2s;
@@ -627,7 +650,7 @@ async function handleChangePassword() {
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -642,7 +665,7 @@ async function handleChangePassword() {
   padding: 11px 24px;
   border-radius: 8px;
   font-size: 0.85rem;
-  font-family: 'Google Sans', sans-serif;
+  font-family: "Google Sans", sans-serif;
   color: var(--gray-text);
   cursor: pointer;
   transition: all 0.2s;
@@ -688,7 +711,9 @@ async function handleChangePassword() {
 .strength-fill {
   height: 100%;
   border-radius: 2px;
-  transition: width 0.3s ease, background 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
 }
 
 .strength-text {
