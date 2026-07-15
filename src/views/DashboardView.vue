@@ -222,6 +222,7 @@ import { useQuotationStore } from '../stores/quotation'
 import { useToastStore } from '../stores/toast'
 import { useConfirmStore } from '../stores/confirm'
 import { useAuthStore } from '../stores/auth'
+import { useWhatsApp } from '../composables/useWhatsApp'
 import { formatCurrency } from '../utils/format'
 import AppLayout from '../components/AppLayout.vue'
 import QuotationCard from '../components/QuotationCard.vue'
@@ -233,6 +234,7 @@ const store = useQuotationStore()
 const toast = useToastStore()
 const confirmStore = useConfirmStore()
 const auth = useAuthStore()
+const { sendPaymentWhatsApp: sendWa } = useWhatsApp()
 const router = useRouter()
 
 const loading = ref(true)
@@ -323,25 +325,23 @@ function formatDate(dateStr) {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
 }
 
-let refreshInterval = null
-
 onMounted(async () => {
   await store.loadAll()
   loading.value = false
 
   document.addEventListener('visibilitychange', handleVisibility)
 
-  // Poll for changes every 10 seconds when tab is visible
-  refreshInterval = setInterval(async () => {
+  // Subscribe to real-time changes instead of polling
+  store.subscribeToChanges(async () => {
     if (document.visibilityState === 'visible') {
       await store.loadAll()
     }
-  }, 10000)
+  })
 })
 
 onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibility)
-  if (refreshInterval) clearInterval(refreshInterval)
+  store.unsubscribeFromChanges()
 })
 
 async function handleVisibility() {
@@ -359,70 +359,8 @@ function openShareModal(quotation) {
   shareModalOpen.value = true
 }
 
-async function sendPaymentWhatsApp(quotation) {
-  const pi = auth.paymentInfo
-  if (!pi || (!pi.bank && !pi.clabe && !pi.paypal)) {
-    toast.error('Configura tus datos de pago en tu perfil')
-    return
-  }
-
-  const q = quotation
-  let total = 0
-  for (const section of q.sections || []) {
-    for (const item of section.items || []) {
-      total += (item.qty || 0) * (item.unitPrice || 0)
-    }
-  }
-
-  const userName = auth.profile?.full_name || ''
-  const stages = q.paymentStages || []
-
-  let message = `✨ *Cotización aprobada*\n\n`
-  message += `Hola ${q.clientName || ''},\n\n`
-  message += `Tu cotización ha sido aprobada. A continuación los datos para realizar el depósito:\n\n`
-  message += `📅 *Evento:* ${q.eventType || '—'}\n`
-  message += `📍 *Venue:* ${q.venue || '—'}\n`
-  message += `📆 *Fecha:* ${q.eventDate || '—'}\n`
-  message += `💰 *Total:* $${total.toLocaleString('es-MX')} MXN\n\n`
-
-  // Payment stages
-  if (stages.length > 0) {
-    message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`
-    message += `📋 *Cronograma de pago:*\n\n`
-    stages.forEach((stage, index) => {
-      const status = stage.status === 'paid' ? '✓ Pagado' : '○ Pendiente'
-      message += `${index + 1}. ${stage.label} (${stage.percent}%) - $${stage.amount.toLocaleString('es-MX')} - ${status}\n`
-    })
-    message += `\n`
-  }
-
-  message += `━━━━━━━━━━━━━━━━━━━━━━\n\n`
-  message += `🏦 *Datos de pago:*\n\n`
-
-  if (pi.bank) message += `*Banco:* ${pi.bank}\n`
-  if (pi.clabe) message += `*CLABE:* ${pi.clabe}\n`
-  if (pi.account) message += `*Cuenta:* ${pi.account}\n`
-  if (pi.holder) message += `*Titular:* ${pi.holder}\n`
-  if (pi.paypal) message += `*PayPal:* ${pi.paypal}\n`
-
-  // Find first unpaid stage
-  const nextStage = stages.find(s => s.status !== 'paid')
-  if (nextStage) {
-    message += `\n📝 *Próximo pago:* ${nextStage.label} - $${nextStage.amount.toLocaleString('es-MX')}\n`
-  }
-
-  message += `\nUna vez realizado el pago, por favor envíame el comprobante 🙏\n\n`
-  message += `Saludos,\n${userName}`
-
-  const encoded = encodeURIComponent(message)
-  const clientPhone = q.clientPhone?.replace(/\D/g, '')
-
-  if (clientPhone) {
-    window.open(`https://api.whatsapp.com/send?phone=52${clientPhone}&text=${encoded}`, '_blank')
-  } else {
-    await navigator.clipboard.writeText(message)
-    toast.info('No se encontró teléfono. Mensaje copiado al portapapeles.')
-  }
+function sendPaymentWhatsApp(quotation) {
+  sendWa(quotation, auth.paymentInfo, auth.profile)
 }
 
 async function deleteQuotation(id) {

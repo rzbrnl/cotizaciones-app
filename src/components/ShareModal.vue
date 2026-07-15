@@ -96,7 +96,7 @@ const copied = ref(false)
 const waInput = ref(null)
 
 const publicUrl = computed(() => {
-  const id = props.quotation._dbId || props.quotation.id
+  const id = props.quotation.share_id || props.quotation.id
   return `${window.location.origin}/publica/${id}`
 })
 

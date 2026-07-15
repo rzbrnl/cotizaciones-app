@@ -174,52 +174,40 @@ async function updateStatus(newStatus) {
 
   const searchData = { ...quotation.value, status: newStatus }
 
-  // Search by local ID
-  const { data: all } = await supabase
+  const { error } = await supabase
     .from('quotations')
-    .select('id, data')
+    .update({ data: searchData })
+    .eq('share_id', quotation.value.share_id)
 
-  if (!all) return
-
-  const match = all.find(q => q.data?.id === quotation.value.id)
-
-  if (match) {
-    const { error } = await supabase
-      .from('quotations')
-      .update({ data: searchData })
-      .eq('id', match.id)
-
-    if (error) {
-      console.error('Update error:', error)
-    }
-  } else {
-    console.error('No matching quotation found for id:', quotation.value.id)
+  if (error) {
+    console.error('Update error:', error)
   }
 }
 
 async function loadQuotation(id) {
   loading.value = true
   try {
-    // Try to find by _dbId first (Supabase ID)
+    // Primary: search by share_id (efficient index lookup)
     let { data, error } = await supabase
       .from('quotations')
       .select('data')
-      .eq('id', id)
+      .eq('share_id', id)
       .single()
 
     if (error || !data) {
-      // Fallback: search all quotations for matching local ID
-      const { data: all } = await supabase
+      // Fallback: search by Supabase UUID (for old links using _dbId)
+      const result = await supabase
         .from('quotations')
-        .select('id, data')
+        .select('data')
+        .eq('id', id)
+        .single()
 
-      if (all) {
-        const match = all.find(q => q.data?.id === id || q.data?._dbId === id)
-        if (match) {
-          quotation.value = match.data
-        }
+      if (!result.error && result.data) {
+        data = result.data
       }
-    } else {
+    }
+
+    if (data) {
       quotation.value = data.data
     }
   } catch (err) {

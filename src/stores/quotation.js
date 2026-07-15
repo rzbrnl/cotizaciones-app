@@ -10,6 +10,7 @@ function generateId() {
 function createBlank() {
   return {
     id: generateId(),
+    share_id: generateId(),
     title: 'Cotización',
     status: 'borrador',
     paymentStatus: 'pendiente',
@@ -101,6 +102,7 @@ export const useQuotationStore = defineStore('quotation', () => {
     savedList.value = (data || []).map(q => ({
       ...q.data,
       _dbId: q.id,
+      _shareId: q.share_id || q.data?.share_id,
     }))
   }
 
@@ -158,7 +160,7 @@ export const useQuotationStore = defineStore('quotation', () => {
     if (existing?._dbId) {
       await supabase
         .from('quotations')
-        .update({ data: copy, updated_at: new Date().toISOString() })
+        .update({ data: copy, share_id: copy.share_id, updated_at: new Date().toISOString() })
         .eq('id', existing._dbId)
       active.value._dbId = existing._dbId
     } else {
@@ -167,6 +169,7 @@ export const useQuotationStore = defineStore('quotation', () => {
         .insert({
           user_id: auth.currentUser.id,
           data: copy,
+          share_id: copy.share_id,
         })
         .select()
         .single()
@@ -316,6 +319,7 @@ export const useQuotationStore = defineStore('quotation', () => {
 
     const copy = JSON.parse(JSON.stringify(original))
     copy.id = generateId()
+    copy.share_id = generateId()
     copy.title = original.title + ' (copia)'
     copy.status = 'borrador'
     copy.date = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()
@@ -416,6 +420,36 @@ export const useQuotationStore = defineStore('quotation', () => {
     templates.value = templates.value.filter(t => t.id !== templateId)
   }
 
+  let realtimeChannel = null
+
+  function subscribeToChanges(callback) {
+    const authStore = useAuthStore()
+    if (!authStore.currentUser) return
+
+    realtimeChannel = supabase
+      .channel('quotations-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'quotations',
+          filter: `user_id=eq.${authStore.currentUser.id}`,
+        },
+        () => {
+          if (callback) callback()
+        }
+      )
+      .subscribe()
+  }
+
+  function unsubscribeFromChanges() {
+    if (realtimeChannel) {
+      supabase.removeChannel(realtimeChannel)
+      realtimeChannel = null
+    }
+  }
+
   return {
     active,
     savedList,
@@ -444,5 +478,7 @@ export const useQuotationStore = defineStore('quotation', () => {
     saveTemplate,
     loadTemplate,
     deleteTemplate,
+    subscribeToChanges,
+    unsubscribeFromChanges,
   }
 })
