@@ -325,23 +325,39 @@ function formatDate(dateStr) {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
 }
 
+let pollInterval = null
+let realtimeConnected = false
+
 onMounted(async () => {
   await store.loadAll()
   loading.value = false
 
   document.addEventListener('visibilitychange', handleVisibility)
 
-  // Subscribe to real-time changes instead of polling
+  // Try Realtime — if it connects, disable polling fallback
   store.subscribeToChanges(async () => {
+    realtimeConnected = true
+    if (pollInterval) {
+      clearInterval(pollInterval)
+      pollInterval = null
+    }
     if (document.visibilityState === 'visible') {
       await store.loadAll()
     }
   })
+
+  // Fallback: poll every 15s in case Realtime isn't available
+  pollInterval = setInterval(async () => {
+    if (!realtimeConnected && document.visibilityState === 'visible') {
+      await store.loadAll()
+    }
+  }, 15000)
 })
 
 onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibility)
   store.unsubscribeFromChanges()
+  if (pollInterval) clearInterval(pollInterval)
 })
 
 async function handleVisibility() {
